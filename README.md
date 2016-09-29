@@ -1,2 +1,6 @@
 # leetcode
-Solutions to problems posted on leetcode
+This repository contains solutions to problems posted on Leetcode.
+Each .cpp file is a standalone entity, that includes a link to the Leetcode problem,
+a solution that was accepted by leetcode (correctness and execution time), and basic test cases.
+
+If you enjoy solving programming problems, you may find these interesting. Enjoy!
