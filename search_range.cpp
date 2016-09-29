@@ -6,7 +6,7 @@
 // Brute Force: Linear scan of the array looking for target. O(n) time.
 // Better: Perform 3 binary searches. The first search locates the target in the array.
 // The second and third searches extend the range to the right and left if duplicates of 
-// target exist in the array.
+// target exist in the array. O(logn) time.
 
 #include <vector>
 #include <iostream>
