@@ -2,7 +2,9 @@ CPP_PROGS := \
 	nth_digit \
 	search_range \
 	rotate_list \
-	first_missing_positive
+	first_missing_positive \
+	dna_sequences \
+	jump_game
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
