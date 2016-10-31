@@ -4,7 +4,10 @@ CPP_PROGS := \
 	rotate_list \
 	first_missing_positive \
 	dna_sequences \
-	jump_game
+	jump_game \
+	jump_game_2 \
+	isomorphic_strings \
+	sum_root_leaf_numbers
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
