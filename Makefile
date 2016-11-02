@@ -7,7 +7,8 @@ CPP_PROGS := \
 	jump_game \
 	jump_game_2 \
 	isomorphic_strings \
-	sum_root_leaf_numbers
+	sum_root_leaf_numbers \
+	find_kth_largest
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
@@ -26,7 +27,6 @@ all: $(CPP_PROGS)
 	@g++ $(CPPFLAGS) $*.cpp -o $@
 	@rm -rf $@.dSYM
 
-
 %: %.go
 	@echo "Go build $@..."
 	@go build $*.go
@@ -38,4 +38,3 @@ clean:
 	@echo "Cleaning..."
 	@rm -f *.o $(CPP_PROGS) $(C_PROGS) $(GO_PROGS)
 	@rm -rf *.dSYM
-	@rm -f  *.aux *.dvi *.ps *.log *.pdf
