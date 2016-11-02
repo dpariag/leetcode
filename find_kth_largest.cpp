@@ -37,7 +37,6 @@ bool test_kth_largest(std::vector<int> nums, int k) {
     Solution soln;
     std::vector<int> copy(nums);
     std::sort(copy.begin(), copy.end());
-    std::cout << copy[copy.size() - k] << std::endl;
     return copy[copy.size() - k] == soln.findKthLargest(nums, k);
 }
 
