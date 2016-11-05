@@ -8,7 +8,8 @@ CPP_PROGS := \
 	jump_game_2 \
 	isomorphic_strings \
 	sum_root_leaf_numbers \
-	find_kth_largest
+	find_kth_largest \
+	3sum
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
