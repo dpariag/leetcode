@@ -20,7 +20,6 @@ const int c_half_min_int = std::numeric_limits<int>::min() >> 1;
 class Solution {
 public:
     int divide(int dividend, int divisor) {
-        //std::cout << "ORIG: " << dividend << " / " << divisor << std::endl;
         bool negate_result = false;
         if (divisor == 0) { return std::numeric_limits<int>::max(); }
         if (dividend == c_min_int && divisor == -1) { return c_max_int; }
@@ -38,14 +37,11 @@ public:
 
         int result = 0;
         for (int i = multiples.size() - 1; i >= 0; --i) {
-        //    std::cout << "multiples[" << i << "] = " << multiples[i] << std::endl;
             if (multiples[i] >= dividend) {
                 result += (-1 << i);
                 dividend -= multiples[i];
             }
         }
-        //std::cout << (negate_result ? "-" : "+");
-        //std::cout << result << std::endl;
         return negate_result ? -result : result;
     }
 };
