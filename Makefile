@@ -9,7 +9,8 @@ CPP_PROGS := \
 	isomorphic_strings \
 	sum_root_leaf_numbers \
 	find_kth_largest \
-	3sum
+	3sum \
+	divide_two_integers
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
