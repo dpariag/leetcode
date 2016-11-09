@@ -4,9 +4,9 @@
 
 // Note that addition, subtraction, and bitwise operations are permitted
 // Brute Force: Add divisor to itself until it would exceed dividend. O(dividend/divisor)
-// Better: Use bitshifting to store divisor, divisor*2, divisor*4, etc, then find the sum of
-// divisor multiples that yields dividend. O(log(dividend)) time and space
-// Be careful to note the signs of operands
+// Better: Use bitshifting to compute divisor, divisor*2, divisor*4, etc, then find the sum of
+// divisor multiples that yields dividend. O(log(dividend)) time and space.
+// This is similar to computing the binary representation of a number (divisor = 2)
 
 #include <vector>
 #include <iostream>
@@ -16,31 +16,37 @@ const int c_max_int = std::numeric_limits<int>::max();
 const int c_min_int = std::numeric_limits<int>::min();
 const int c_half_min_int = std::numeric_limits<int>::min() >> 1;
 
-// Accepted. 6ms. Beats 82.54% of submissions, ties 17.46%.
+// Accepted. 6ms. Beats 82.54% of submissions, ties 17.46% (with some variability)
 class Solution {
 public:
     int divide(int dividend, int divisor) {
-        bool negate_result = false;
+        // Handle a few special cases
         if (divisor == 0) { return std::numeric_limits<int>::max(); }
         if (dividend == c_min_int && divisor == -1) { return c_max_int; }
         if (dividend == c_max_int && divisor == -1) { return c_min_int; }
 
-        negate_result = (dividend > 0 && divisor > 0) || (dividend < 0 && divisor < 0);
+        // Perform the calculation using negative numbers, because
+        // std::abs(MIN_INT) = std::abs(MAX_INT) + 1, so avoids overflow
+        bool negate_result = (dividend > 0 && divisor > 0) || (dividend < 0 && divisor < 0);
         if (dividend > 0) { dividend = -dividend; } 
         if (divisor > 0) { divisor = -divisor; }
 
-        std::vector<int> multiples(1, divisor);
-        while (divisor >= dividend && divisor >= c_half_min_int) {
-            divisor = divisor << 1;
-            multiples.emplace_back(divisor);
+        // Find the largest multiple of divisor that fits in dividend
+        int multiple = divisor;
+        int max_power = 1;
+        while (multiple >= dividend && multiple >= c_half_min_int) {
+            multiple = multiple << 1;
+            ++max_power;
         }
 
+        // Count the multiples of divisor that fit in dividend
         int result = 0;
-        for (int i = multiples.size() - 1; i >= 0; --i) {
-            if (multiples[i] >= dividend) {
+        for (int i = max_power - 1; i >= 0; --i) {
+            if (multiple >= dividend) {
                 result += (-1 << i);
-                dividend -= multiples[i];
+                dividend -= multiple;
             }
+            multiple = multiple >> 1;
         }
         return negate_result ? -result : result;
     }
