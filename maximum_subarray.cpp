@@ -4,7 +4,7 @@
 
 // Brute Force: Generate all O(n^2) subarrays, compute sums, and track max. O(n^3) time, O(1) space.
 // Better: Calculate the running sum over the array. If running sum of nums[i..j] becomes negative, 
-// then reset sum to zero, discarding the subarray nums[i..j]. O(n) time and O(1) space.
+// then reset sum to zero, discarding the subarray nums[i..j]. Track max. O(n) time and O(1) space.
 
 #include <vector>
 #include <iostream>
