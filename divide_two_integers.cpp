@@ -11,6 +11,7 @@
 #include <vector>
 #include <iostream>
 #include <assert.h>
+#include <limits>
 
 const int c_max_int = std::numeric_limits<int>::max();
 const int c_min_int = std::numeric_limits<int>::min();
