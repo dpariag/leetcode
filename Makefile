@@ -10,7 +10,8 @@ CPP_PROGS := \
 	sum_root_leaf_numbers \
 	find_kth_largest \
 	3sum \
-	divide_two_integers
+	divide_two_integers \
+	maximum_subarray
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
