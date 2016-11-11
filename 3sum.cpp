@@ -10,6 +10,8 @@
 #include <vector>
 #include <iostream>
 #include <assert.h>
+#include <limits>
+#include <algorithm>
 
 using Triple = std::vector<int>;        // alias the leetcode definition of a triple
 using Triples = std::vector<Triple>;    // similarly, alias the leetcode definition
