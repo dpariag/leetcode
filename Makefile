@@ -11,7 +11,9 @@ CPP_PROGS := \
 	find_kth_largest \
 	3sum \
 	divide_two_integers \
-	maximum_subarray
+	maximum_subarray \
+	word_break \
+	3sum_closest
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
