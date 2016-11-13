@@ -13,7 +13,8 @@ CPP_PROGS := \
 	divide_two_integers \
 	maximum_subarray \
 	word_break \
-	3sum_closest
+	3sum_closest \
+	array_intersection
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
