@@ -20,6 +20,7 @@
 #include <string>
 #include <vector>
 #include <unordered_set>
+#include <algorithm>
 #include <iostream>
 #include <assert.h>
 
@@ -43,26 +44,28 @@ public:
                 word_indices[i].emplace_back(i - substring.size() + 1);
                 //std::cout << substring << " is a word" << std::endl;
                 substring.clear();
-            } else if (dict.find(s.substr(0,i+1)) != dict.end()) {
+            } 
+            /*else if (dict.find(s.substr(0,i+1)) != dict.end()) {
                 // s[0..i] is a word
+                std::cout << "**" << s.substr(0, i+1) << std::endl;
                 word_indices[i].emplace_back(0);
                 substring.clear();
             } 
+            */
             //std::cout << "*i = " << i << std::endl;
             for (int j = i - 1; j >= 0; --j) {
                 auto& indices = word_indices[j];
                 for (auto k = 0; k < indices.size(); ++k) {
                     //std::cout << "indices = " << indices[k] << "," << i << std::endl;
                     auto word = s.substr(indices[k], (i - indices[k] + 1));
-                    //std::cout << "Word: " << word << "?";
                     if (dict.find(word) != dict.end()) {
-                        //std::cout << " yes!" << std::endl;
+                        //std::cout << "Word: " << word << std::endl;
                         word_indices[i].emplace_back(i - word.size() + 1);
                         substring.clear();
-                    } //else { std::cout << " no!" << std::endl; }
-
+                    } 
                     word = s.substr(j, i - j + 1);
                     if (dict.find(word) != dict.end()) {
+                        //std::cout << "*word: " << word << std::endl;
                         word_indices[i].emplace_back(j);
                     }
                 }
@@ -70,23 +73,62 @@ public:
         }
 
         if (word_indices.back().empty()) { return sentences; }
-
-        std::cout << std::endl;
-        for (int i = 0; i < word_indices.size(); ++i) {
+    
+        /* 
+        for (auto i = 0; i < word_indices.size(); ++i) {
+            if (word_indices[i].empty()) { continue; }
             std::cout << i << " : ";
             for (auto j = 0; j < word_indices[i].size(); ++j) {
-                std::cout << word_indices[i][j] << " ";
+                auto word = s.substr(word_indices[i][j], i - word_indices[i][j] + 1);
+                std::cout << word << " ";
             }
             std::cout << std::endl;
         }
+        std::cout << std::endl;
+        for (auto& s : sentences) {
+            std::cout << s << std::endl;
+        }
+        */
+        auto last_word = s.substr(word_indices.back()[0], s.size() - word_indices.back()[0]);
+        generate_sentences(s, word_indices, word_indices.size() - 1, "", sentences);
         return sentences;
+    }
+
+    void generate_sentences(const std::string& s, const WordIndices& word_indices,
+                            int index, std::string sentence, Sentences& sentences) {
+        if (index <= 0) { 
+            sentence.pop_back(); // remove last space
+            sentences.emplace_back(std::move(sentence)); 
+            return;
+        }
+
+        for (auto i = 0; i < word_indices[index].size(); ++i) {
+            auto word = s.substr(word_indices[index][i], index - word_indices[index][i] + 1);
+            //std::cout << "index = " << index << " word = " << word << std::endl;
+            //sentence.insert(0, s, word_indices[index][i], index - word_indices[index][i] + 1);
+            //sentence.append(s, word_indices[index][i], index - word_indices[index][i] + 1);
+            //sentence.insert(0, 1, ' ');
+            //std::cout << sentence << std::endl;
+            generate_sentences(s, word_indices, word_indices[index][i] - 1,
+                               word + " " + sentence, sentences); 
+        }
     }
 };
 
-void test_word_break() {
-    Dictionary dict({"bed", "bat", "bath", "hand", "and", "beyond"});
+void test_word_break(std::initializer_list<std::string>&& dict_words, const std::string& s) {
+    Dictionary dict(dict_words);
     Solution soln;
-    soln.wordBreak("bedbathandbeyond", dict);
+    auto sentences = soln.wordBreak(s, dict);
+    
+    for (auto& s : sentences) {
+        std::cout << s << std::endl;
+    }
+    std::cout << std::endl;
+}
+
+void test_word_break() {
+    test_word_break({"a"}, "a");
+    test_word_break({"bed","bat","bath","hand","and","beyond", "be", "yond"}, "bedbathandbeyond");
 }
 
 int main(int argc, char** argv) {
