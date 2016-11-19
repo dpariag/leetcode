@@ -87,23 +87,34 @@ public:
     }
 };
 
-void test_word_break(std::initializer_list<std::string>&& dict_words, const std::string& s) {
+bool test_word_break(std::initializer_list<std::string>&& dict_words, const std::string& s,
+                     std::vector<std::string> expected_sentences) {
     Dictionary dict(dict_words);
     Solution soln;
     auto sentences = soln.wordBreak(s, dict);
-    
-    for (auto& s : sentences) {
-        std::cout << s << std::endl;
-    }
+    std::sort(sentences.begin(), sentences.end());
+    std::sort(expected_sentences.begin(), expected_sentences.end());
+    /* 
+    for (auto& s : sentences) { std::cout << s << std::endl; }
     std::cout << std::endl;
+    */
+    return (sentences == expected_sentences);
 }
 
 void test_word_break() {
-    test_word_break({"aaaa","aaa","aa"}, "aaaaaaaa");
-    test_word_break({"aaaa","aaa"}, "aaaaaaa");
-    test_word_break({"a","abc","b","cd"}, "abcd");
-    test_word_break({"a"}, "a");
-    test_word_break({"bed","bat","bath","hand","and","beyond", "be", "yond"}, "bedbathandbeyond");
+    assert(test_word_break({"aaaa","aaa","aa"}, "aaaaaaaa",
+                           {"aaaa aaaa", "aa aa aaaa", "aaaa aa aa", "aa aa aa aa", 
+                            "aaa aaa aa", "aa aaaa aa", "aaa aa aaa", "aa aaa aaa" }));
+
+    assert(test_word_break({"aaaa","aaa"}, "aaaaaaa",
+                           {"aaa aaaa", "aaaa aaa"}));
+    assert(test_word_break({"a","abc","b","cd"}, "abcd", {"a b cd"}));
+
+    assert(test_word_break({"a"}, "a", {"a"}));
+    assert(test_word_break({"bed","bat","bath","hand","and","beyond", "be", "yond"}, 
+                            "bedbathandbeyond",
+                            {"bed bat hand be yond", "bed bat hand beyond",
+                             "bed bath and be yond", "bed bath and beyond"}));
 }
 
 int main(int argc, char** argv) {
