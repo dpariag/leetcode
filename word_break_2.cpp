@@ -23,13 +23,26 @@
 #include <algorithm>
 #include <iostream>
 #include <assert.h>
+#include <chrono>
 
 using Dictionary = std::unordered_set<std::string>;
 using Sentences = std::vector<std::string>;
 // WordIndices[i] holds starting indices of words that end at i
 using WordIndices = std::vector<std::vector<int>>; 
 
-// Accepted. 149ms. Beats 0.49% of submissions.
+void print(const WordIndices& indices) {
+    for (auto i = 0; i < indices.size(); ++i) {
+        if (indices[i].empty()) { continue; }
+        std::cout << i << " : ";
+        for (auto j = 0; j < indices[i].size(); ++j) {
+            std::cout << indices[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+}
+
+// Accepted. 103ms. Beats 0.76% of submissions.
 class Solution {
 public:
     Sentences wordBreak(const std::string& s, Dictionary& dict) {
@@ -46,26 +59,28 @@ public:
                 word_indices[i].emplace_back(i - substring.size() + 1);
                 substring.clear();
             } 
-           
+          
+            //print(word_indices); 
             for (int j = i - 1; j >= 0; --j) {
                 auto& indices = word_indices[j];
+                if (indices.empty()) { continue; }
                 for (auto k = 0; k < indices.size(); ++k) {
                     auto word = s.substr(indices[k], (i - indices[k] + 1));
+                    //std::cout << "word = " << word << std::endl;
                     if (dict.find(word) != dict.end() && new_words.find(word) == new_words.end()) {
                         word_indices[i].emplace_back(i - word.size() + 1);
                         new_words.emplace(word);
                         substring.clear();
                     } 
-                    word = s.substr(j, i - j + 1);
-                    if (dict.find(word) != dict.end() && new_words.find(word) == new_words.end()) {
-                        word_indices[i].emplace_back(j);
-                        new_words.emplace(word);
-                        break;
-                    }
+                }
+                auto word = s.substr(j, i - j + 1);
+                if (dict.find(word) != dict.end() && new_words.find(word) == new_words.end()) {
+                    word_indices[i].emplace_back(j);
+                    new_words.emplace(std::move(word));
+                    break;
                 }
             }
         }
-
         if (word_indices.back().empty()) { return sentences; }
         generate_sentences(s, word_indices, word_indices.size() - 1, "", sentences);
         return sentences;
@@ -81,8 +96,10 @@ public:
 
         for (auto i = 0; i < word_indices[index].size(); ++i) {
             auto word = s.substr(word_indices[index][i], index - word_indices[index][i] + 1);
+            word.append(1, ' ');
+            word.append(sentence);
             generate_sentences(s, word_indices, word_indices[index][i] - 1,
-                               word + " " + sentence, sentences); 
+                               word, sentences);
         }
     }
 };
@@ -94,14 +111,14 @@ bool test_word_break(std::initializer_list<std::string>&& dict_words, const std:
     auto sentences = soln.wordBreak(s, dict);
     std::sort(sentences.begin(), sentences.end());
     std::sort(expected_sentences.begin(), expected_sentences.end());
-    /* 
-    for (auto& s : sentences) { std::cout << s << std::endl; }
-    std::cout << std::endl;
-    */
+    //for (auto& s : sentences) { std::cout << s << std::endl; }
+    //std::cout << std::endl;
     return (sentences == expected_sentences);
 }
 
 void test_word_break() {
+    assert(test_word_break({"cat", "cats", "and", "sand", "dog"}, "catsanddog",
+                           {"cats and dog", "cat sand dog"}));
     assert(test_word_break({"aaaa","aaa","aa"}, "aaaaaaaa",
                            {"aaaa aaaa", "aa aa aaaa", "aaaa aa aa", "aa aa aa aa", 
                             "aaa aaa aa", "aa aaaa aa", "aaa aa aaa", "aa aaa aaa" }));
@@ -118,7 +135,11 @@ void test_word_break() {
 }
 
 int main(int argc, char** argv) {
+    //auto start = std::chrono::high_resolution_clock::now();
     test_word_break();
+    //auto end = std::chrono::high_resolution_clock::now();
+    //std::chrono::duration<double> elapsed = (end - start);
+    //std::cout << "Elapsed: " << elapsed.count() << std::endl;
     std::cout << argv[0] + 2 << "...OK!" << std::endl;
     return 0;
 }
