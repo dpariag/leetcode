@@ -23,90 +23,74 @@
 #include <algorithm>
 #include <iostream>
 #include <assert.h>
-//#include <chrono>
-
-struct Word {
-    int start = 0;  // index of first character in a word
-    int end = 0;    // index of last character in a word
-    Word(int s, int e): start(s), end(e) {}
-};
 
 using Dictionary = std::unordered_set<std::string>;
 using Sentences = std::vector<std::string>;
-using Words = std::vector<Word>; // starting and ending indices of words
+// WordIndices[i] holds starting indices of words that end at i
+using WordIndices = std::vector<std::vector<int>>; 
 
-void print(const Words& words) {
-    for (auto i = 0; i < words.size(); ++i) {
-        std::cout << words[i].start << "," << words[i].end << std::endl;
-    }
-    std::cout << std::endl;
-}
-
-// Accepted. 103ms. Beats 0.76% of submissions.
+// Accepted. 96ms. Beats 0.76% of submissions.
 class Solution {
 public:
     Sentences wordBreak(const std::string& s, Dictionary& dict) {
         Sentences sentences;
-        Words words; 
+        WordIndices word_indices(s.size()); // holds starting indices of words ending at index i
         std::string substring;
-        
+        std::vector<int> valid_indices;
+
+        valid_indices.emplace_back(-1);
         for (int i = 0; i < s.size(); ++i) {
-            //std::cout << std::endl << "i = " << i << std::endl;
             Dictionary new_words;
             substring.push_back(s[i]);
             if (dict.find(substring) != dict.end() && new_words.find(substring) == new_words.end()) {
-                //std::cout << "1. word = " << substring << std::endl;
                 // s[k+1..i] is a word, so s[0..i] has a valid decomposition
                 new_words.emplace(substring);
-                words.emplace_back(Word(int(i - substring.size() + 1), i));
+                word_indices[i].emplace_back(i - substring.size() + 1);
                 substring.clear();
+                if (i != valid_indices.back()) { valid_indices.emplace_back(i); }
             } 
-            for (int j = words.size() - 1; j >= 0; --j) {
-                // Try to concatenate suffix with an earlier word
-                auto word = s.substr(words[j].start, (i - words[j].start + 1));
-                //std::cout << "2. word = " << word << std::endl;
-                if (dict.find(word) != dict.end() && new_words.find(word) == new_words.end()) {
-                    words.emplace_back(Word(int(i - word.size() + 1), i));
-                    //std::cout << "2. " << words.back().start << "," << words.back().end << std::endl;
-                    new_words.emplace(word);
-                    substring.clear();
+          
+            for (int v  = valid_indices.size() - 1; v >= 1; --v) {
+                auto j = valid_indices[v];
+                auto& indices = word_indices[j];
+
+                for (auto k = 0; k < indices.size(); ++k) {
+                    auto word = s.substr(indices[k], (i - indices[k] + 1));
+                    if (dict.find(word) != dict.end() && new_words.find(word) == new_words.end()) {
+                        word_indices[i].emplace_back(i - word.size() + 1);
+                        new_words.emplace(word);
+                        substring.clear();
+                        if (i != valid_indices.back()) { valid_indices.emplace_back(i); }
+                    } 
                 }
-                if (i <= words[j].end + 1) { continue; }
-                // Check suffix following words[j].end
-                word = s.substr(words[j].end + 1, i - words[j].end);
-                //std::cout << "3. word = " << word << std::endl;
+                auto word = s.substr(j, i - j + 1);
                 if (dict.find(word) != dict.end() && new_words.find(word) == new_words.end()) {
-                    words.emplace_back(Word(words[j].end + 1, int(words[j].end + word.size())));
-                    //std::cout << "3. " << words.back().start << "," << words.back().end << std::endl;
+                    word_indices[i].emplace_back(j);
                     new_words.emplace(std::move(word));
-                    substring.clear();
+                    if (i != valid_indices.back()) { valid_indices.emplace_back(i); }
                     break;
                 }
             }
         }
-        if (words.empty() || words.back().end != s.size() - 1) { return sentences; }
-        //print(words); 
-        generate_sentences(s, s.size() -1, words, words.size() - 1, "", sentences);
+        if (word_indices.back().empty()) { return sentences; }
+        generate_sentences(s, word_indices, word_indices.size() - 1, "", sentences);
         return sentences;
     }
 
-    void generate_sentences(const std::string& s, int s_index, 
-                            const Words& words, int w_index, 
-                            std::string sentence, Sentences& sentences) {
-        if (s_index < 0) { 
+    void generate_sentences(const std::string& s, const WordIndices& word_indices,
+                            int index, std::string sentence, Sentences& sentences) {
+        if (index < 0) { 
             sentence.pop_back(); // remove last space
             sentences.emplace_back(std::move(sentence)); 
             return;
         }
-        
-        for (auto i = w_index; i >= 0;  --i) {
-            if (words[i].end < s_index) { break; }
-            if (words[i].end == s_index) {
-                auto word = s.substr(words[i].start, words[i].end - words[i].start + 1);
-                word.append(1, ' ');
-                word.append(sentence);
-                generate_sentences(s, words[i].start - 1, words, i-1, word, sentences);
-            }
+
+        for (auto i = 0; i < word_indices[index].size(); ++i) {
+            auto word = s.substr(word_indices[index][i], index - word_indices[index][i] + 1);
+            word.append(1, ' ');
+            word.append(sentence);
+            generate_sentences(s, word_indices, word_indices[index][i] - 1,
+                               word, sentences);
         }
     }
 };
@@ -118,8 +102,6 @@ bool test_word_break(std::initializer_list<std::string>&& dict_words, const std:
     auto sentences = soln.wordBreak(s, dict);
     std::sort(sentences.begin(), sentences.end());
     std::sort(expected_sentences.begin(), expected_sentences.end());
-    //for (auto& s : sentences) { std::cout << s << std::endl; }
-    //std::cout << std::endl;
     return (sentences == expected_sentences);
 }
 
@@ -142,11 +124,7 @@ void test_word_break() {
 }
 
 int main(int argc, char** argv) {
-    //auto start = std::chrono::high_resolution_clock::now();
     test_word_break();
-    //auto end = std::chrono::high_resolution_clock::now();
-    //std::chrono::duration<double> elapsed = (end - start);
-    //std::cout << "Elapsed: " << elapsed.count() << std::endl;
     std::cout << argv[0] + 2 << "...OK!" << std::endl;
     return 0;
 }
