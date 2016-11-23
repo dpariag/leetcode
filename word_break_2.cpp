@@ -89,8 +89,7 @@ public:
             auto word = s.substr(word_indices[index][i], index - word_indices[index][i] + 1);
             word.append(1, ' ');
             word.append(sentence);
-            generate_sentences(s, word_indices, word_indices[index][i] - 1,
-                               word, sentences);
+            generate_sentences(s, word_indices, word_indices[index][i] - 1, word, sentences);
         }
     }
 };
