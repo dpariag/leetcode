@@ -26,14 +26,13 @@
 //#include <chrono>
 
 struct Word {
-    int start = 0;
-    int end = 0;
+    int start = 0;  // index of first character in a word
+    int end = 0;    // index of last character in a word
 };
 
 using Dictionary = std::unordered_set<std::string>;
 using Sentences = std::vector<std::string>;
-// WordIndices[i] holds starting indices of words that end at i
-using Words = std::vector<Word>;
+using Words = std::vector<Word>; // starting and ending indices of words
 
 void print(const Words& words) {
     for (auto i = 0; i < words.size(); ++i) {
@@ -49,34 +48,35 @@ public:
         Sentences sentences;
         Words words; 
         std::string substring;
-       
+        
         for (int i = 0; i < s.size(); ++i) {
-            std::cout << "i = " << i << std::endl;
+            //std::cout << std::endl << "i = " << i << std::endl;
             Dictionary new_words;
             substring.push_back(s[i]);
             if (dict.find(substring) != dict.end() && new_words.find(substring) == new_words.end()) {
-                std::cout << "1. word = " << substring << std::endl;
+                //std::cout << "1. word = " << substring << std::endl;
                 // s[k+1..i] is a word, so s[0..i] has a valid decomposition
                 new_words.emplace(substring);
                 words.emplace_back(Word{int(i - substring.size() + 1), i});
                 substring.clear();
             } 
-            print(words); 
             for (int j = words.size() - 1; j >= 0; --j) {
                 // Try to concatenate suffix with an earlier word
                 auto word = s.substr(words[j].start, (i - words[j].start + 1));
-                std::cout << "2. word = " << word << std::endl;
+                //std::cout << "2. word = " << word << std::endl;
                 if (dict.find(word) != dict.end() && new_words.find(word) == new_words.end()) {
                     words.emplace_back(Word{int(i - word.size() + 1), i});
+                    //std::cout << "2. " << words.back().start << "," << words.back().end << std::endl;
                     new_words.emplace(word);
                     substring.clear();
                 }
-
+                if (i <= words[j].end + 1) { continue; }
                 // Check suffix following words[j].end
-                word = s.substr(words[j].end + 1, i - words[j].end + 2);
-                std::cout << "3. word = " << word << std::endl;
+                word = s.substr(words[j].end + 1, i - words[j].end);
+                //std::cout << "3. word = " << word << std::endl;
                 if (dict.find(word) != dict.end() && new_words.find(word) == new_words.end()) {
-                    words.emplace_back(Word{words[j].end + 1, i+1});
+                    words.emplace_back(Word{words[j].end + 1, int(words[j].end + word.size())});
+                    //std::cout << "3. " << words.back().start << "," << words.back().end << std::endl;
                     new_words.emplace(std::move(word));
                     substring.clear();
                     break;
@@ -84,23 +84,27 @@ public:
             }
         }
         if (words.empty() || words.back().end != s.size() - 1) { return sentences; }
-        generate_sentences(s, words, s.size() - 1, "", sentences);
+        //print(words); 
+        generate_sentences(s, s.size() -1, words, words.size() - 1, "", sentences);
         return sentences;
     }
 
-    void generate_sentences(const std::string& s, const Words& words,
-                            int index, std::string sentence, Sentences& sentences) {
-        if (index < 0) { 
+    void generate_sentences(const std::string& s, int s_index, 
+                            const Words& words, int w_index, 
+                            std::string sentence, Sentences& sentences) {
+        if (s_index < 0) { 
             sentence.pop_back(); // remove last space
             sentences.emplace_back(std::move(sentence)); 
             return;
         }
-
-        for (auto i = index; words[i].end == index; --i) {
-            auto word = s.substr(words[i].start, words[i].end - words[i].start + 1);
-            word.append(1, ' ');
-            word.append(sentence);
-            generate_sentences(s, words, words[i].start - 1, word, sentences);
+        
+        for (auto i = w_index; i >= 0;  --i) {
+            if (words[i].end == s_index) {
+                auto word = s.substr(words[i].start, words[i].end - words[i].start + 1);
+                word.append(1, ' ');
+                word.append(sentence);
+                generate_sentences(s, words[i].start - 1, words, i-1, word, sentences);
+            }
         }
     }
 };
@@ -112,8 +116,8 @@ bool test_word_break(std::initializer_list<std::string>&& dict_words, const std:
     auto sentences = soln.wordBreak(s, dict);
     std::sort(sentences.begin(), sentences.end());
     std::sort(expected_sentences.begin(), expected_sentences.end());
-    for (auto& s : sentences) { std::cout << s << std::endl; }
-    std::cout << std::endl;
+    //for (auto& s : sentences) { std::cout << s << std::endl; }
+    //std::cout << std::endl;
     return (sentences == expected_sentences);
 }
 
