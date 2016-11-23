@@ -28,6 +28,7 @@
 struct Word {
     int start = 0;  // index of first character in a word
     int end = 0;    // index of last character in a word
+    Word(int s, int e): start(s), end(e) {}
 };
 
 using Dictionary = std::unordered_set<std::string>;
@@ -57,7 +58,7 @@ public:
                 //std::cout << "1. word = " << substring << std::endl;
                 // s[k+1..i] is a word, so s[0..i] has a valid decomposition
                 new_words.emplace(substring);
-                words.emplace_back(Word{int(i - substring.size() + 1), i});
+                words.emplace_back(Word(int(i - substring.size() + 1), i));
                 substring.clear();
             } 
             for (int j = words.size() - 1; j >= 0; --j) {
@@ -65,7 +66,7 @@ public:
                 auto word = s.substr(words[j].start, (i - words[j].start + 1));
                 //std::cout << "2. word = " << word << std::endl;
                 if (dict.find(word) != dict.end() && new_words.find(word) == new_words.end()) {
-                    words.emplace_back(Word{int(i - word.size() + 1), i});
+                    words.emplace_back(Word(int(i - word.size() + 1), i));
                     //std::cout << "2. " << words.back().start << "," << words.back().end << std::endl;
                     new_words.emplace(word);
                     substring.clear();
@@ -75,7 +76,7 @@ public:
                 word = s.substr(words[j].end + 1, i - words[j].end);
                 //std::cout << "3. word = " << word << std::endl;
                 if (dict.find(word) != dict.end() && new_words.find(word) == new_words.end()) {
-                    words.emplace_back(Word{words[j].end + 1, int(words[j].end + word.size())});
+                    words.emplace_back(Word(words[j].end + 1, int(words[j].end + word.size())));
                     //std::cout << "3. " << words.back().start << "," << words.back().end << std::endl;
                     new_words.emplace(std::move(word));
                     substring.clear();
@@ -99,6 +100,7 @@ public:
         }
         
         for (auto i = w_index; i >= 0;  --i) {
+            if (words[i].end < s_index) { break; }
             if (words[i].end == s_index) {
                 auto word = s.substr(words[i].start, words[i].end - words[i].start + 1);
                 word.append(1, ' ');
