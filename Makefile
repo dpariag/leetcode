@@ -16,7 +16,8 @@ CPP_PROGS := \
 	3sum_closest \
 	array_intersection \
 	word_break_2 \
-	third_maximum_number
+	third_maximum_number \
+	maximal_xor
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
