@@ -17,7 +17,8 @@ CPP_PROGS := \
 	array_intersection \
 	word_break_2 \
 	third_maximum_number \
-	maximal_xor
+	maximal_xor \
+	number_of_bits
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
