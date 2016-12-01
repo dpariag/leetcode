@@ -2,11 +2,15 @@
 // Given a sorted array of integers, enforce a cardinality of at most 2 for each item.
 // Example: Given {1,1,1,2,2,3} the resulting array is {1,1,2,2,3}
 
+// Brute Force: Use extra storage (e.g, hash_map + extra array) to track cardinality of each element.
+// Better: Can be done in place using a read and write index, and implementing carefully.
+
 #include <vector>
 #include <iostream>
 #include <assert.h>
 #include "numbers.h"
 
+// Accepted. 13ms. Beats 42.77% of solutions and ties 46.49% of solutions.
 class Solution {
 public:
     int removeDuplicates(std::vector<int>& nums) {
@@ -51,6 +55,7 @@ void test_remove_duplicates() {
     assert(test_remove_duplicates({1}, {1}));
     assert(test_remove_duplicates({1,2}, {1,2}));
     assert(test_remove_duplicates({2,2,2,2,2}, {2,2}));
+    assert(test_remove_duplicates({2,2,2,2,2,3}, {2,2,3}));
     assert(test_remove_duplicates({1,2,14,15}, {1,2,14,15}));
     assert(test_remove_duplicates({1,1,2}, {1,1,2}));
     assert(test_remove_duplicates({1,2,2,2,2,3,4,5,5,6}, {1,2,2,3,4,5,5,6}));
