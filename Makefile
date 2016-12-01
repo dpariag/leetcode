@@ -18,7 +18,8 @@ CPP_PROGS := \
 	word_break_2 \
 	third_maximum_number \
 	maximal_xor \
-	number_of_bits
+	number_of_bits \
+	remove_duplicates
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
