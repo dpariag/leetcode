@@ -21,7 +21,8 @@ CPP_PROGS := \
 	number_of_bits \
 	remove_duplicates \
 	remove_duplicates_2 \
-	single_number
+	single_number \
+	single_number_2
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
