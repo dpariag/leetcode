@@ -20,7 +20,8 @@ CPP_PROGS := \
 	maximal_xor \
 	number_of_bits \
 	remove_duplicates \
-	remove_duplicates_2
+	remove_duplicates_2 \
+	single_number
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
