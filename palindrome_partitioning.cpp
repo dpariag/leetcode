@@ -11,6 +11,7 @@
 using Partition = std::vector<std::string>;
 using Partitions = std::vector<Partition>;
 
+// Accepted. 96ms. Beats 10.75% of submissions, ties 0.51% of submissions.
 class Solution {
 public:
     inline bool is_palindrome(const std::string& s) {
@@ -71,7 +72,15 @@ bool test_partition(std::string s, Partitions expected) {
 }
 
 void test_partition() {
+    assert(test_partition("aab", Partitions({{"a","a","b"}, {"aa", "b"}})));
     assert(test_partition("abba", Partitions({{"a","b","b","a"}, {"abba"}, {"a", "bb", "a"}})));
+    assert(test_partition("aaaaa", 
+        Partitions({{"a","a","a","a","a"}, 
+                    {"aa","a","a","a"}, {"a","aa","a","a"}, {"a","a","aa","a"}, {"a","a","a","aa"},
+                    {"aa", "aa", "a"}, {"aa", "a", "aa"}, {"a","aa","aa"},
+                    {"aaa","a","a"}, {"aaa","aa"}, {"a","aaa","a"}, {"aa","aaa"},{"a","a","aaa"},
+                    {"aaaa","a"}, {"aaaaa"},
+                    {"a","aaaa"}})));
 }
 
 void test_palindrome() {
