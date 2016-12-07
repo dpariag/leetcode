@@ -6,12 +6,14 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <unordered_map>
 #include <assert.h>
 
 using Partition = std::vector<std::string>;
 using Partitions = std::vector<Partition>;
+using PartitionMap = std::unordered_map<std::string, Partitions>;
 
-// Accepted. 96ms. Beats 10.75% of submissions, ties 0.51% of submissions.
+// Accepted. 52ms. Beats 23.23% of submissions, ties 0.51% of submissions.
 class Solution {
 public:
     inline bool is_palindrome(const std::string& s) {
@@ -26,12 +28,17 @@ public:
         if (s.size() == 0) { return Partitions(); }
         if (s.size() == 1) { return Partitions({Partition({s})}); }
 
+        auto found = m_partitions.find(s);
+        if (found != m_partitions.end()) {
+            return found->second;
+        }
+
         Partitions result;
         if (is_palindrome(s)) {
             result.emplace_back(Partition({s}));
         }
 
-        for (int i = s.size() - 1; i >= 0; --i) {
+        for (int i = s.size() - 1; i >= 1; --i) {
             // Process string right to left to make building the partition faster
             auto right = s.substr(i);   // right fragment
             if (is_palindrome(right)) {
@@ -43,8 +50,11 @@ public:
                 result.insert(result.end(), left_partition.begin(), left_partition.end());
             }
         }
+        m_partitions.emplace(s, result);
         return result;
     }
+private:
+    PartitionMap m_partitions;
 };
 
 void print(const Partitions& partitions) {
