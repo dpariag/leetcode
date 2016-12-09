@@ -3,6 +3,12 @@
 // Return all possible palindromic partitionings of s.
 // Example: given s = "aab", return {{"aa","b"}, {"a","a","b"}}
 
+// Is a DP, table-driven approach possible? table[i][j] is true iff s[i..j] is a palindrome.
+// Fill out the diagonal first (substrings of length 1).
+// Then fill out substrings of length 2,3,...,n
+// After construction, walk the first row of the table, building decompositions.
+// O(n^2) time and space.
+
 #include <vector>
 #include <string>
 #include <iostream>
@@ -14,7 +20,7 @@ using Partitions = std::vector<Partition>;
 using PartitionMap = std::unordered_map<std::string, Partitions>;
 
 // Accepted. 52ms. Beats 23.23% of submissions, ties 0.51% of submissions.
-class Solution {
+class Solution1 {
 public:
     inline bool is_palindrome(const std::string& s) {
         auto len = s.size();
@@ -57,6 +63,77 @@ private:
     PartitionMap m_partitions;
 };
 
+class Solution2 {
+public:
+    using Table = std::vector<std::vector<bool>>;
+
+    Table build_table(const std::string& s) {
+        Table table(s.size(), std::vector<bool>(s.size(), false));
+
+        // Substrings of length 1 are always palindromic
+        for (auto i = 0u; i < s.size(); ++i) { table[i][i] = true; }
+
+        for (auto len = 2u; len <= s.size(); ++len) {
+            for (auto row = 0; row <= s.size() - len; ++row) {
+                auto col = row + len - 1;
+                if (len == 2) {
+                    table[row][col] = s[row] == s[col];
+                } else {
+                    table[row][col] = s[row] == s[col] && table[row+1][col-1];
+                }
+            }
+        }
+        return table;
+    }
+
+    void partition_search(Partitions& partitions, Partition partition,
+                          const Table& table, const std::string& s, int start) {
+        //std::cout << "s = " << s << std::endl;
+        //std::cout << "start = " << start << std::endl;
+        if (start >= s.size()) {
+            partitions.emplace_back(partition);
+            return;
+        }
+
+        /*
+        if (table[start][s.size()-1]) {
+            // s[start...end] is a palindrome
+            partition.emplace_back(s.substr(start));
+            partitions.emplace_back(partition);
+            partition_search(partitions, partition, table, s, s.size());
+            partition.pop_back();
+        }
+        */
+
+        for (auto i = start; i < s.size(); ++i) {
+            if (table[start][i]) {
+                partition.emplace_back(s.substr(start, i - start + 1));
+                partition_search(partitions, partition, table, s, i+1);
+                partition.pop_back();
+            }
+        }
+    }
+
+    Partitions partition(const std::string& s) {
+        Partitions result;
+        Partition p;
+        Table table = build_table(s);
+        /*
+        for (auto i = 0; i < table.size(); ++i) {
+            for(auto j = 0; j < table.size(); ++j) {
+                std::cout << (table[i][j] ? "T" : "F") << " ";
+            }
+            std::cout << std::endl;
+        }
+        std::cout << std::endl;
+        */
+        partition_search(result, p, table, s, 0);
+        return result;
+    }
+
+private:
+};
+
 void print(const Partitions& partitions) {
     for (auto& partition : partitions) {
         for (auto& p : partition) {
@@ -67,23 +144,31 @@ void print(const Partitions& partitions) {
 }
 
 bool test_partition(std::string s, Partitions expected) {
-    Solution soln;
+    Solution1 soln1;
+    Solution2 soln2;
 
-    auto p = soln.partition(s);
-    std::sort(p.begin(), p.end());
+    auto p1 = soln1.partition(s);
+    std::sort(p1.begin(), p1.end());
+
+    auto p2 = soln2.partition(s);
+    std::sort(p2.begin(), p2.end());
+
     std::sort(expected.begin(), expected.end());
 
+    /*
     std::cout << "Got" << std::endl;
-    print(p);
+    print(p2);
     std::cout << "Expected" << std::endl;
     print(expected);
-
-    return p == expected;
+    std::cout << std::endl;
+    */
+    return p1 == expected && p2 == expected;
+    //return p2 == expected;
 }
 
 void test_partition() {
-    assert(test_partition("aab", Partitions({{"a","a","b"}, {"aa", "b"}})));
     assert(test_partition("abba", Partitions({{"a","b","b","a"}, {"abba"}, {"a", "bb", "a"}})));
+    assert(test_partition("aab", Partitions({{"a","a","b"}, {"aa", "b"}})));
     assert(test_partition("aaaaa", 
         Partitions({{"a","a","a","a","a"}, 
                     {"aa","a","a","a"}, {"a","aa","a","a"}, {"a","a","aa","a"}, {"a","a","a","aa"},
@@ -93,20 +178,15 @@ void test_partition() {
                     {"a","aaaa"}})));
 }
 
-void test_palindrome() {
-    Solution soln;
-
-    assert(soln.is_palindrome("a") == true);
-    assert(soln.is_palindrome("aa") == true);
-    assert(soln.is_palindrome("ab") == false);
-    assert(soln.is_palindrome("abba") == true);
-    assert(soln.is_palindrome("abcba") == true);
-    assert(soln.is_palindrome("abcdba") == false);
-    assert(soln.is_palindrome("abccba") == true);
+void test_solution_2() {
+    Solution2 soln;
+    soln.partition("abba");
+    soln.partition("babe");
+    soln.partition("babab");
 }
 
 int main(int argc, char** argv) {
-    test_palindrome();
+    //test_solution_2();
     test_partition();
     std::cout << argv[0] + 2 << "...OK!" << std::endl;
     return 0;
