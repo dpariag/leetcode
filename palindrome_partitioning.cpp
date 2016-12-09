@@ -63,6 +63,7 @@ private:
     PartitionMap m_partitions;
 };
 
+// Accepted. 12ms. Beats 70.99% of submissions, ties 5.58%
 class Solution2 {
 public:
     using Table = std::vector<std::vector<bool>>;
@@ -86,24 +87,12 @@ public:
         return table;
     }
 
-    void partition_search(Partitions& partitions, Partition partition,
+    void partition_search(Partitions& partitions, Partition& partition,
                           const Table& table, const std::string& s, int start) {
-        //std::cout << "s = " << s << std::endl;
-        //std::cout << "start = " << start << std::endl;
         if (start >= s.size()) {
             partitions.emplace_back(partition);
             return;
         }
-
-        /*
-        if (table[start][s.size()-1]) {
-            // s[start...end] is a palindrome
-            partition.emplace_back(s.substr(start));
-            partitions.emplace_back(partition);
-            partition_search(partitions, partition, table, s, s.size());
-            partition.pop_back();
-        }
-        */
 
         for (auto i = start; i < s.size(); ++i) {
             if (table[start][i]) {
@@ -118,30 +107,10 @@ public:
         Partitions result;
         Partition p;
         Table table = build_table(s);
-        /*
-        for (auto i = 0; i < table.size(); ++i) {
-            for(auto j = 0; j < table.size(); ++j) {
-                std::cout << (table[i][j] ? "T" : "F") << " ";
-            }
-            std::cout << std::endl;
-        }
-        std::cout << std::endl;
-        */
         partition_search(result, p, table, s, 0);
         return result;
     }
-
-private:
 };
-
-void print(const Partitions& partitions) {
-    for (auto& partition : partitions) {
-        for (auto& p : partition) {
-            std::cout << p << " ";
-        }
-        std::cout << std::endl;
-    } 
-}
 
 bool test_partition(std::string s, Partitions expected) {
     Solution1 soln1;
@@ -154,16 +123,7 @@ bool test_partition(std::string s, Partitions expected) {
     std::sort(p2.begin(), p2.end());
 
     std::sort(expected.begin(), expected.end());
-
-    /*
-    std::cout << "Got" << std::endl;
-    print(p2);
-    std::cout << "Expected" << std::endl;
-    print(expected);
-    std::cout << std::endl;
-    */
     return p1 == expected && p2 == expected;
-    //return p2 == expected;
 }
 
 void test_partition() {
@@ -178,15 +138,7 @@ void test_partition() {
                     {"a","aaaa"}})));
 }
 
-void test_solution_2() {
-    Solution2 soln;
-    soln.partition("abba");
-    soln.partition("babe");
-    soln.partition("babab");
-}
-
 int main(int argc, char** argv) {
-    //test_solution_2();
     test_partition();
     std::cout << argv[0] + 2 << "...OK!" << std::endl;
     return 0;
