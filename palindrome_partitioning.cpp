@@ -3,10 +3,13 @@
 // Return all possible palindromic partitionings of s.
 // Example: given s = "aab", return {{"aa","b"}, {"a","a","b"}}
 
-// Is a DP, table-driven approach possible? table[i][j] is true iff s[i..j] is a palindrome.
+// Brute Force: Recursion with backtracking. Iterate the string, testing each substring
+// s[0..i] and recursing on s[i+1..end].
+// Better: Cache the results of recursion (memoization).
+// Best: Dynamic programming. Build a table, where table[i][j] is true iff s[i..j] is a palindrome.
 // Fill out the diagonal first (substrings of length 1).
 // Then fill out substrings of length 2,3,...,n
-// After construction, walk the first row of the table, building decompositions.
+// Use this table in a DFS style recursion to identify palindromic substrings.
 // O(n^2) time and space.
 
 #include <vector>
@@ -19,6 +22,7 @@ using Partition = std::vector<std::string>;
 using Partitions = std::vector<Partition>;
 using PartitionMap = std::unordered_map<std::string, Partitions>;
 
+// Recursion with memoization
 // Accepted. 52ms. Beats 23.23% of submissions, ties 0.51% of submissions.
 class Solution1 {
 public:
@@ -63,6 +67,7 @@ private:
     PartitionMap m_partitions;
 };
 
+// Dynamic programming
 // Accepted. 12ms. Beats 70.99% of submissions, ties 5.58%
 class Solution2 {
 public:
