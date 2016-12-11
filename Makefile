@@ -23,7 +23,8 @@ CPP_PROGS := \
 	remove_duplicates_2 \
 	single_number \
 	single_number_2 \
-	palindrome_partitioning
+	palindrome_partitioning \
+	move_zeroes
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
