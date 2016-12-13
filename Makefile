@@ -25,7 +25,8 @@ CPP_PROGS := \
 	single_number_2 \
 	palindrome_partitioning \
 	move_zeroes \
-	longest_palindrome
+	longest_palindrome \
+	longest_valid_parens
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
