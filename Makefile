@@ -28,7 +28,8 @@ CPP_PROGS := \
 	longest_palindrome \
 	longest_valid_parens \
 	array_product_except_self \
-	arranging_coins
+	arranging_coins \
+	peak_element
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
