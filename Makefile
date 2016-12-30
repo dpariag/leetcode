@@ -29,7 +29,8 @@ CPP_PROGS := \
 	longest_valid_parens \
 	array_product_except_self \
 	arranging_coins \
-	peak_element
+	peak_element \
+	sort_colors
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
