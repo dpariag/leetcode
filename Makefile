@@ -30,7 +30,8 @@ CPP_PROGS := \
 	array_product_except_self \
 	arranging_coins \
 	peak_element \
-	sort_colors
+	sort_colors \
+	rotate_array
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
