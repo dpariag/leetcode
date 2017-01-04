@@ -31,7 +31,8 @@ CPP_PROGS := \
 	arranging_coins \
 	peak_element \
 	sort_colors \
-	rotate_array
+	rotate_array \
+	reverse_words
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
