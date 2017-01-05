@@ -13,8 +13,8 @@
 #include <vector>
 #include <iostream>
 #include <assert.h>
-#include "bits.h"
-#include "numbers.h"
+//#include "bits.h"
+//#include "numbers.h"
 
 // Accepted. 49ms. Beats 96.74% of submissions, ties < 1% of submissions.
 class Solution {

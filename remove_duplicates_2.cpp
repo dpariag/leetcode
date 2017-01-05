@@ -8,7 +8,6 @@
 #include <vector>
 #include <iostream>
 #include <assert.h>
-#include "numbers.h"
 
 // Accepted. 13ms. Beats 42.77% of solutions and ties 46.49% of solutions.
 class Solution {
