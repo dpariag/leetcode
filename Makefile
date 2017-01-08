@@ -32,7 +32,8 @@ CPP_PROGS := \
 	peak_element \
 	sort_colors \
 	rotate_array \
-	reverse_words
+	reverse_words \
+	palindrome_pairs
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
