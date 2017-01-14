@@ -33,7 +33,9 @@ CPP_PROGS := \
 	sort_colors \
 	rotate_array \
 	reverse_words \
-	palindrome_pairs
+	palindrome_pairs \
+	min_depth_binary_tree \
+	perfect_squares
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
