@@ -30,7 +30,7 @@ struct Hash {
 
 using Cache = std::unordered_map<CacheEntry, int, Hash>;
 
-class Solution {
+class Solution1 {
 public:
     int numSquares(int n) {
         Cache cache;
@@ -67,7 +67,44 @@ private:
     static Squares m_squares;
 };
 
-Squares Solution::m_squares = Squares(1,1);
+Squares Solution1::m_squares = Squares(1,1);
+
+
+using Table = std::vector<std::vector<int>>;
+
+class Solution {
+public:
+    int numSquares(int n) {
+        if (n == 1) { return 1; }
+
+        Table table;
+        int to_square = table.size() + 1;
+        while ((to_square * to_square) <= n) {
+            table.emplace_back(std::vector<int>(n+1, 0));
+            to_square = table.size() + 1;
+        }
+
+        for (int col = 0; col < table[0].size(); ++col) {
+            table[0][col] = col;
+        }
+
+        int num_squares = n;
+        for (int row = 1; row < table.size(); ++row) {
+            for (int col = 1; col < table[row].size(); ++col) {
+                int square = (row+1) * (row+1);
+                int count = 1;
+                table[row][col] = table[row-1][col];
+                while (col - (count*square) >= 0) {
+                    table[row][col] = std::min(table[row-1][col-(count*square)] + count, 
+                                               table[row][col]);
+                    ++count;
+                }
+            }
+            num_squares = std::min(num_squares, table[row][n]);
+        }
+        return num_squares;
+    }
+};
 
 void test_num_squares() {
     Solution soln;
