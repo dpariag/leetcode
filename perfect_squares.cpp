@@ -102,6 +102,7 @@ public:
             }
             num_squares = std::min(num_squares, table[row][n]);
         }
+        std::cout << "n = " << n << " num_squares = " << num_squares << std::endl;
         return num_squares;
     }
 };
@@ -115,7 +116,7 @@ void test_num_squares() {
     assert(soln.numSquares(10) == 2); // 10 = 9 + 1
     assert(soln.numSquares(22) == 3); // 22 = 9 + 9 + 4
     assert(soln.numSquares(35) == 3); // 35 = 25 + 9 + 1
-    //assert(soln.numSquares(9732) == 4); // 9732 = (98*98) + (11*11) +  
+    assert(soln.numSquares(9732) == 3); // 9732 = (98*98) + (11*11) +  
 }
 
 int main(int argc, char** argv) {
