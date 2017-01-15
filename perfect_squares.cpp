@@ -29,8 +29,8 @@ struct Hash {
 };
 
 using Cache = std::unordered_map<CacheEntry, int, Hash>;
-
-class Solution1 {
+#if 0
+class Solution2 {
 public:
     int numSquares(int n) {
         Cache cache;
@@ -66,13 +66,10 @@ public:
 private: 
     static Squares m_squares;
 };
-
-Squares Solution1::m_squares = Squares(1,1);
-
+Squares Solution2::m_squares = Squares(1,1);
 
 using Table = std::vector<std::vector<int>>;
-
-class Solution {
+class Solution1 {
 public:
     int numSquares(int n) {
         if (n == 1) { return 1; }
@@ -106,6 +103,55 @@ public:
         return num_squares;
     }
 };
+#endif
+
+// Accepted. 93ms. Beats 81.08% of solutions and ties < 1% of submissions.
+class Solution {
+public:
+    int numSquares(int n) {
+        Cache cache;
+        int64_t min = n;
+        int to_square = 1;
+        while ((to_square * to_square) <= n) {
+            ++to_square;
+        }
+        --to_square;
+
+        int ret = min_num_squares(cache, n, n, 0, min, to_square);
+        std::cout << "n = " << n << " --> " << ret << std::endl;
+        return ret;
+    }
+    
+    int64_t min_num_squares(Cache& cache, int n, int remainder, int num_squares, 
+                        int64_t& cur_min, int to_square) {
+        if (remainder == 0) {
+            return 0;
+        } else if (num_squares >= cur_min) {
+            return std::numeric_limits<int>::max() - 1;
+        }
+
+        //auto found = cache.find(CacheEntry(remainder,to_square));
+        //if (found != cache.end()) {
+        //    return found->second;
+        //}
+      
+        int64_t min_ways = std::numeric_limits<int>::max();
+        for (int i = to_square; i > 0; --i) {
+            int square = i * i;
+            if (remainder - square >= 0) {
+                int64_t min = 1 + min_num_squares(cache, n, remainder-square, num_squares+1, cur_min, i);
+                min_ways = std::min(min_ways, min);
+            }
+            if (remainder == n) {
+                cur_min = std::min(cur_min, min_ways);
+            }
+        }
+        //cache.emplace(CacheEntry(remainder, to_square), min_ways);
+        //std::cout << "Cache size = " << cache.size() << std::endl;
+        return min_ways;
+    }
+};
+
 
 void test_num_squares() {
     Solution soln;
@@ -117,6 +163,8 @@ void test_num_squares() {
     assert(soln.numSquares(22) == 3); // 22 = 9 + 9 + 4
     assert(soln.numSquares(35) == 3); // 35 = 25 + 9 + 1
     assert(soln.numSquares(9732) == 3); // 9732 = (98*98) + (11*11) +  
+    assert(soln.numSquares(6337) == 2); // 9732 = (98*98) + (11*11) +  
+    assert(soln.numSquares(1535) == 4); // 9732 = (98*98) + (11*11) +  
 }
 
 int main(int argc, char** argv) {
