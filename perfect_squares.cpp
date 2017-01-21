@@ -3,9 +3,9 @@
 // Example: Given n = 12, return 3 (12 = 4 + 4 + 4); given n = 13, return 2 (13 = 4 + 9).
 
 // Approach #1: Depth-first-search, pruning any path that is longer than the current minimum.
-// TODO: Breadth-first-search which will be faster at finding a "shortest path"
+// Note: Breadth-first-search is guaranteed to find a "shortest path", but probably explores more
+// sub-optimal paths in the process.
 
-#include <vector>
 #include <iostream>
 #include <assert.h>
 #include <cmath>
