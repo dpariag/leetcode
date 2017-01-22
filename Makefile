@@ -35,7 +35,8 @@ CPP_PROGS := \
 	reverse_words \
 	palindrome_pairs \
 	min_depth_binary_tree \
-	perfect_squares
+	perfect_squares \
+	partition_list
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
