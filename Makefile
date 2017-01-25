@@ -36,7 +36,8 @@ CPP_PROGS := \
 	palindrome_pairs \
 	min_depth_binary_tree \
 	perfect_squares \
-	partition_list
+	partition_list \
+	majority_element
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
