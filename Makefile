@@ -37,7 +37,8 @@ CPP_PROGS := \
 	min_depth_binary_tree \
 	perfect_squares \
 	partition_list \
-	majority_element
+	majority_element \
+	majority_element2 \
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
