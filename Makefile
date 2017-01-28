@@ -39,6 +39,7 @@ CPP_PROGS := \
 	partition_list \
 	majority_element \
 	majority_element2 \
+	group_anagrams
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
