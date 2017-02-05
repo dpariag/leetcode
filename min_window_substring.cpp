@@ -4,7 +4,7 @@
 // Example: S = "ADOBECODEBANC", T = "ABC", return "BANC".
 
 // Brute Force: Generate all substrings of S, check if each covers T. O(n^3) time and O(n) space.
-// Better: Use two hash_maps and a sliding window over S.
+// Better: Use two hash_maps (or lookup tables) and a sliding window over S.
 
 #include <string>
 #include <iostream>
@@ -13,36 +13,32 @@
 
 class CharSet {
 public:
-    CharSet(const std::string& s) : num_covered(0) {
+    CharSet(const std::string& s) : num_covered(0), num_to_cover(0) {
         for (auto ch : s) {
-            to_cover[ch]++;
+            ++to_cover[(int)ch];
+            if (to_cover[(int)ch] == 1) { ++num_to_cover; }
         }
     }
 
     inline void add(char ch) {
-        auto found = to_cover.find(ch);
-        if (found != to_cover.end()) {
-            auto count = ++covered[ch];
-            if (count == found->second) { ++num_covered; }
-        }
+        auto count = ++covered[(int)ch];
+        if (count == to_cover[(int)ch]) { ++num_covered; }
     }
 
     inline void remove(char ch) {
-        auto found = covered.find(ch);
-        if (found != covered.end() && found->second > 0) {
-            if (found->second == to_cover[ch]) { --num_covered; }
-            --found->second;
-        }
+        auto count = --covered[(int)ch];
+        if (count >= 0 && count < to_cover[(int)ch]) { --num_covered; }
     }
 
     inline bool covers() const {
-        return num_covered == to_cover.size();
+        return num_covered == num_to_cover;
     }
 
 private:
     int num_covered;
-    std::unordered_map<char, int> to_cover;
-    std::unordered_map<char, int> covered;
+    int num_to_cover;
+    int to_cover[256] = {0};
+    int covered[256] = {0};
 };
 
 struct Window {
@@ -51,7 +47,7 @@ struct Window {
     int size() const { return (end - start) + 1; }
 };
 
-// 59ms. Beats 35.73% of submissions, ties 0.91% of submissions.
+// 9ms. Beats 69.92% of submissions, ties 29.44% of submissions.
 class Solution {
 public:
     std::string minWindow(const std::string& s, const std::string& t) {
@@ -61,7 +57,7 @@ public:
 
         while (cur_window.end < int(s.size())) {
             while (charset.covers()) {
-                if (min_window.size() == 0 || cur_window.size() < min_window.size()) {
+                if (cur_window.size() < min_window.size() || min_window.size() == 0)  {
                     min_window = cur_window;
                 }
                 charset.remove(s[cur_window.start]);
