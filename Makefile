@@ -40,7 +40,8 @@ CPP_PROGS := \
 	majority_element \
 	majority_element2 \
 	group_anagrams \
-	min_window_substring
+	min_window_substring \
+	remove_duplicates_list
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
