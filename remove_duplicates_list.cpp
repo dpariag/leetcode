@@ -2,8 +2,9 @@
 // Given a sorted linked list, delete all duplicates such that each element appear only once.
 // Example: Given 1->1->2, return 1->2. Given 1->1->2->3->3, return 1->2->3.
 
-// Brute Force:
-// Better:
+// Brute Force: Use a hash_map to detect duplicates
+// Better: Iterate the list, skipping duplicate elements and adjusting list pointers as needed.
+// Because the list is sorted, duplicates must appear consecutively.
 
 #include "list.h"
 #include <iostream>
@@ -14,16 +15,13 @@ class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
         ListNode* cur = head;
-        while (cur != nullptr && cur->next != nullptr) {
-            if (cur->next->val != cur->val) {
-                cur = cur->next;
-            } else {
-                while (cur->next != nullptr && cur->next->val == cur->val) {
-                    ListNode* to_delete = cur->next;
-                    cur->next = to_delete->next;
-                    delete to_delete;
-                }
+        while (cur != nullptr) {
+            while (cur->next != nullptr && cur->next->val == cur->val) {
+                ListNode* to_delete = cur->next;
+                cur->next = to_delete->next;
+                delete to_delete;
             }
+            cur = cur->next;
         }
         return head;
     }
