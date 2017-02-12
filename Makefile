@@ -42,7 +42,8 @@ CPP_PROGS := \
 	group_anagrams \
 	min_window_substring \
 	remove_duplicates_list \
-	remove_duplicates_list_2
+	remove_duplicates_list_2 \
+	clone_graph
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
