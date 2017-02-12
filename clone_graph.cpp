@@ -1,8 +1,8 @@
 // Leetcode: https://leetcode.com/problems/clone-graph/
 // Clone an undirected graph. Each graph node contains a unique label and a list of its neighbors.
 
-// Brute Force:
-// Better:
+// Solution: Do a depth-first-search traversal of the original graph, cloning nodes during the
+// traversal. Track visited nodes to avoid traversing cycles infinitely.
 
 #include <vector>
 #include <iostream>
