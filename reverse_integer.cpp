@@ -2,8 +2,8 @@
 // Reverse digits of an integer. Return 0 if the reversed integer overflows.
 // Example: given x = 123, return 321 given x = -123, return -321
 
-// Brute Force:
-// Better:
+// Brute Force: Convert the integer to a string, reverse it, and convert back to an integer.
+// Better: Extract the rightmost digit, and append it to a new integer. Repeat. O(d) time.
 
 #include <iostream>
 #include <assert.h>
