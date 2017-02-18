@@ -43,7 +43,9 @@ CPP_PROGS := \
 	min_window_substring \
 	remove_duplicates_list \
 	remove_duplicates_list_2 \
-	clone_graph
+	clone_graph \
+	interleaving_string \
+	reverse_integer
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
