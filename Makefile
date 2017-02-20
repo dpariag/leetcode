@@ -45,7 +45,9 @@ CPP_PROGS := \
 	remove_duplicates_list_2 \
 	clone_graph \
 	interleaving_string \
-	reverse_integer
+	reverse_integer \
+	two_sum \
+	candy
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
