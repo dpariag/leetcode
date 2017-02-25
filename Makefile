@@ -48,7 +48,8 @@ CPP_PROGS := \
 	reverse_integer \
 	two_sum \
 	candy \
-	contains_duplicate_2
+	contains_duplicate_2 \
+	n_queens
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
