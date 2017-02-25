@@ -47,7 +47,8 @@ CPP_PROGS := \
 	interleaving_string \
 	reverse_integer \
 	two_sum \
-	candy
+	candy \
+	contains_duplicate_2
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
