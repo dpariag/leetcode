@@ -49,7 +49,8 @@ CPP_PROGS := \
 	two_sum \
 	candy \
 	contains_duplicate_2 \
-	n_queens
+	n_queens \
+	equal_partitions
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
