@@ -50,7 +50,8 @@ CPP_PROGS := \
 	candy \
 	contains_duplicate_2 \
 	n_queens \
-	equal_partitions
+	equal_partitions \
+	binary_tree_levels
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
