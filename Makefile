@@ -51,7 +51,8 @@ CPP_PROGS := \
 	contains_duplicate_2 \
 	n_queens \
 	equal_partitions \
-	binary_tree_levels
+	binary_tree_levels \
+	reorder_list
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
