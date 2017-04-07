@@ -19,6 +19,7 @@ struct TreeNode {
     }
 };
 
+// Helpers for testing
 void bst_insert(TreeNode*& node, int value) {
     if (node == nullptr) {
         node = new TreeNode(value);
@@ -52,5 +53,17 @@ void print(TreeNode* node) {
     std::cout << "}" << std::endl;
     print(node->left);
     print(node->right);
+}
+
+bool tree_equals(const TreeNode* tree1, const TreeNode* tree2) {
+    if (tree1 == nullptr && tree2 == nullptr) {
+        return true;
+    } else if (tree1 != nullptr && tree2 != nullptr) {
+        return tree1->val == tree2->val &&
+               tree_equals(tree1->left, tree2->left) &&
+               tree_equals(tree1->right, tree2->right);
+    } else {
+        return false;
+    }
 }
 #endif // TREE_NODE_H
