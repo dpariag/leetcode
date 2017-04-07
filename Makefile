@@ -52,7 +52,8 @@ CPP_PROGS := \
 	n_queens \
 	equal_partitions \
 	binary_tree_levels \
-	reorder_list
+	reorder_list \
+	delete_bst_node
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
