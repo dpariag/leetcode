@@ -15,7 +15,8 @@ enum class ChildType { None, Left, Right };
 
 class Solution {
 public:
-    inline void delete_node(TreeNode* node) {
+    inline void delete_node(TreeNode* node, TreeNode*& parent_ptr, TreeNode* new_child) {
+        parent_ptr = new_child;
         node->left = nullptr;
         node->right = nullptr;
         delete node;
@@ -46,32 +47,30 @@ public:
             return nullptr;
         } else if (node->left == nullptr && node->right == nullptr) {
             // key found in a leaf node
-            TreeNode** parent_ptr = (childType == ChildType::Left) ? &(parent->left) : &(parent->right);
-            *parent_ptr = nullptr;
-            delete node;
-            return root;
+            TreeNode*& parent_ptr = (childType == ChildType::Left) ? (parent->left) : (parent->right);
+            delete_node(node, parent_ptr, nullptr);
         } else if (node->left == nullptr && node->right != nullptr) {
             // Node has only a right subtree
             TreeNode*& parent_ptr = (childType == ChildType::Left) ? parent->left : parent->right;
-            parent_ptr = node->right;
-            delete_node(node);
-            return root;
+            delete_node(node, parent_ptr, node->right);
         } else if (node->left != nullptr && node->right == nullptr) {
             // Node has only a left subtree
             TreeNode*& parent_ptr = (childType == ChildType::Left) ? parent->left : parent->right;
-            parent_ptr = node->left;
-            delete_node(node);
-            return root;
+            delete_node(node, parent_ptr, node->left);
         } else {
             // Node has left and right subtrees.
             // Swap node with it's in-order successor, then remove the successor
-            TreeNode* succ = node->right, *parent = node;
+            TreeNode* succ = node->right, *succ_parent = node;
             while (succ != nullptr && succ->left != nullptr) {
-                parent = succ;
+                succ_parent = succ;
                 succ = succ->left;
             }
             std::swap(node->val, succ->val);
-            parent->left = nullptr;
+            if (succ_parent != node) { 
+                succ_parent->left = nullptr; 
+            } else {
+                succ_parent->right = nullptr;
+            }
             delete succ;
         }
         return root;
@@ -93,6 +92,7 @@ bool test_bst_delete(std::vector<int> values, int to_delete, std::vector<int> ex
 void test_bst_delete() {
     assert(test_bst_delete({}, 10, {}));
     assert(test_bst_delete({1}, 10, {1}));
+    assert(test_bst_delete({1,2}, 1, {2}));
     assert(test_bst_delete({20}, 20, {}));
     // Delete a leaf which is a right child
     assert(test_bst_delete({20,10,30,5,35,32,27,8,12}, 8,
@@ -106,9 +106,12 @@ void test_bst_delete() {
     // Delete a node with just a left subtree
     assert(test_bst_delete({20,10,30,5,35,32,27,8,12}, 35,
                            {20,10,30,5,32,27,8,12}));
-    
+    // Delete a node with two subtrees 
     assert(test_bst_delete({20,10,30,5,35,32,27,8,12}, 30,
                            {20,10,32,5,35,27,8,12}));
+    
+    assert(test_bst_delete({5,3,6,2,4,7}, 3,
+                           {5,4,2,6,7}));
 }
 
 int main(int argc, char** argv) {
