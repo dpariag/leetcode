@@ -11,20 +11,20 @@
 #include "tree_node.h"
 #include "stdio.h"
 
-enum class ChildType { None, Left, Right };
-
 // Accepted. 36ms. Beats 65.86% of submissions, ties 18.88% of submissions
 class Solution {
 public:
-    inline void delete_node(TreeNode* node, TreeNode** parent_ptr, TreeNode* new_child) {
-        *parent_ptr = new_child;
+    inline void delete_node(TreeNode* node, TreeNode* parent, TreeNode** child_ptr, TreeNode* new_child) {
+        if (parent != nullptr) {
+            child_ptr = (node == parent->left) ? &(parent->left) : &(parent->right);
+        }
+        *child_ptr = new_child;
         node->left = nullptr;
         node->right = nullptr;
         delete node;
     }
 
     TreeNode* deleteNode(TreeNode* root, int key) {
-        ChildType childType = ChildType::None;
         TreeNode* node = root, *parent = nullptr;
         while (node != nullptr) {
             if (key == node->val) {
@@ -32,48 +32,37 @@ public:
             } else if (key < node->val) {
                 parent = node;
                 node = node->left;
-                childType = ChildType::Left;
             } else {
                 parent = node;
                 node = node->right;
-                childType = ChildType::Right;
             }
         }
 
-        TreeNode** parent_ptr = &root;
+        TreeNode** child_ptr = &root;
         if (node == nullptr) {
             // key not found
             return root;
         } else if (node->left == nullptr && node->right == nullptr) {
             // key found in a leaf node
-            if (parent != nullptr) {
-                parent_ptr = (childType == ChildType::Left) ? &(parent->left) : &(parent->right);
-            }
-            delete_node(node, parent_ptr, nullptr);
+            delete_node(node, parent, child_ptr, nullptr);
         } else if (node->left == nullptr && node->right != nullptr) {
             // Node has only a right subtree
-            if (parent != nullptr) {
-                parent_ptr = (childType == ChildType::Left) ? &parent->left : &parent->right;
-            }
-            delete_node(node, parent_ptr, node->right);
+            delete_node(node, parent, child_ptr, node->right);
         } else if (node->left != nullptr && node->right == nullptr) {
             // Node has only a left subtree
-            if (parent != nullptr) {
-                parent_ptr = (childType == ChildType::Left) ? &parent->left : &parent->right;
-            }
-            delete_node(node, parent_ptr, node->left);
+            delete_node(node, parent, child_ptr, node->left);
         } else {
             // Node has left and right subtrees.
             // Swap node with it's in-order successor, then remove the successor
             TreeNode* succ = node->right, *succ_parent = node;
-            parent_ptr = &(node->right);
+            child_ptr = &(node->right);
             while (succ != nullptr && succ->left != nullptr) {
                 succ_parent = succ;
                 succ = succ->left;
-                parent_ptr = &(succ_parent->left);
+                child_ptr = &(succ_parent->left);
             }
             int succesor_value = succ->val;
-            *parent_ptr = deleteNode(succ, succ->val);
+            *child_ptr = deleteNode(succ, succ->val);
             node->val = succesor_value;
         }
         return root;
