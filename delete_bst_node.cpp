@@ -13,7 +13,7 @@
 
 enum class ChildType { None, Left, Right };
 
-// Accepted. 62ms. Beats 3.61% of submissions
+// Accepted. 36ms. Beats 65.86% of submissions, ties 18.88% of submissions
 class Solution {
 public:
     inline void delete_node(TreeNode* node, TreeNode** parent_ptr, TreeNode* new_child) {
@@ -66,13 +66,14 @@ public:
             // Node has left and right subtrees.
             // Swap node with it's in-order successor, then remove the successor
             TreeNode* succ = node->right, *succ_parent = node;
+            parent_ptr = &(node->right);
             while (succ != nullptr && succ->left != nullptr) {
                 succ_parent = succ;
                 succ = succ->left;
+                parent_ptr = &(succ_parent->left);
             }
             int succesor_value = succ->val;
-            // TODO: Recursing on the root is slow. Recurse on succ, and update it's parent
-            deleteNode(root, succ->val);
+            *parent_ptr = deleteNode(succ, succ->val);
             node->val = succesor_value;
         }
         return root;
