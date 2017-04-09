@@ -13,10 +13,11 @@
 
 enum class ChildType { None, Left, Right };
 
+// Accepted. 62ms. Beats 3.61% of submissions
 class Solution {
 public:
-    inline void delete_node(TreeNode* node, TreeNode*& parent_ptr, TreeNode* new_child) {
-        parent_ptr = new_child;
+    inline void delete_node(TreeNode* node, TreeNode** parent_ptr, TreeNode* new_child) {
+        *parent_ptr = new_child;
         node->left = nullptr;
         node->right = nullptr;
         delete node;
@@ -39,23 +40,27 @@ public:
             }
         }
 
+        TreeNode** parent_ptr = &root;
         if (node == nullptr) {
             // key not found
             return root;
-        } else if (parent == nullptr) {
-            delete node;
-            return nullptr;
         } else if (node->left == nullptr && node->right == nullptr) {
             // key found in a leaf node
-            TreeNode*& parent_ptr = (childType == ChildType::Left) ? (parent->left) : (parent->right);
+            if (parent != nullptr) {
+                parent_ptr = (childType == ChildType::Left) ? &(parent->left) : &(parent->right);
+            }
             delete_node(node, parent_ptr, nullptr);
         } else if (node->left == nullptr && node->right != nullptr) {
             // Node has only a right subtree
-            TreeNode*& parent_ptr = (childType == ChildType::Left) ? parent->left : parent->right;
+            if (parent != nullptr) {
+                parent_ptr = (childType == ChildType::Left) ? &parent->left : &parent->right;
+            }
             delete_node(node, parent_ptr, node->right);
         } else if (node->left != nullptr && node->right == nullptr) {
             // Node has only a left subtree
-            TreeNode*& parent_ptr = (childType == ChildType::Left) ? parent->left : parent->right;
+            if (parent != nullptr) {
+                parent_ptr = (childType == ChildType::Left) ? &parent->left : &parent->right;
+            }
             delete_node(node, parent_ptr, node->left);
         } else {
             // Node has left and right subtrees.
@@ -65,13 +70,10 @@ public:
                 succ_parent = succ;
                 succ = succ->left;
             }
-            std::swap(node->val, succ->val);
-            if (succ_parent != node) { 
-                succ_parent->left = nullptr; 
-            } else {
-                succ_parent->right = nullptr;
-            }
-            delete succ;
+            int succesor_value = succ->val;
+            // TODO: Recursing on the root is slow. Recurse on succ, and update it's parent
+            deleteNode(root, succ->val);
+            node->val = succesor_value;
         }
         return root;
     }
@@ -81,11 +83,18 @@ bool test_bst_delete(std::vector<int> values, int to_delete, std::vector<int> ex
     TreeNode* tree = nullptr;
     bst_insert(tree, values);
 
+    std::cout << std::endl << std::endl;
+    std::cout << "TREE:" << std::endl;
+    print(tree);
+    std::cout << "EXPECTED:" << std::endl;
     TreeNode* expected_tree = nullptr;
     bst_insert(expected_tree, expected);
+    print(expected_tree);
 
     Solution soln;
     tree = soln.deleteNode(tree, to_delete);
+    std::cout << "AFTER DELETE" << std::endl;
+    print(tree);
     return tree_equals(tree, expected_tree);
 }
 
@@ -112,6 +121,9 @@ void test_bst_delete() {
     
     assert(test_bst_delete({5,3,6,2,4,7}, 3,
                            {5,4,2,6,7}));
+    
+    assert(test_bst_delete({5,3,6,2,4,7}, 5,
+                           {6,3,7,2,4}));
 }
 
 int main(int argc, char** argv) {
