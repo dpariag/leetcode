@@ -73,18 +73,11 @@ bool test_bst_delete(std::vector<int> values, int to_delete, std::vector<int> ex
     TreeNode* tree = nullptr;
     bst_insert(tree, values);
 
-    std::cout << std::endl << std::endl;
-    std::cout << "TREE:" << std::endl;
-    print(tree);
-    std::cout << "EXPECTED:" << std::endl;
     TreeNode* expected_tree = nullptr;
     bst_insert(expected_tree, expected);
-    print(expected_tree);
 
     Solution soln;
     tree = soln.deleteNode(tree, to_delete);
-    std::cout << "AFTER DELETE" << std::endl;
-    print(tree);
     return tree_equals(tree, expected_tree);
 }
 
