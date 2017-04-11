@@ -53,7 +53,10 @@ CPP_PROGS := \
 	equal_partitions \
 	binary_tree_levels \
 	reorder_list \
-	delete_bst_node
+	delete_bst_node \
+	first_missing_positive \
+	rotate_function \
+
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
