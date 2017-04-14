@@ -56,6 +56,7 @@ CPP_PROGS := \
 	delete_bst_node \
 	first_missing_positive \
 	rotate_function \
+	lexicographical_numbers
 
 
 CFLAGS := -std=c99
