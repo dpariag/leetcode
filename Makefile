@@ -57,7 +57,8 @@ CPP_PROGS := \
 	first_missing_positive \
 	rotate_function \
 	lexicographical_numbers \
-	merge_k_sorted_lists
+	merge_k_sorted_lists \
+	decode_ways
 
 
 CFLAGS := -std=c99
