@@ -58,7 +58,8 @@ CPP_PROGS := \
 	rotate_function \
 	lexicographical_numbers \
 	merge_k_sorted_lists \
-	decode_ways
+	decode_ways \
+	reverse_vowels
 
 
 CFLAGS := -std=c99
