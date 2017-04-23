@@ -59,7 +59,8 @@ CPP_PROGS := \
 	lexicographical_numbers \
 	merge_k_sorted_lists \
 	decode_ways \
-	reverse_vowels
+	reverse_vowels \
+	increasing_triplet
 
 
 CFLAGS := -std=c99
