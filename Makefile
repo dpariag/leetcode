@@ -64,7 +64,8 @@ CPP_PROGS := \
 	brick_wall \
 	continuous_subarray_sum \
 	array_duplicates\
-	sliding_window_max
+	sliding_window_max \
+	lru_cache
 
 
 
