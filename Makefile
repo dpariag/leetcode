@@ -60,7 +60,12 @@ CPP_PROGS := \
 	merge_k_sorted_lists \
 	decode_ways \
 	reverse_vowels \
-	increasing_triplet
+	increasing_triplet \
+	brick_wall \
+	continuous_subarray_sum \
+	array_duplicates\
+	sliding_window_max
+
 
 
 CFLAGS := -std=c99
