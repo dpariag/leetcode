@@ -65,7 +65,8 @@ CPP_PROGS := \
 	continuous_subarray_sum \
 	array_duplicates\
 	sliding_window_max \
-	lru_cache
+	lru_cache \
+	surrounded_regions
 
 
 
