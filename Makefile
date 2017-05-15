@@ -66,8 +66,9 @@ CPP_PROGS := \
 	array_duplicates\
 	sliding_window_max \
 	lru_cache \
-	surrounded_regions
-
+	surrounded_regions \
+	path_sum \
+	path_sum_2
 
 
 CFLAGS := -std=c99

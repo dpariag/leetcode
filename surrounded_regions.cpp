@@ -3,7 +3,8 @@
 // A region is captured by flipping all 'O's into 'X's in that surrounded region.
 
 // Brute Force: Generate all possible regions, check if each is surrounded.
-// Better:
+// Better: Perform BFS from each 'O' on the perimeter of the board, marking any reachable 'O'
+// with a sentinel. When done, only unreachable 'O's (i.e., surrounded regions) remain. O(n^2) time.
 
 #include <vector>
 #include <queue>
