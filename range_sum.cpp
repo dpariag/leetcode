@@ -14,7 +14,6 @@ class NumArray {
 public:
     NumArray(const std::vector<int>& nums): m_tree(nullptr) {
         build(m_tree, nums, 0, nums.size() - 1);
-        print(m_tree);
     }
 
     void update(int i, int val) {
@@ -88,24 +87,10 @@ private:
         }
         return delta;
     }
-
-    void print(Node* node) const {
-        if (node == nullptr) { return; }
-        std::cout << "[" << node->index << "] = ";
-        std::cout << node->val << " -> {";
-        if (node->left != nullptr) { std::cout << node->left->val;}
-        std::cout << ",";
-        if (node->right != nullptr) { std::cout << node->right->val;}
-        std::cout << "} [lSum = " << node->leftSum << ", rSum = ";
-        std::cout << node->rightSum << "]" << std::endl;;
-        print(node->left);
-        print(node->right);
-    }
 };
 
 void test_range_sum() {
     NumArray arr({0,1,2,3,4,5,6});
-    std::cout << std::endl;
     assert(arr.sumRange(0,0) == 0);
     assert(arr.sumRange(0,1) == 1);
     assert(arr.sumRange(0,2) == 3);
