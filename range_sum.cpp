@@ -2,8 +2,8 @@
 // Given an integer array A, find the sum of the elements between indices i and j (i ≤ j), inclusive.
 // The update(i, val) function modifies A by updating the element at index i to val.
 
-// Brute Force:
-// Better:
+// Brute Force: Simply store the array. sum is O(n) and update is O(1). On average, O(n)
+// Better: Store the array as an annotated binary tree. sum/update are O(logN). On average, O(logN)
 
 #include <vector>
 #include <iostream>

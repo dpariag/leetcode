@@ -68,7 +68,10 @@ CPP_PROGS := \
 	lru_cache \
 	surrounded_regions \
 	path_sum \
-	path_sum_2
+	path_sum_2 \
+	range_sum \
+	repeated_substring \
+	longest_harmonious
 
 
 CFLAGS := -std=c99
