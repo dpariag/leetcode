@@ -71,7 +71,8 @@ CPP_PROGS := \
 	path_sum_2 \
 	range_sum \
 	repeated_substring \
-	longest_harmonious
+	longest_harmonious \
+	next_greater
 
 
 CFLAGS := -std=c99

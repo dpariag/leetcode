@@ -18,19 +18,22 @@
 
 using Numbers = std::vector<int>;
 
-// Accepted. 15ms. Beats 54.76% of submissions, ties 8.72% of submissions.
+// Accepted. 9ms. Beats 63.47% of submissions, ties 36.53% of submissions.
 class Solution {
 public:
     Numbers nextGreaterElement(const Numbers& nums1, const Numbers& nums2) {
-        std::stack<int> pending; // elements in nums2 whose next greater is unknown
+         // Note: pending uses a vector as a stack (for speed)
+        Numbers pending(nums2.size(), 0); // elements in nums2 whose next greater is unknown
         std::unordered_map<int, int> next_greater(nums2.size()*2); // map nums2[i] to its next greater
 
+        int index = -1;
         for (auto n : nums2) {
-            while(!pending.empty() && n > pending.top()) {
-                next_greater.emplace(pending.top(), n);
-                pending.pop();
+            while(index >= 0 && n > pending[index]) {
+                next_greater.emplace(pending[index], n);
+                --index;
             }
-            pending.push(n);
+            ++index;
+            pending[index] = n;
         }
 
         Numbers result(nums1.size(), 0);
