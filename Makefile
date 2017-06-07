@@ -72,7 +72,8 @@ CPP_PROGS := \
 	range_sum \
 	repeated_substring \
 	longest_harmonious \
-	next_greater
+	next_greater \
+	no_consecutive_ones
 
 
 CFLAGS := -std=c99
