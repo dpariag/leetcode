@@ -9,57 +9,214 @@
 #include <iostream>
 #include <assert.h>
 
-struct Pair {
-    int64_t value = 0;  // a value with no consecutive ones in its bits
-    int32_t index = 0;  // index of the next bit we manipulate
-    Pair(int v, int i) : value(v), index(i) {}
-}; 
+const int num_block_values = 8;
+int block_values[num_block_values] = {0,1,2,4,5,8,9,10};
+
+struct BlockCount {
+    int num_values = 0;
+    int num_00 = 0; // 0..0 (i.e, starts and ends with a zero bit)
+    int num_01 = 0; // 0..1
+    int num_10 = 0; // 1..0
+    int num_11 = 0; // 1..1
+
+    BlockCount() : num_00(0), num_01(0), num_10(0), num_11(0) {}
+    BlockCount(int n00, int n01, int n10, int n11): 
+        num_00(n00), num_01(n01), num_10(n10), num_11(n11) {}
+
+    BlockCount& operator+=(const BlockCount& other) {
+        num_00 += other.num_00;
+        num_01 += other.num_01;
+        num_10 += other.num_10;
+        num_11 += other.num_11;
+        return *this;
+    }
+
+    BlockCount& operator*=(const BlockCount& other) {
+        BlockCount rhs;
+        rhs.num_00 = num_00 * (other.num_00 + other.num_10) + num_01 * (other.num_00);
+        rhs.num_01 = num_01 * (other.num_01) + num_00 * (other.num_01 + other.num_11);
+        rhs.num_10 = num_10 * (other.num_00 + other.num_10) + num_11 * (other.num_00);
+        rhs.num_11 = num_10 * (other.num_01 + other.num_11) + num_11 * (other.num_01);
+        *this = rhs;
+        return *this;
+    }
+
+    int count() const { return num_00 + num_01 + num_10 + num_11; }
+};
+
+std::ostream& operator<<(std::ostream& out, const BlockCount& b) {
+    out << "00 : " << b.num_00 << std::endl;
+    out << "01 : " << b.num_01 << std::endl;
+    out << "10 : " << b.num_10 << std::endl;
+    out << "11 : " << b.num_11 << std::endl;
+    return out;
+}
+
+BlockCount mult(const BlockCount& a, const BlockCount& b) {
+    BlockCount rhs;
+    rhs.num_00 = a.num_00 * (b.num_00 + b.num_10) + a.num_01 * (b.num_00);
+    rhs.num_01 = a.num_01 * (b.num_01) + a.num_00 * (b.num_01 + b.num_11);
+    rhs.num_10 = a.num_10 * (b.num_00 + b.num_10) + a.num_11 * (b.num_00);
+    rhs.num_11 = a.num_10 * (b.num_01 + b.num_11) + a.num_11 * (b.num_01);
+    return rhs;
+}
+
+// Full block has:
+// num_00 : 3 
+// num_01 : 2
+// num_10 : 2
+// num_11 : 1
 
 class Solution {
 public:
-    int findIntegers(int num) {
-        std::deque<Pair> values;
-        int count = 1;
-        values.emplace_back(Pair(0,0));
-
-        while (!values.empty()) {
-            auto& front = values.front();
-            std::cout << "front (value, index) = " << front.value << "," << front.index << std::endl;
-            std::cout << (front.value | (1 << front.index)) << std::endl;
-            int64_t next = front.value | (1 << (front.index+1));
-            if (front.index < 31 && next <= num) {
-                values.emplace_back(Pair(front.value, front.index+1));
+    BlockCount count_integers(int up_to) {
+        BlockCount result(0,0,0,0);
+        for (int i = 0; i < num_block_values; ++i) {
+            if (block_values[i] <= up_to) {
+                ++result.num_values;
+                if ((block_values[i] & 9) == 0) {
+                    ++result.num_00;
+                } else if ((block_values[i] & 9) == 8) {
+                    ++result.num_10;
+                } else if ((block_values[i] & 9) == 1) {
+                    ++result.num_01;
+                } else if ((block_values[i] & 9) == 9) {
+                    ++result.num_11;
+                }
             }
-            next = (front.value | (1 << front.index)) | (1 << (front.index + 2));
-            if (front.index < 30 && next <= num) {
-                values.emplace_back(Pair(front.value | (1 << front.index), front.index + 2));
-            }
-            values.pop_front();
-            ++count;
         }
-        //std::cout << "count = " << count << std::endl;
-        return count;
+        return result;
     }
+
+    BlockCount find_block(int b) {
+        BlockCount r;
+        if ((b & 9) == 0) {
+            ++r.num_00;
+        } else if ((b & 9) == 8) {
+            ++r.num_10;
+        } else if ((b & 9) == 1) {
+            ++r.num_01;
+        } else if ((b & 9) == 9) {
+            ++r.num_11;
+        }
+        return r;
+    }
+
+    BlockCount count_block(int block, BlockCount& full_block, BlockCount& rollover) {
+        BlockCount result;
+        for (int i = 0; i < num_block_values; ++i) {
+            BlockCount b = find_block(block_values[i]);
+            if (block_values[i] < block) {
+                result += mult(b, full_block); //b * full_block;
+            } else if (block_values[i] == block) {
+                result += mult(b, rollover); //b * rollover;
+            } else { break; }
+        }
+        return result;
+    }
+
+    int findIntegers(int num) {
+        std::cout << "*******************************" << std::endl;
+        std::cout << "Num = " << num << std::endl;
+        int mask = 15;
+        int cur_block = num & mask;
+        //std::cout << "First block = " << cur_block << std::endl;
+        BlockCount full_block = count_integers(mask);
+        BlockCount full_block4 = full_block;
+        BlockCount rollover = count_integers(cur_block);
+        if (num <= mask) { return rollover.count(); }
+        //std::cout << "First block count " << std::endl;
+        //std::cout << rollover << std::endl;
+
+        num = num >> 4;
+        int num_blocks = 0;
+        BlockCount result;
+        while (num != 0) {
+            ++num_blocks;
+            cur_block = num & mask;
+            result = count_block(cur_block, full_block, rollover);
+            num = num >> 4;
+            if (num != 0) {
+                std::cout << "**" << std::endl;
+                full_block *= full_block4;
+                rollover = result;
+            }
+        }
+        std::cout << result.count() << std::endl;
+        return result.count();
+    }
+
 };
+
+inline bool has_consecutive_bits(int num) {
+    const int mask = 3;
+    while (num != 0) {
+        if ((num & mask) == mask) { return true; }
+        num = num >> 1;
+    }
+    return false;
+}
+
+inline int brute_force(int num) {
+    int result = 0;
+    for (int i = 0; i <= num; ++i) {
+        if (!has_consecutive_bits(i)) {
+            ++result;
+        }
+    }
+    return result;
+}
+
+inline void print_binary(unsigned value) {
+    unsigned mask = 1 << 31;
+    while (mask > 0) {
+        if (mask & value)
+            std::cout << "1";
+        else
+            std::cout << "0";
+        mask = mask >> 1;
+    }
+}
+
+void print_solns() {
+    int count = 0;
+    for (int i = 0; i <= 93359300; ++i) {
+        if (!has_consecutive_bits(i)) {
+            ++count;
+            std::cout << i << "  :  ";
+            print_binary(i);
+            std::cout << "  #" << count << std::endl;
+        }
+    }
+}
 
 void test_find_integers() {
     Solution soln;
 
-    assert(soln.findIntegers(1000000000) == 13);
-    return;
+    assert(soln.findIntegers(16) == 9);
     assert(soln.findIntegers(1) == 2);
     assert(soln.findIntegers(2) == 3);
     assert(soln.findIntegers(3) == 3);
     assert(soln.findIntegers(15) == 8);
-    assert(soln.findIntegers(16) == 9);
     assert(soln.findIntegers(17) == 10);
     assert(soln.findIntegers(18) == 11);
     assert(soln.findIntegers(20) == 12);
     assert(soln.findIntegers(21) == 13);
+    assert(soln.findIntegers(64) == 22);
+    assert(soln.findIntegers(65) == 23);
+    assert(soln.findIntegers(146) == 45);
+    assert(soln.findIntegers(276) == 67);
+    assert(soln.findIntegers(325) == 81);
+    assert(soln.findIntegers(168992) == 6313);
+    assert(soln.findIntegers(327840) == 9397);
+    assert(soln.findIntegers(349474) == 10928);
+    assert(soln.findIntegers(89478472) == 514222);
 }
 
 int main(int argc, char** argv) {
     test_find_integers();
+    //print_solns();
     std::cout << argv[0] + 2 << "...OK!" << std::endl;
     return 0;
 }
+int result = 0;
