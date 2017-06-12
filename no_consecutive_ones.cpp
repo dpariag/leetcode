@@ -133,4 +133,3 @@ int main(int argc, char** argv) {
     std::cout << argv[0] + 2 << "...OK!" << std::endl;
     return 0;
 }
-int result = 0;
