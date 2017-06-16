@@ -5,8 +5,12 @@
 // Input: ["cat","cats","catsdogcats","dog","dogcatsdog","hippopotamuses","rat","ratcatdogcat"]
 // Output: ["catsdogcats","dogcatsdog","ratcatdogcat"]
 //
-// Brute Force:
-// Better:
+// Brute Force: Iterate each word in the dict, checking if word[i..j] is a word, and then recursing
+// on word[j+1..n-1]. Exponential runtime, though memoization might help.
+// Better: Eliminate recursion, and memoize. Iterate each word, storing a boolean if word[0..i] is
+// a dictionary word or concatenation. If it is not, iterate over word[0..j] 0 <= j < i to find 
+// earlier prefixes which are words or valid concatenations. If one is found, determine if 
+// word[j+1..i] is a word. If it is, then word[0..i] is a concatenation.
 
 #include <vector>
 #include <iostream>
@@ -45,7 +49,7 @@ public:
         Dict dict(words.begin(), words.end());
         for (const auto& w : words) {
             if (is_concatenation(w, dict)) {
-                concatenations.emplace_back(std::move(w));
+                concatenations.emplace_back(w);
             }
         }
         return concatenations;
