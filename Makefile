@@ -73,7 +73,8 @@ CPP_PROGS := \
 	repeated_substring \
 	longest_harmonious \
 	next_greater \
-	no_consecutive_ones
+	no_consecutive_ones \
+	concatenated_words
 
 
 CFLAGS := -std=c99
