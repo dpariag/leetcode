@@ -74,7 +74,8 @@ CPP_PROGS := \
 	longest_harmonious \
 	next_greater \
 	no_consecutive_ones \
-	concatenated_words
+	concatenated_words \
+	container_most_water
 
 
 CFLAGS := -std=c99
