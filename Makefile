@@ -75,7 +75,8 @@ CPP_PROGS := \
 	next_greater \
 	no_consecutive_ones \
 	concatenated_words \
-	container_most_water
+	container_most_water \
+	h_index
 
 
 CFLAGS := -std=c99

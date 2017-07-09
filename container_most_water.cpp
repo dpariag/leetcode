@@ -1,6 +1,6 @@
 // Leetcode: https://leetcode.com/problems/container-with-most-water/#/description
-// Given non-negative integers a1, a2, ..., an, where each represents a line from the x-axis to 
-// (i, ai), Find 2 lines, which together with x-axis form a container which contains the most water.
+// Given a histogram, represented as an integer array, find the pair of lines which together with 
+// the x-axis traps the most water.
 
 // Brute Force: Examine all pairs of lines, calculating the trapped water. Track max. O(n^2)
 // Better: Iterate the array from both ends. At each iteration, discard the shorter line in
