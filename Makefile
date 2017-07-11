@@ -76,7 +76,8 @@ CPP_PROGS := \
 	no_consecutive_ones \
 	concatenated_words \
 	container_most_water \
-	h_index
+	h_index \
+	generate_parentheses
 
 
 CFLAGS := -std=c99
