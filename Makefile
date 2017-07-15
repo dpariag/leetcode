@@ -79,7 +79,8 @@ CPP_PROGS := \
 	h_index \
 	generate_parentheses \
 	longest_repeating_char_replacement \
-	binary_tree_zigzag
+	binary_tree_zigzag \
+	search_rotated_array
 
 
 CFLAGS := -std=c99
