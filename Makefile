@@ -77,7 +77,8 @@ CPP_PROGS := \
 	concatenated_words \
 	container_most_water \
 	h_index \
-	generate_parentheses
+	generate_parentheses \
+	longest_repeating_char_replacement
 
 
 CFLAGS := -std=c99

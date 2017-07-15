@@ -6,7 +6,7 @@
 
 // Brute Force: Consider all possible substrings, check if k+1 different letters occur in any,
 // and return the longest one. O(n^3) time, O(n) time.
-// Better: Scan the string with two pointers looking for the longest span containing k+1 letters.
+// Better: Scan the string with two pointers looking for a longest span requiring <= k replacements.
 // O(n) time and space.
 
 #include <string>
@@ -14,7 +14,7 @@
 #include <vector>
 #include <assert.h>
 
-// Accepted. 16ms. Beats 46.08% of submissions.
+// Accepted. 13ms. Beats 53.92% of submissions, ties 31.57% of submissions.
 class Solution {
 public:
     int characterReplacement(const std::string& s, int k) {
@@ -29,15 +29,20 @@ public:
             auto replacements = (right - left + 1) - max_count;
             while (replacements > k) {
                 auto l_index = s[left] - 'A';
-                --char_counts[l_index];
-                max_count = *std::max_element(char_counts.begin(), char_counts.end());
+                if (char_counts[l_index] == max_count) {
+                    // Decrementing the max, must find new max
+                    --char_counts[l_index];
+                    max_count = *std::max_element(char_counts.begin(), char_counts.end());
+                } else {
+                    // Max doesn't change.
+                    --char_counts[l_index];
+                }
                 ++left;
                 replacements = (right - left + 1) - max_count;
             }
             max_span = std::max(max_span, (right - left + 1));
             ++right;
         }
-        std::cout << "max span = " << max_span << std::endl;
         return max_span;
     }
 };
