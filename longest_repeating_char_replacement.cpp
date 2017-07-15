@@ -1,50 +1,57 @@
 // Leetcode: https://leetcode.com/problems/longest-repeating-character-replacement/#/description
-// Given a string of uppercase English letters, you can replace any letter with another up to k times.
+// Given a string of uppercase letters, you can replace any letter with another up to k times.
 // Find the length of a longest substring containing one repeating letter that can be built.
-// Example: "ABAB", k = 2. Build "AAAA" => return 4.
+// Example: "ABAB", k = 2 => return 4 ("AAAA")
+// Example: "ABCCD", k = 2 => return 4 ("CCCCD")
 
-// Brute Force: Consider all possible substrings, check if each contains only 2 letters with one
-// of the letters occuring <= k times. O(n^3) time.
-// Better: Scan the string with two pointers looking for the longest span containing 2 letters
-// with one of them occurring <= k times. O(n) time.
+// Brute Force: Consider all possible substrings, check if k+1 different letters occur in any,
+// and return the longest one. O(n^3) time, O(n) time.
+// Better: Scan the string with two pointers looking for the longest span containing k+1 letters.
+// O(n) time and space.
 
 #include <string>
 #include <iostream>
+#include <vector>
 #include <assert.h>
 
+// Accepted. 16ms. Beats 46.08% of submissions.
 class Solution {
 public:
     int characterReplacement(const std::string& s, int k) {
-        char first_char = 'a', second_char = 'a';
-        int left = 0, right = 0;
-        int max_span = 0;
+        std::vector<int> char_counts(26, 0);
+        int max_span = 0, left = 0, right = 0;
+        int max_count = 0;
 
         while (right < s.size()) {
-            if (first_char == 'a') {
-              first_char = s[right];
-            } else if (s[right] != first_char && second_char == 'a') {
-               second_char = s[right];
-            } else {
-                if (s[right] != first_char && s[right] != second_char) {
-                    left = right;
-                }
+            auto r_index = s[right] - 'A';
+            ++char_counts[r_index];
+            max_count = std::max(max_count, char_counts[r_index]);
+            auto replacements = (right - left + 1) - max_count;
+            while (replacements > k) {
+                auto l_index = s[left] - 'A';
+                --char_counts[l_index];
+                max_count = *std::max_element(char_counts.begin(), char_counts.end());
+                ++left;
+                replacements = (right - left + 1) - max_count;
             }
-            max_span = std::max(max_span, right - left + 1);
+            max_span = std::max(max_span, (right - left + 1));
             ++right;
         }
-        std::cout << "Max span = " << max_span << std::endl;
+        std::cout << "max span = " << max_span << std::endl;
         return max_span;
     }
 };
 
 void test_char_replacement() {
     Solution soln;
-    assert(soln.characterReplacement("AAAAA", 5) == 5);
-    assert(soln.characterReplacement("AAABB", 2) == 5);
-    assert(soln.characterReplacement("AABBB", 2) == 5);
-    assert(soln.characterReplacement("AABCBB", 1) == 3);
-    assert(soln.characterReplacement("AABCBB", 2) == 3);
-    assert(soln.characterReplacement("ABCDEFG", 22) == 2);
+    assert(soln.characterReplacement("", 4) == 0);              // ""
+    assert(soln.characterReplacement("A", 0) == 1);             // A
+    assert(soln.characterReplacement("AAABB", 2) == 5);         // AAAAA
+    assert(soln.characterReplacement("CCAAABB", 2) == 5);       // AAAAABB
+    assert(soln.characterReplacement("CAAXABB", 2) == 5);       // AAAAABB
+    assert(soln.characterReplacement("CAAXXABB", 2) == 5);      // CAAAAABB 
+    assert(soln.characterReplacement("CAAXYZABB", 2) == 4);     // AAAAYZAB
+    assert(soln.characterReplacement("ABCDEFG", 3) == 4);       // ABCGGGG 
 }
 
 int main(int argc, char** argv) {
