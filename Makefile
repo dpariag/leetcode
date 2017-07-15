@@ -78,7 +78,8 @@ CPP_PROGS := \
 	container_most_water \
 	h_index \
 	generate_parentheses \
-	longest_repeating_char_replacement
+	longest_repeating_char_replacement \
+	binary_tree_zigzag
 
 
 CFLAGS := -std=c99
