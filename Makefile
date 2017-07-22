@@ -80,7 +80,8 @@ CPP_PROGS := \
 	generate_parentheses \
 	longest_repeating_char_replacement \
 	binary_tree_zigzag \
-	search_rotated_array
+	search_rotated_array \
+	in_order_iterative
 
 
 CFLAGS := -std=c99

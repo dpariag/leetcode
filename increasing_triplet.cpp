@@ -24,6 +24,7 @@ public:
         for (auto num : nums) {
             if (num <= min) {
                 // New minimum (i.e., start a new triplet)
+                // Don't reset middle, we may be able to complete the previous triplet.
                 min = num;
             } else if (num <= middle) {
                 // Larger than current min, smaller than current middle
