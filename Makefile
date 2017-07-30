@@ -81,7 +81,12 @@ CPP_PROGS := \
 	longest_repeating_char_replacement \
 	binary_tree_zigzag \
 	search_rotated_array \
-	in_order_iterative
+	in_order_iterative \
+	01_matrix \
+	swap_nodes_in_pairs \
+	maximum_path_sum \
+	permutations \
+	permutations_2
 
 
 CFLAGS := -std=c99
