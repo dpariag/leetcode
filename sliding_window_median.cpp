@@ -14,7 +14,7 @@
 class MedianFinder {
 public:
     // Assumes that the MedianFinder is non-empty
-    double get_median() const {
+    inline double get_median() const {
         if (m_smaller.size() > m_larger.size()) {
             return *(--m_smaller.end());
         } else if (m_smaller.size() < m_larger.size()) {
@@ -24,34 +24,16 @@ public:
         return (double(*(--m_smaller.end())) + double(*(m_larger.begin()))) / 2.0;
     }
 
-    void insert(int value) {
+    inline void insert(int value) {
         if (m_smaller.empty() && m_larger.empty()) {
-            //std::cout << "inserting " << value << " into m_smaller" << std::endl;
             m_smaller.emplace(value);
         } else {
-            //std::cout << "Inserting " << value << ". median = " << get_median() << std::endl;
             value <= int(get_median()) ? m_smaller.emplace(value) : m_larger.emplace(value);
         }
         rebalance();
     }
 
-    void remove(int value) {
-#if 0
-        if (m_smaller.empty() && m_larger.empty()) {
-            // nothing to do
-        } else if (m_smaller.empty()) {
-            //std::cout << "erasing " << value << " from larger" << std::endl;
-            erase(m_larger, value);
-        } else if (m_larger.empty()) {
-            //std::cout << "erasing " << value << " from smaller " << std::endl;
-            erase(m_smaller, value);
-        } else {
-            std::cout << "Removing " << value << ". median = " << get_median() << std::endl;
-            //auto larger_min = *m_larger.begin();
-            //value < larger_min ? erase(m_smaller, value) : erase(m_larger, value);
-            //value <= int(get_median()) ? erase(m_smaller, value) : erase(m_larger, value);
-        }
-#endif
+    inline void remove(int value) {
         auto found = m_smaller.find(value);
         if (found != m_smaller.end()) {
             m_smaller.erase(found);
@@ -62,11 +44,11 @@ public:
         rebalance();
     }
 
-    size_t size() const {
+    inline size_t size() const {
         return m_smaller.size() + m_larger.size();
     }
 
-    void rebalance() {
+    inline void rebalance() {
         int num_smaller = m_smaller.size();
         int num_larger = m_larger.size();
         if (num_smaller - num_larger > 1) {
@@ -106,7 +88,7 @@ private:
 
 };
 
-// Accepted. 79ms. Beats 42.19% of submissions, ties 2.5% of submissions.
+// Accepted. 65ms. Beats 83.72% of submissions, ties ~5% of submissions.
 class Solution {
 public:
     std::vector<double> medianSlidingWindow(std::vector<int>& nums, int k) {
@@ -121,8 +103,6 @@ public:
                 median_finder.insert(nums[i]);
             }
             if (median_finder.size() >= k) {
-                //median_finder.print();
-                //std::cout << "current median = " << median_finder.get_median() << std::endl;
                 medians.emplace_back(median_finder.get_median());
             }
         }
@@ -133,12 +113,6 @@ public:
 bool test_medians(std::vector<int> values, int k, std::vector<double> expected) {
     Solution soln;
     auto medians = soln.medianSlidingWindow(values, k);
-    /*
-    for (auto m : medians) {
-        std::cout << m << " ";
-    }
-    std::cout << std::endl << std::endl;
-    */
     return medians == expected;
 }
 
