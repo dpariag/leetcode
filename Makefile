@@ -86,7 +86,10 @@ CPP_PROGS := \
 	swap_nodes_in_pairs \
 	maximum_path_sum \
 	permutations \
-	permutations_2
+	permutations_2 \
+	sliding_window_median \
+	max_word_lengths
+
 
 
 CFLAGS := -std=c99
