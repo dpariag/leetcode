@@ -11,7 +11,7 @@
 #include <iostream>
 #include <assert.h>
 
-// Accepted. 455ms. Beats 8.96% of submissions.
+// Accepted. 269ms. Beats 16.26% of submissions.
 class Solution {
 public:
     inline int calculate_product(const std::string& first, const std::string& second) {
@@ -32,6 +32,9 @@ public:
 
     int maxProduct(std::vector<std::string>& words) {
         int max_product = 0;
+        for (int i = 0; i < words.size(); ++i) {
+            std::sort(words[i].begin(), words[i].end());
+        }
         std::sort(words.begin(), words.end());
         for (int i = 0; i < words.size(); ++i) {
             for (int j = i+1; j < words.size(); ++j) {
