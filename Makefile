@@ -88,7 +88,8 @@ CPP_PROGS := \
 	permutations \
 	permutations_2 \
 	sliding_window_median \
-	max_word_lengths
+	max_word_lengths \
+	burst_balloons \
 
 
 

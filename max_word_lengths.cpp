@@ -3,43 +3,37 @@
 // the two words do not share common letters. You may assume that each word will contain only lower 
 // case letters. If no such two words exist, return 0.
 
-// Brute Force:
-// Better:
+// Brute Force: Compare all pairs of words, looking for words with no common letters. O(m*n^2)
+// Better: Represent the letters in a word by a 32-bit mask, making it easy to identify letter sets
+// with a null intersection. O(n^2 + m)
 
 #include <vector>
 #include <string>
 #include <iostream>
 #include <assert.h>
 
-// Accepted. 269ms. Beats 16.26% of submissions.
+// Accepted. 39ms. Beats 96.96% of submissions, ties 3.04% of submissions
 class Solution {
 public:
-    inline int calculate_product(const std::string& first, const std::string& second) {
-        int first_bits = 0, second_bits = 0; 
-        for (auto ch : first) {
-            first_bits |= (1 << (ch -'a'));
+    inline int build_bitmask(const std::string& str) {
+        int mask = 0;
+        for (auto ch : str) {
+            mask |= (1 << (ch -'a'));
         }
-        
-        for (auto ch : second) {
-            second_bits |= (1 << (ch - 'a'));
-        }
-
-        if ((first_bits & second_bits) == 0) {
-            return first.length() * second.length();
-        }
-        return 0;
+        return mask;
     } 
 
     int maxProduct(std::vector<std::string>& words) {
+        std::vector<int> masks(words.size(), 0);
+        for (int i = 0; i < words.size(); ++i) {
+            masks[i] = build_bitmask(words[i]);
+        }
+
         int max_product = 0;
         for (int i = 0; i < words.size(); ++i) {
-            std::sort(words[i].begin(), words[i].end());
-        }
-        std::sort(words.begin(), words.end());
-        for (int i = 0; i < words.size(); ++i) {
             for (int j = i+1; j < words.size(); ++j) {
-                if (words[i][0] != words[j][0]) {
-                    auto product = calculate_product(words[i], words[j]);
+                if ((masks[i] & masks[j]) == 0) {
+                    int product = words[i].length() * words[j].length();
                     max_product = std::max(max_product, product);
                 }
             }
