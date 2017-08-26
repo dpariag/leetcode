@@ -90,7 +90,8 @@ CPP_PROGS := \
 	sliding_window_median \
 	max_word_lengths \
 	burst_balloons \
-	contiguous_array
+	contiguous_array \
+	duplicate_subtrees
 
 
 

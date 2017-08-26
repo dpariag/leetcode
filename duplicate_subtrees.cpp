@@ -9,6 +9,7 @@
 #include <vector>
 #include <iostream>
 #include <unordered_map>
+#include <algorithm>
 #include <assert.h>
 #include "tree_node.h"
 
@@ -77,7 +78,7 @@ public:
                 }
             }
         }
-        
+
         if (!found_duplicate) {
             // root currently has no duplicates, save it for future comparisons
             SubtreeData data;
@@ -88,7 +89,35 @@ public:
     }
 };
 
+bool test_duplicate_subtrees(const std::vector<int> values, std::vector<int> expected_dups) {
+    Solution soln;
+    TreeNode* root = nullptr;
+
+    in_order_insert(root, values);
+    auto duplicates = soln.findDuplicateSubtrees(root);
+    std::vector<int> duplicate_values;
+
+    for (auto d : duplicates) {
+        duplicate_values.emplace_back(d->val);
+    }
+
+    std::sort(expected_dups.begin(), expected_dups.end());
+    std::sort(duplicate_values.begin(), duplicate_values.end());
+    return (duplicate_values == expected_dups);
+}
+
+void test_duplicate_subtrees() {
+    assert(test_duplicate_subtrees({}, {}));
+    assert(test_duplicate_subtrees({1}, {}));
+    assert(test_duplicate_subtrees({1,1,1}, {1}));
+    assert(test_duplicate_subtrees({1,1,2}, {}));
+    assert(test_duplicate_subtrees({2,1,5,2,1}, {2,1}));
+    assert(test_duplicate_subtrees({3,1,5,2,1}, {1}));
+    assert(test_duplicate_subtrees({1,1,1,1,1}, {1,1}));
+}
+
 int main(int argc, char** argv) {
+    test_duplicate_subtrees();
     std::cout << argv[0] + 2 << "...OK!" << std::endl;
     return 0;
 }

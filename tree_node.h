@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-// Leetcode definition of a TreeNode
+// Leetcode definition of a TreeNode, with added constructors/destructors
 struct TreeNode {
     int val;
     TreeNode* left;
@@ -38,6 +38,21 @@ void bst_insert(TreeNode*& root, const std::vector<int>& values) {
     for (auto v : values) {
         bst_insert(root, v);
     }
+}
+
+void in_order_insert(TreeNode*& node, const std::vector<int>& values, int start, int end) {
+    if (start > end) { return; }
+
+    int mid = start + (end-start) / 2;
+    node = new TreeNode(values[mid]);
+
+    in_order_insert(node->left, values, start, mid-1);
+    in_order_insert(node->right, values, mid+1, end);
+}
+
+void in_order_insert(TreeNode*& node, const std::vector<int>& values) {
+    if (values.empty()) { return; }
+    in_order_insert(node, values, 0, values.size() - 1);
 }
 
 void print(TreeNode* node) {
