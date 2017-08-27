@@ -91,7 +91,8 @@ CPP_PROGS := \
 	max_word_lengths \
 	burst_balloons \
 	contiguous_array \
-	duplicate_subtrees
+	duplicate_subtrees \
+	max_tree_width
 
 
 
