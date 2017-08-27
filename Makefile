@@ -92,9 +92,8 @@ CPP_PROGS := \
 	burst_balloons \
 	contiguous_array \
 	duplicate_subtrees \
-	max_tree_width
-
-
+	max_tree_width \
+	bitwiswe_and_range
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
