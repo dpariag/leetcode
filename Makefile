@@ -93,7 +93,8 @@ CPP_PROGS := \
 	contiguous_array \
 	duplicate_subtrees \
 	max_tree_width \
-	bitwiswe_and_range
+	bitwise_and_range \
+	number_islands
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
