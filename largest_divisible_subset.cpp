@@ -18,13 +18,14 @@ class Solution {
 public:
     std::vector<int> largestDivisibleSubset(std::vector<int>& nums) {
         if (nums.empty()) { return std::vector<int>(); }
+
         std::vector<std::vector<int>> divisors(nums.size(), std::vector<int>());
         std::sort(nums.begin(), nums.end());
-        int largest = 0, largest_index = 0;
-     
+        int largest_index = 0;
         divisors[0].emplace_back(nums[0]);
+
         for (int i = 1; i < nums.size(); ++i) {
-            int max_divisors = -1, max_index = -1;
+            int max_divisors = -1, max_index = 0;
             for (int j = 0; j < i; ++j) {
                 if (nums[i] % nums[j] == 0 && int(divisors[j].size()) > max_divisors) {
                     max_divisors = divisors[j].size();
@@ -35,9 +36,8 @@ public:
                 divisors[i] = divisors[max_index];
             }
             divisors[i].emplace_back(nums[i]);
-            if (int(divisors[i].size()) > largest) {
+            if (int(divisors[i].size()) > divisors[largest_index].size()) {
                 largest_index = i;
-                largest = divisors[i].size();
             }
         }
         return divisors[largest_index];

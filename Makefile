@@ -94,7 +94,8 @@ CPP_PROGS := \
 	duplicate_subtrees \
 	max_tree_width \
 	bitwise_and_range \
-	number_islands
+	number_islands \
+	largest_divisible_subset
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
