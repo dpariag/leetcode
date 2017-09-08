@@ -95,7 +95,10 @@ CPP_PROGS := \
 	max_tree_width \
 	bitwise_and_range \
 	number_islands \
-	largest_divisible_subset
+	largest_divisible_subset \
+	distinct_subsequences \
+	edit_distance \
+	russian_doll_envelopes
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
