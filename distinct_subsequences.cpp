@@ -17,7 +17,7 @@ using Table = std::vector<std::vector<int>>;
 // Accepted. 6ms. Beats 28.59% of submissions, ties 48.38% of submissions.
 class Solution {
 public:
-    int numDistinct(std::string& s, std::string& t) {
+    int numDistinct(const std::string& s, const std::string& t) {
         Table table(t.size(), std::vector<int>(s.size(), 0));
 
         // Initialize the first row

@@ -99,7 +99,8 @@ CPP_PROGS := \
 	distinct_subsequences \
 	edit_distance \
 	russian_doll_envelopes \
-	reverse_list
+	reverse_list \
+	distinct_subsequences
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
