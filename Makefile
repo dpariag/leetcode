@@ -100,7 +100,8 @@ CPP_PROGS := \
 	edit_distance \
 	russian_doll_envelopes \
 	reverse_list \
-	distinct_subsequences
+	distinct_subsequences \
+	trapping_rain_water
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic

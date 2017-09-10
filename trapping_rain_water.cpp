@@ -11,7 +11,7 @@
 #include <iostream>
 #include <assert.h>
 
-// Accepted. 57.56% of submissions, ties 35.28% of submissions.
+// Accepted. Beats 57.56% of submissions, ties 35.28% of submissions.
 class Solution {
 public:
     int trap(const std::vector<int>& height) {
