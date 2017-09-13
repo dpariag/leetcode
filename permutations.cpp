@@ -17,12 +17,13 @@ int factorial(size_t n) {
     return result;
 }
 
-// Accepted. 16ms. Beats 14.53% of submissions, ties 11.21% of submissions.
+// Accepted. 9ms. Beats 76.48% of submissions, ties 23.48% of submissions.
 class Solution {
 public:
-    void permutations(Permutation& nums, int start, Permutations& perms) {
+    inline void permutations(Permutation& nums, int start, Permutations& perms) {
         if (start == nums.size() - 1) {
             perms.emplace_back(nums);
+            return;
         }
 
         for (int i = start; i < nums.size(); ++i) {
