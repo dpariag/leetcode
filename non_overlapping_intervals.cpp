@@ -2,8 +2,9 @@
 // Given a collection of intervals, find the minimum number of intervals you need to remove to 
 // make the rest of the intervals non-overlapping.
 
-// Brute Force:
-// Better:
+// Brute Force: Generate all subsets of intervals, find the longest non-overlapping subset. 
+// Better: Sort the intervals by start. Iterate, tracking the last interval added.
+// If an addition causes overlap, choose the interval ending first. O(n*logn) time, O(1) space.
 
 #include <vector>
 #include <iostream>
@@ -27,13 +28,13 @@ public:
                  [](const Interval& a, const Interval& b) { return a.start < b.start; });
 
         int num_removed = 0;
-        Interval last = intervals[0];
+        int last = 0;
         for (int i = 1; i < intervals.size(); ++i) {
-            if (intervals[i].start >= last.end) {
-                last = intervals[i];
+            if (intervals[i].start >= intervals[last].end) {
+                last = i;
             } else {
-                if (intervals[i].end < last.end) {
-                    last = intervals[i];
+                if (intervals[i].end < intervals[last].end) {
+                    last = i;
                 }
                 ++num_removed;
             }
