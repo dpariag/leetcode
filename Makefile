@@ -102,7 +102,12 @@ CPP_PROGS := \
 	reverse_list \
 	distinct_subsequences \
 	trapping_rain_water \
-	remove_k_digits
+	remove_k_digits \
+	total_hamming_distance \
+	valid_square \
+	non_overlapping_intervals \
+	smallest_range \
+	is_subsequence
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
