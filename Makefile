@@ -107,7 +107,8 @@ CPP_PROGS := \
 	valid_square \
 	non_overlapping_intervals \
 	smallest_range \
-	is_subsequence
+	is_subsequence \
+	k_diff_pairs
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
