@@ -108,7 +108,11 @@ CPP_PROGS := \
 	non_overlapping_intervals \
 	smallest_range \
 	is_subsequence \
-	k_diff_pairs
+	remove_invalid_parens \
+	k_diff_pairs \
+	valid_palindrome_2 \
+	find_k_closest \
+	power_of_four
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
