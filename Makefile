@@ -112,7 +112,8 @@ CPP_PROGS := \
 	k_diff_pairs \
 	valid_palindrome_2 \
 	find_k_closest \
-	power_of_four
+	power_of_four \
+	right_side_view
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
