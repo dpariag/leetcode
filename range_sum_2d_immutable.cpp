@@ -1,9 +1,9 @@
 // Leetcode: https://leetcode.com/problems/range-sum-query-2d-immutable/description/
 // Given a 2D matrix, find the sum of the elements inside the rectangle defined by the 2 corners
-// (row1, col1) and (row2, col2).
+// (row1, col1) and (row2, col2). The matrix is immutable, and many sum queries are executed.
 
-// Brute Force:
-// Better:
+// Brute Force: For each call, sweep the rectangle and sum it's elements. O(n^2) time.
+// Better: Pre-compute row sums of the matrix. The sum can then be computed in O(n) time.
 
 #include <vector>
 #include <iostream>
@@ -11,15 +11,13 @@
 
 using Matrix = std::vector<std::vector<int>>;
 
-// Accepted. 23ms. Beats 37.66% of submissions, ties 19.94% of submissions.
+// Accepted. 22ms. Beats 57.59% of submissions, ties 30.22% of submissions.
 class NumMatrix {
 public:
     NumMatrix(const Matrix& m): row_sums(m) {
         for (int row = 0; row < m.size(); ++row) {
-            int row_sum = 0;
-            for (int col = 0; col < m[0].size(); ++col) {
-                row_sum += m[row][col];
-                row_sums[row][col] = row_sum;
+            for (int col = 1; col < m[0].size(); ++col) {
+                row_sums[row][col] = row_sums[row][col-1] + m[row][col];
             }
         }
     }
