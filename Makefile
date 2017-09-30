@@ -115,7 +115,8 @@ CPP_PROGS := \
 	power_of_four \
 	right_side_view \
 	range_sum_2d_immutable \
-	array_partition_1
+	array_partition_1 \
+	find_right_interval
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
