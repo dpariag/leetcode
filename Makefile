@@ -116,7 +116,9 @@ CPP_PROGS := \
 	right_side_view \
 	range_sum_2d_immutable \
 	array_partition_1 \
-	find_right_interval
+	find_right_interval \
+	integer_replacement \
+	palindrome_list
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
