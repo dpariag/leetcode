@@ -118,7 +118,9 @@ CPP_PROGS := \
 	array_partition_1 \
 	find_right_interval \
 	integer_replacement \
-	palindrome_list
+	palindrome_list \
+	lca_bst \
+	add_strings
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
