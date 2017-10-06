@@ -120,7 +120,8 @@ CPP_PROGS := \
 	integer_replacement \
 	palindrome_list \
 	lca_bst \
-	add_strings
+	add_strings \
+	longest_word_in_dict
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
