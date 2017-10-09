@@ -122,7 +122,8 @@ CPP_PROGS := \
 	lca_bst \
 	add_strings \
 	longest_word_in_dict \
-	binary_tree_levels_2
+	binary_tree_levels_2 \
+	4sum
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
