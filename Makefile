@@ -123,7 +123,12 @@ CPP_PROGS := \
 	add_strings \
 	longest_word_in_dict \
 	binary_tree_levels_2 \
-	4sum
+	4sum \
+	remove_nth_from_end \
+	min_rotated_array \
+	next_greater_3 \
+	diameter_binary_tree \
+	gas_station
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
