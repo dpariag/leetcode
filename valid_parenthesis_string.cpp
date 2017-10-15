@@ -2,38 +2,46 @@
 // Given a string consisting of '(', ')' and '*' characters, determine if it represents a string
 // of balanced parentheses. The '*' character can be treated as a '(', ')' or the empty string.
 
-// Brute Force:
-// Better:
+// Brute Force: Use a counter to track balanced parens. On '*', recurse treating star as each of ')'
+// '(' and ''. O(3^n) time.
+// Better: Use separate counters for parens and '*'s. In the event of an imbalance on ')', see if
+// there are '*'s occurring earlier in the string. At the end, '*'s can be used to balance
+// unmatched '('s, provided the stars occur AFTER the '('
 
 #include <vector>
 #include <iostream>
 #include <assert.h>
 
-// Start time: 12:28pm
-// Done my testing at 12:38pm
-// Accepted. 266ms. Beats 20.98% of submissions, ties < 1% of submissions.
+// Accepted. 3ms. Beats 38.12% of submissions, ties 51.19% of submissions. 1:43pm.
 class Solution {
 public:
-    bool check_balanced(const std::string&s, int i, int balanced) {
+    bool checkValidString(const std::string& s) {
+        int balanced = 0, num_stars = 0;
+        int closing_stars = 0;
 
-        for (; i < s.size(); ++i) {
+        for (int i = 0; i < s.size(); ++i) {
             if (s[i] == '(') {
                 ++balanced;
-            } else if (s[i] == ')') {
+            } else if (s[i] == ')') { 
                 --balanced;
-                if (balanced < 0) { return false; }
+                if (balanced < 0) {
+                    // Use a star if it occurred earlier
+                    if (num_stars > 0) { 
+                        --num_stars, ++balanced;
+                    } else {
+                        return false;
+                    }
+                }
+                // Stars used to match '(' can be no more than balanced - discard extras.
+                closing_stars = std::min(closing_stars, balanced);
             } else if (s[i] == '*') {
-                return (check_balanced(s, i+1, balanced+1) ||
-                        (balanced > 0 && check_balanced(s, i+1, balanced-1)) ||
-                        check_balanced(s, i+1, balanced));
+                ++num_stars;
+                if (balanced > 0) {
+                    ++closing_stars;
+                }
             }
         }
-        return balanced == 0;
-    }
-
-    bool checkValidString(const std::string& s) {
-        int balanced = 0;
-        return check_balanced(s, 0, balanced);
+        return balanced >= 0 && closing_stars >= balanced;
     }
 };
 
@@ -42,6 +50,7 @@ void test_valid_string() {
     assert(soln.checkValidString("") == true);
     assert(soln.checkValidString("()") == true);
     assert(soln.checkValidString("(*)") == true);
+    assert(soln.checkValidString("(*))") == true);
     assert(soln.checkValidString("()*") == true);
     assert(soln.checkValidString("*()") == true);
     assert(soln.checkValidString("*()*") == true);
@@ -49,6 +58,8 @@ void test_valid_string() {
     assert(soln.checkValidString("(()**)") == true);
     assert(soln.checkValidString(")(()**)") == false);
     assert(soln.checkValidString("(()**))))") == false);
+    assert(soln.checkValidString("(())(())(((()*()()()))()((()()(*()())))(((*)()") == false);
+    assert(soln.checkValidString("(())((())()()(*)(*()(())())())()()((()())((()))(*") == false);
 }
 
 int main(int argc, char** argv) {

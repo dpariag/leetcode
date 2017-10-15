@@ -128,7 +128,8 @@ CPP_PROGS := \
 	min_rotated_array \
 	next_greater_3 \
 	diameter_binary_tree \
-	gas_station
+	gas_station \
+	valid_parenthesis_string
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
