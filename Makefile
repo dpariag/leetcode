@@ -130,6 +130,7 @@ CPP_PROGS := \
 	diameter_binary_tree \
 	gas_station \
 	valid_parenthesis_string \
+	course_schedule_2 \
 	guess_number_2
 
 CFLAGS := -std=c99
