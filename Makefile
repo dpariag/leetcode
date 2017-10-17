@@ -129,7 +129,8 @@ CPP_PROGS := \
 	next_greater_3 \
 	diameter_binary_tree \
 	gas_station \
-	valid_parenthesis_string
+	valid_parenthesis_string \
+	guess_number_2
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic

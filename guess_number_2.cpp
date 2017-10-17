@@ -3,68 +3,60 @@
 // number is higher or lower than your last guess. Each wrong guess of 'x' costs $x.
 // How much money do you need to guarantee a win?
 
-// Brute Force:
-// Better:
+// The wording of the question is confusing. In general, we want to use binary search to narrow
+// the range of guesses. However, the binary search path does not yield the minimum cost.
+// For example: with {1,2,3,4}, the worst case for binary search costs 2 + 3 = 5. 
+// However, choosing 3 then 1 (cost=$4) is a tighter upper bound (3 is a better first guess than 2).
+// Brute Force: Try all initial guesses then recurse on left and right sub-ranges. 
+// Better: Improve the above, by memo-izing based on [start,end] of the range.
 
 #include <vector>
 #include <iostream>
 #include <assert.h>
-#include <unordered_map>
 
-// Start 8:24pm
-// Done on paper: 8:32pm
-// Done coding: 8:34pm
-// Question is confusing, didn't understand looking for "best strategy".
-// Pure Binary search is not the optimal cost strategy!
-// Start coding again at 9:05pm
-// Accepted by Leetcode  9:39pm
+using Cache = std::vector<std::vector<int>>; // Min cost for the range [i..j]
 
-struct Hash {
-    size_t operator()(const std::pair<int,int>& p) const {
-        return p.first * 7 + p.second * 13;
-    }
-};
-
-using Cache = std::unordered_map<std::pair<int,int>, int, Hash>;
-
-// Accepted. 206ms. Beats 4.09% of submissions. Ties < 1% of submissions.
+// Accepted. 23ms. Beats 34.31% of submissions. Ties 2.14% of submissions.
 class Solution {
 public:
-    // start and end are values (guesses) not array indices
     int get_money(int start, int end, Cache& cache) {
         if (start > end) { return 0; }
-        if (start == end) { return 0; } // range of size 1
-        if ((end - start) == 1) { return start; }   // range of size 2
-        if ((end - start) == 2) { return start + 1; } // range of size 3
 
-        auto found = cache.find(std::make_pair(start,end));
-        if (found != cache.end()) {
-            return found->second;
-        }
+        // Check cache!
+        if (cache[start][end] != -1) { return cache[start][end]; }
 
         int min_cost = std::numeric_limits<int>::max();
-        // 4 or more... and not in the cache
+        // Try each initial guess, then recurse on left and right ranges
         for (int i = start; i <= end; ++i) {
+            // First guess is wrong + worst case over (left, right) ranges
             auto cost = i + std::max(get_money(start, i-1, cache), get_money(i+1, end, cache));
+            // Take the minimum over all first guess worst cases
             min_cost = std::min(min_cost, cost); 
         }
-        cache.emplace(std::make_pair(start,end), min_cost);
+        // Update cache!
+        cache[start][end] = min_cost;
         return min_cost;
     }
 
     int getMoneyAmount(int n) {
-        Cache cache;
+        Cache cache(n+1, std::vector<int>(n+1, -1));
+
+        for (int i = 1; i <= n; ++i) {
+            cache[i][i] = 0;                                // range of 1 costs 0
+            if (i+1 < cache[i].size()) cache[i][i+1] = i;   // range of 2 costs the smaller one
+            if (i+2 < cache[i].size()) cache[i][i+2] = i+1; // range of 3 costs the middle one
+        }
         return get_money(1, n, cache);
     }
 };
 
 void test_guess_money() {
     Solution soln;
-    assert(soln.getMoneyAmount(7) == 10);
     assert(soln.getMoneyAmount(1) == 0);
     assert(soln.getMoneyAmount(2) == 1);
     assert(soln.getMoneyAmount(3) == 2);
     assert(soln.getMoneyAmount(4) == 4);
+    assert(soln.getMoneyAmount(7) == 10);
 }
 
 int main(int argc, char** argv) {
