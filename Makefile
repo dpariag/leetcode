@@ -131,7 +131,8 @@ CPP_PROGS := \
 	gas_station \
 	valid_parenthesis_string \
 	course_schedule_2 \
-	guess_number_2
+	guess_number_2 \
+	redundant_connection
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
