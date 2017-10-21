@@ -132,7 +132,8 @@ CPP_PROGS := \
 	valid_parenthesis_string \
 	course_schedule_2 \
 	guess_number_2 \
-	redundant_connection
+	redundant_connection \
+	linked_list_cycle2
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
