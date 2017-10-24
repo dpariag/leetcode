@@ -133,7 +133,8 @@ CPP_PROGS := \
 	course_schedule_2 \
 	guess_number_2 \
 	redundant_connection \
-	linked_list_cycle2
+	linked_list_cycle2 \
+	can_i_win
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
