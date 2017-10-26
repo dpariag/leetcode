@@ -134,7 +134,8 @@ CPP_PROGS := \
 	guess_number_2 \
 	redundant_connection \
 	linked_list_cycle2 \
-	can_i_win
+	can_i_win \
+	elimination_game
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic

@@ -3,37 +3,34 @@
 // Repeat the previous step, but from right to left, removing the last number then every other number
 // Repeat from alternating ends, until a single number remains. Return that number
 
-// Brute Force:
-// Better:
+// Brute Force: Construct an array and iteratively remove alternating elements as described. 
+// O(logn*n^2) time and O(n) space.
+// Better: No need to construct an array. Instead, compute the values of the leftmost and rightmost
+// elements in the sequence at each iteration. O(logN) time and O(1) space.
 
 #include <vector>
 #include <iostream>
 #include <assert.h>
 
-// 9:28am
-// Code and tests done at 9:44
-// Leetcode found a bug, have to go to work
 // Accepted. 62ms. Beats 50.26% of submissions, ties 6.25% of submissions.
 class Solution {
 public:
     int lastRemaining(int n) {
         if (n == 1) { return 1; }
-        int first = 1, last = n, step_size = 2;
-        bool left_side = true;
-
-        // Remove odd numbers
-        first = 2;
-        last = (last % 2) ? last - 1 : last;
-        step_size = 4, left_side = false;
-        int length = n / 2;
+        // Remove odd numbers, so the sequence looks like 2,4,6,...,last
+        int first = 2, last = (n % 2) ? n-1 : n;
+        int step_size = 2, length = n / 2;
+        bool left_side = false;
 
         while (length > 1) {
             if (left_side) {
-                first += (step_size / 2); 
-                if (length % 2) { last -= (step_size / 2); }
+                // Advance left endpoint. Also advance right for odd-length sequences
+                first += step_size; 
+                if (length % 2) { last -= step_size; }
             } else {
-                last -= (step_size / 2);
-                if (length % 2) { first += (step_size / 2); }
+                // Advance right endpoint. Also advance left for odd-length sequences
+                last -= step_size;
+                if (length % 2) { first += step_size; }
             }
             left_side = !left_side;
             step_size = step_size * 2;
