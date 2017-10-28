@@ -21,7 +21,6 @@ public:
                         int(word1[row-1] == word2[col-1]) + table[row-1][col-1]});
             }
         }
-        //std::cout << table.back().back() << std::endl;
         return (word1.size() - table.back().back()) + (word2.size() - table.back().back());
     }
 };

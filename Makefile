@@ -136,7 +136,8 @@ CPP_PROGS := \
 	linked_list_cycle2 \
 	can_i_win \
 	elimination_game \
-	decode_string
+	decode_string \
+	delete_op_two_strings
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
