@@ -137,7 +137,8 @@ CPP_PROGS := \
 	can_i_win \
 	elimination_game \
 	decode_string \
-	delete_op_two_strings
+	delete_op_two_strings \
+	4sum_2
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
