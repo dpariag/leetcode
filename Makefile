@@ -135,7 +135,8 @@ CPP_PROGS := \
 	redundant_connection \
 	linked_list_cycle2 \
 	can_i_win \
-	elimination_game
+	elimination_game \
+	decode_string
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic

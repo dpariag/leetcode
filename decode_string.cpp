@@ -2,14 +2,16 @@
 // Decode a string that has been encoded using the format: k[encoded_string], where the 
 // encoded_string inside the square brackets is repeated exactly k times. Note k > 0.
 
-// Brute Force:
-// Better:
+// Brute Force: Multiple passes over input, expanding all non-nested encoded strings on each pass.
+// Better: Use recursion to expand nested encodings. Each encoding is generated once and never moves.
 
 #include <vector>
 #include <cctype>
 #include <iostream>
+#include <unordered_map>
 #include <assert.h>
 
+// Accepted. 0ms. Beats 50.95% of submissions, ties 49.05% of submissions.
 class Solution {
 public:
     std::string decode(const std::string& s, int& offset) {
