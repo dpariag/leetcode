@@ -18,7 +18,7 @@ public:
         int mask = 1;
         int size = int(nums.size());
 
-        while (mask != 0 && mask <= max) {
+        while (mask != 0) {
             int num_with_bit_set = 0;
             for (auto num : nums) {
                 if (num & mask) { ++num_with_bit_set; }
