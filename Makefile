@@ -139,7 +139,8 @@ CPP_PROGS := \
 	decode_string \
 	delete_op_two_strings \
 	4sum_2 \
-	matchsticks_to_square
+	matchsticks_to_square \
+	buy_sell_cooldown
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
