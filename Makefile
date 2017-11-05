@@ -140,7 +140,8 @@ CPP_PROGS := \
 	delete_op_two_strings \
 	4sum_2 \
 	matchsticks_to_square \
-	buy_sell_cooldown
+	buy_sell_cooldown \
+	target_sum
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
