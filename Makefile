@@ -143,7 +143,8 @@ CPP_PROGS := \
 	buy_sell_cooldown \
 	target_sum \
 	palindrome_number \
-	maximum_swap
+	maximum_swap \
+	subsets
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
