@@ -144,7 +144,8 @@ CPP_PROGS := \
 	target_sum \
 	palindrome_number \
 	maximum_swap \
-	subsets
+	subsets \
+	range_addition_2
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
