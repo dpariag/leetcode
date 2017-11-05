@@ -2,8 +2,8 @@
 // Given a list of non-negative integers and a target sum S.
 // Find out how many ways you can assign '+' and '-' operators to obtain the target sum S.
 
-// Brute Force:
-// Better:
+// Brute Force: Use recursion to assign +/- signs to each number. O(2^n)
+// Better: Memoize the recursion to avoid re-calculating paths
 
 #include <vector>
 #include <unordered_map>
