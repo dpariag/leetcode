@@ -141,7 +141,8 @@ CPP_PROGS := \
 	4sum_2 \
 	matchsticks_to_square \
 	buy_sell_cooldown \
-	target_sum
+	target_sum \
+	palindrome_number
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
