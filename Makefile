@@ -146,7 +146,8 @@ CPP_PROGS := \
 	maximum_swap \
 	subsets \
 	range_addition_2 \
-	predict_the_winner
+	predict_the_winner \
+	sort_char_frequency
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
