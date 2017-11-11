@@ -20,12 +20,6 @@ static const int cAtlantic = 2;
 static const int cBoth = 3;
 static const int cVisited = 4;
 
-// Start: 7:38pm
-// Start coding: 7:45pm
-// Done coding: 8:35
-// My tests pass: 8:45
-// Leetcode pass: 8:53pm
-
 // Accepted. 222ms. Beats 6.08% of submissions, ties < 1% of submissions.
 class Solution {
 public:
