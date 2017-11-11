@@ -17,6 +17,7 @@ using Coods = std::vector<std::pair<int, int>>;
 
 static const int cPacific = 1;
 static const int cAtlantic = 2;
+static const int cBoth = 3;
 static const int cVisited = 4;
 
 // Start: 7:38pm
@@ -25,34 +26,32 @@ static const int cVisited = 4;
 // My tests pass: 8:45
 // Leetcode pass: 8:53pm
 
-// Accepted. 313ms. Beats 3.80% of submissions, ties < 1% of submissions.
+// Accepted. 222ms. Beats 6.08% of submissions, ties < 1% of submissions.
 class Solution {
 public:
     inline bool valid_row(const Matrix& m, int row) { return row >= 0 && row < m.size(); }
     inline bool valid_col(const Matrix& m, int col) { return col >= 0 && col < m[0].size(); }
 
-    bool dfs(const Matrix& m, Reachable& r, int row, int col, char target) {
-        if (row < 0 || row >= m.size() || col < 0 || col >= m[0].size()) { return false; }
-        if (r[row][col] & target) { return true; }
-         
-        if (r[row][col] & cVisited) { return false; }
+    int dfs(const Matrix& m, Reachable& r, int row, int col, char target) {
+        if (row < 0 || row >= m.size() || col < 0 || col >= m[0].size()) { return 0; }        
+        if (r[row][col] & cVisited) { return r[row][col]; }
+        if ((r[row][col] & target) == target) { return target; }
+        
         r[row][col] |= cVisited; // mark visited
-
         using Cells = std::vector<std::pair<int,int>>;
-        for (auto cell : Cells({{row-1,col}, {row,col-1}, {row+1, col}, {row, col+1}})) {
+        for (auto& cell : Cells({{row-1,col}, {row,col-1}, {row+1, col}, {row, col+1}})) {
             int next_row = cell.first, next_col = cell.second;
-
             if (valid_row(m, next_row) && valid_col(m, next_col) &&
                 m[next_row][next_col] <= m[row][col]) {
-                if (dfs(m, r, next_row, next_col, target)) {
-                    r[row][col] |= target;
+                r[row][col] |= dfs(m, r, next_row, next_col, target);
+                if ((r[row][col] & target) == target) {
                     r[row][col] ^= cVisited; // unvisit
-                    return true;
+                    return r[row][col];
                 }
             }
         }
         r[row][col] ^= cVisited; // unvisit
-        return false;
+        return r[row][col];
     }
 
     Coods pacificAtlantic(const Matrix& m) {
@@ -71,8 +70,7 @@ public:
 
         for (int row = 0; row < m.size(); ++row) {
             for (int col = 0; col < m[0].size(); ++col) {
-                dfs(m, reachable, row, col, cPacific);
-                dfs(m, reachable, row, col, cAtlantic);
+                dfs(m, reachable, row, col, cBoth);
             }
         }
        
@@ -82,7 +80,6 @@ public:
                 if ((reachable[row][col] & cAtlantic) &&
                     (reachable[row][col] & cPacific)) {
                     result.emplace_back(std::make_pair(row, col));
-                    //std::cout << "(" << row << "," << col << ")" << std::endl;
                 }
             }
         }
@@ -99,6 +96,13 @@ bool test_pacific_atlantic(const Matrix& m, const Coods cood) {
 void test_pacific_atlantic() {
     assert(test_pacific_atlantic({{1,2,2,3,5},{3,2,3,4,4},{2,4,5,3,1},{6,7,1,4,5}, {5,1,1,2,4}}, 
                 {{0,4},{1,3},{1,4},{2,2},{3,0},{3,1},{4,0}}));
+
+    assert(test_pacific_atlantic({{1,2,3,4},{12,13,14,5},{11,16,15,6},{10,9,8,7}}, 
+                {{0,3},
+                 {1,0},{1,1},{1,2},{1,3},
+                 {2,0},{2,1},{2,2},{2,3},
+                 {3,0},{3,1},{3,2},{3,3}}));
+
 }
 
 int main(int argc, char** argv) {

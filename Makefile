@@ -147,7 +147,8 @@ CPP_PROGS := \
 	subsets \
 	range_addition_2 \
 	predict_the_winner \
-	sort_char_frequency
+	sort_char_frequency \
+	pacific_atlantic
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
