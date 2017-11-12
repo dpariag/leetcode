@@ -149,7 +149,8 @@ CPP_PROGS := \
 	predict_the_winner \
 	sort_char_frequency \
 	pacific_atlantic \
-	min_moves_equal
+	min_moves_equal \
+	flatten_binary_tree
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
