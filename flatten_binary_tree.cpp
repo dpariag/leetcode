@@ -1,15 +1,16 @@
 // Leetcode: https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/
 // Given a binary tree, flatten it to a linked list in-place.
 
-// Brute Force:
-// Better:
+// Brute Force: In-order traversal, appending Nodes to a vector. Build list from vector. 
+// O(n) time, O(n+h) space.
+// Better: A post-order traversal in which each recursive call returns head and tail pointers
+// to the sub-lists. Build list from sublists. O(n) time and O(h) space (recursion).
 
 #include <vector>
 #include <iostream>
 #include <assert.h>
 #include "tree_node.h"
 
-// Start: 10:11am. Done: 10:25
 // Accepted. 6ms. Beats 41.55% of submissions, ties 56.84% of submissions.
 class Solution {
 public:
