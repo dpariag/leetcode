@@ -150,7 +150,9 @@ CPP_PROGS := \
 	sort_char_frequency \
 	pacific_atlantic \
 	min_moves_equal \
-	flatten_binary_tree
+	min_moves_equal2 \
+	flatten_binary_tree \
+	find_all_anagrams
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
