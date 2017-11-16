@@ -13,12 +13,12 @@ static const int c_visited = 2;
 
 bool knows(int a, int b);
 
-// Accepted. 1045ms. Beats 0.94% of submissions
+// Accepted. 976ms. Beats 2.02% of submissions, ties < 1% of submissions.
 class Solution {
 public:
     bool knows_no_one(int cur, int n) {
         for (int i = 0; i < n; ++i) {
-            if (knows(cur, i)) { return false; }
+            if (i != cur && knows(cur, i)) { return false; }
         }
         return true;
     }
@@ -29,7 +29,7 @@ public:
 
         visited[cur] = c_in_progress;
         for (int i = 0; i < n; ++i) {
-            if (knows(cur, i)) {
+            if (i != cur && knows(cur, i)) {
                 dfs(i, n, incoming, visited);
             }
         }

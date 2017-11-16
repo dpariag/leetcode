@@ -152,7 +152,8 @@ CPP_PROGS := \
 	min_moves_equal \
 	min_moves_equal2 \
 	flatten_binary_tree \
-	find_all_anagrams
+	find_all_anagrams \
+	find_celebrity
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
