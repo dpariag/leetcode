@@ -12,6 +12,7 @@
 
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #include <assert.h>
 //#include "bits.h"
 //#include "numbers.h"

@@ -12,6 +12,7 @@
 #include <string>
 #include <iostream>
 #include <unordered_map>
+#include <algorithm>
 #include <assert.h>
 
 using Strings = std::vector<std::string>;

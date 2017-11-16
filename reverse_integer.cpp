@@ -6,6 +6,7 @@
 // Better: Extract the rightmost digit, and append it to a new integer. Repeat. O(d) time.
 
 #include <iostream>
+#include <limits>
 #include <assert.h>
 
 // Accepted. 16ms. Beats 41.19% of submissions, ties 8.3% of submissions

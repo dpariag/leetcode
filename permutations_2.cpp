@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <unordered_set>
+#include <algorithm>
 #include <iostream>
 #include <assert.h>
 

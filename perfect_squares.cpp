@@ -7,6 +7,7 @@
 // sub-optimal paths in the process.
 
 #include <iostream>
+#include <algorithm>
 #include <assert.h>
 #include <cmath>
 

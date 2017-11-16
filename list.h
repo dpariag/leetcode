@@ -1,6 +1,7 @@
 #ifndef LIST_H
 #define LIST_H
 #include <iostream>
+#include <algorithm>
 #include <vector>
 
 // List node definition used by LeetCode.

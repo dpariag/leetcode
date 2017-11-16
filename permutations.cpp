@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #include <assert.h>
 
 using Permutation = std::vector<int>;

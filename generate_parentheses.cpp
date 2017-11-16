@@ -8,6 +8,7 @@
 #include <vector>
 #include <iostream>
 #include <assert.h>
+#include <algorithm>
 
 // Accepted. 3ms. Beats 13.75% of submissions, ties 83.86% of submissions.
 class Solution {

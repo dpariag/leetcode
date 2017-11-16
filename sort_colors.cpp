@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #include <assert.h>
 
 static const int Red = 0;

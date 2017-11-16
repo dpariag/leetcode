@@ -7,14 +7,11 @@
 
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #include <assert.h>
 
 using Subset = std::vector<int>;
 using Subsets = std::vector<Subset>;
-
-// 9:26am
-// Coding done 9:31
-// Bugs fixed and leetcode accepted: 9:35
 
 // Accepted. 6ms. Beats 18.89% of submissions, ties 76.43% of submissions.
 class Solution {

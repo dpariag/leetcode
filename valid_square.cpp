@@ -5,6 +5,8 @@
 // Better: Generate all 6 lines connecting 4 points. Square has 4 equal sides and 2 equal diagonals.
 
 #include <vector>
+#include <limits>
+#include <algorithm>
 #include <cmath>
 #include <iostream>
 #include <assert.h>

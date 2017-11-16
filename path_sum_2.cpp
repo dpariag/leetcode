@@ -7,6 +7,7 @@
 #include <vector>
 #include <iostream>
 #include <assert.h>
+#include <algorithm>
 #include "tree_node.h"
 
 using Path = std::vector<int>;

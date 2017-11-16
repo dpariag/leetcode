@@ -9,6 +9,7 @@
 #include <vector>
 #include <iostream>
 #include <assert.h>
+#include <limits>
 #include "tree_node.h"
 
 const int int_min = std::numeric_limits<int>::min();

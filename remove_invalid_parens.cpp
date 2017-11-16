@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <stack>
+#include <algorithm>
 #include <unordered_set>
 #include <iostream>
 #include <assert.h>

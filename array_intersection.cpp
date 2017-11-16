@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #include <unordered_set>
 #include <assert.h>
 

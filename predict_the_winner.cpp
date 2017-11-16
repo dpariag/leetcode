@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <iostream>
+#include <limits>
 #include <assert.h>
 
 using Cache = std::vector<std::vector<int>>;

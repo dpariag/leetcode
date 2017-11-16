@@ -6,6 +6,7 @@
 // Better: Sort the array, and sum even-numbered indices. O(n*logn) time.
 
 #include <vector>
+#include <algorithm>
 #include <iostream>
 #include <assert.h>
 

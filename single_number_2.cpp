@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #include <assert.h>
 
 // Accepted. 26ms. Beats 10.89% of solutions, ties 26.00% of solutions.

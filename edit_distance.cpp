@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <algorithm>
 #include <assert.h>
 
 using Table = std::vector<std::vector<int>>;

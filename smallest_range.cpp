@@ -7,6 +7,7 @@
 // Better: Use a binary tree (std::map) to locate the minimum element. O(n*logk)
 
 #include <map>
+#include <limits>
 #include <vector>
 #include <iostream>
 #include <assert.h>

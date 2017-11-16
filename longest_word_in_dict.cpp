@@ -9,6 +9,7 @@
 
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #include <assert.h>
 
 // Accepted. 105ms. Beats 57.80% of submissions, ties 6.61% of submisssions.
