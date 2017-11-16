@@ -7,13 +7,9 @@
 #include <iostream>
 #include <assert.h>
 
-static const int c_unvisited = 0;
-static const int c_in_progress = 1;
-static const int c_visited = 2;
-
 bool knows(int a, int b);
 
-// Accepted. 976ms. Beats 2.02% of submissions, ties < 1% of submissions.
+// Accepted. 62ms. Beats 38.01% of submissions, ties < 5.53% of submissions.
 class Solution {
 public:
     bool knows_no_one(int cur, int n) {
@@ -23,30 +19,22 @@ public:
         return true;
     }
 
-    void dfs(int cur, int n, std::vector<int>& incoming, std::vector<int>& visited) {
-        incoming[cur]++;
-        if (visited[cur] != c_unvisited) { return; }
-
-        visited[cur] = c_in_progress;
-        for (int i = 0; i < n; ++i) {
-            if (i != cur && knows(cur, i)) {
-                dfs(i, n, incoming, visited);
-            }
-        }
-        visited[cur] = c_visited;
-    }
-
     int findCelebrity(int n) {
-        std::vector<int> incoming(n, 0);
-        std::vector<int> visited(n, c_unvisited);
-
+        // First scan for someone who knows no-one
         for (int i = 0; i < n; ++i) {
-            dfs(i, n, incoming, visited);
-        }
-
-        for (int i = 0; i < n; ++i) {
-            if (incoming[i] == n && knows_no_one(i, n)) {
-                return i;
+            if (knows_no_one(i, n)) {
+                // Possible celebrity
+                bool celebrity = true;
+                for (int j = 0; j < n; ++j) {
+                    if (j != i && knows(j, i) == false) {
+                        celebrity = false;
+                        break;
+                    }
+                }
+                if (celebrity) {
+                    // i knows nobody, and everyone knows i 
+                    return i; 
+                }
             }
         }
         return -1;
