@@ -154,7 +154,7 @@ CPP_PROGS := \
 	flatten_binary_tree \
 	find_all_anagrams \
 	find_celebrity \
-	plus_one
+	plus_one \
 	subarray_product
 
 CFLAGS := -std=c99
