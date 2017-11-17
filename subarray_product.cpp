@@ -4,14 +4,14 @@
 
 // Brute Force: Generate all subarrays and compute their product. O(n^3) time.
 // Better: Use a sliding window over the array, enlarge if product < k, shrink if product >= k.
+// O(n) time and O(1) space.
 
 #include <vector>
 #include <numeric>
 #include <iostream>
 #include <assert.h>
 
-// 5:23pm --> 5:35
-
+// Accepted. 135ms. Beats 47.67% of submissions, ties 3.76% of submissions.
 class Solution {
 public:
     int numSubarrayProductLessThanK(const std::vector<int>& nums, int k) {
@@ -19,20 +19,12 @@ public:
         int left = 0, right = 0;
         while (right < nums.size()) {
             product *= nums[right];
-            std::cout << "left = " << left << " right = " << right << std::endl;
-            std::cout << "product = " << product << std::endl;
-            if (product < k) {
-            } else {
-                while (left <= right && product >= k) {
-                    product /= nums[left];
-                    ++left;
-                }
+            while (left <= right && product >= k) {
+                product /= nums[left++];
             }
             count += (right - left + 1);
-            std::cout  << "count = " << count << std::endl;
             ++right;
         }
-        std::cout << "final count = " << count << std::endl;
         return count;
     }
 };
