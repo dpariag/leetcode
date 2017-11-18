@@ -159,7 +159,8 @@ CPP_PROGS := \
 	excel_column_title \
 	non_decreasing_array \
 	multiply_strings \
-	rectangle_area
+	rectangle_area \
+	valid_palindrome
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
