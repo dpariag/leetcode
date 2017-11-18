@@ -155,7 +155,8 @@ CPP_PROGS := \
 	find_all_anagrams \
 	find_celebrity \
 	plus_one \
-	subarray_product
+	subarray_product \
+	excel_column_title
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
