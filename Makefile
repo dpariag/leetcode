@@ -156,7 +156,9 @@ CPP_PROGS := \
 	find_celebrity \
 	plus_one \
 	subarray_product \
-	excel_column_title
+	excel_column_title \
+	non_decreasing_array \
+	multiply_strings
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
