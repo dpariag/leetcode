@@ -16,57 +16,20 @@
 using Person = std::pair<int,int>;
 using Queue = std::vector<Person>;
 
-void print(Queue& q) {
-    for (int i = 0; i < q.size(); ++i) {
-        std::cout << q[i].first << "," << q[i].second << " ";
-    }
-    std::cout << std::endl;
-}
-
-// Start: 10:10am
-// Coded: 10:27am
+// Accepted. 29ms. Beats 98.11% of submissions, ties 1.66% of submissions.
 class Solution {
 public:
-
-    int num_taller_ahead(Queue& people, int height, int index) {
-        int count = 0;
-        for (int i = 0; i < index; ++i) {
-            if (people[i].first >= height) { ++count; }
-        }
-        return count;
-    }
-
     Queue reconstructQueue(Queue& people) {
-        // Sort by height, breaking ties by k
+        // Sort by decreasing height, breaking ties by smaller k
         std::sort(people.begin(), people.end(),
-                  [](const Person& p1, const Person& p2) { return (p1.first < p2.first) || 
+                  [](const Person& p1, const Person& p2) { return (p1.first > p2.first) || 
                     ((p1.first == p2.first) && (p1.second < p2.second));});
-
-        int i = 0;
-        while (i < people.size()) {
-            int num_taller = people[i].second;
-            int actual_taller = num_taller_ahead(people, people[i].first, i);
-
-            if (actual_taller == num_taller) {
-                ++i;
-                continue;
-            }
-        
-            std::cout << "actual_taller = " << actual_taller << " but need " << num_taller << std::endl;       
-            print(people);
-            int cur = i, next = i+1;
-            while (actual_taller < num_taller && (next < people.size())) {
-                std::swap(people[cur], people[next]);
-                print(people);
-                if (people[next].first < people[cur].first) { ++actual_taller; }
-                cur = next, next++;
-            }
-            print(people);
-
-            std::cout << "now actual_taller = " << actual_taller << std::endl;       
-            assert(actual_taller == num_taller);
+        // Now insert people using their k-value
+        Queue q;
+        for (const Person& p : people) {
+            q.insert(q.begin() + p.second, p);
         }
-        return people;
+        return q;
     }
 };
 
