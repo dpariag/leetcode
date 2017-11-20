@@ -161,7 +161,8 @@ CPP_PROGS := \
 	multiply_strings \
 	rectangle_area \
 	valid_palindrome \
-	queue_reconstruct
+	queue_reconstruct \
+	android_unlock
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
