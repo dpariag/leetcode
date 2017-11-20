@@ -162,7 +162,9 @@ CPP_PROGS := \
 	rectangle_area \
 	valid_palindrome \
 	queue_reconstruct \
-	android_unlock
+	android_unlock \
+	island_perimeter \
+	longest_substring_k_distinct
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
