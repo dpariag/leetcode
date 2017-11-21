@@ -164,7 +164,9 @@ CPP_PROGS := \
 	queue_reconstruct \
 	android_unlock \
 	island_perimeter \
-	longest_substring_k_distinct
+	longest_substring_k_distinct \
+	moving_average \
+	letter_combos_phone
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
