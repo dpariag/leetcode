@@ -2,7 +2,8 @@
 
 // Brute Force: Generate all substrings, count distinct in each, track longest. O(n^3) time.
 // Better: Use a sliding window (left and right indices) to iterate the string. 
-// Grow the window while it contains k or fewer distinct chars, shrink it otherwise. O(n) time and O(1) space.
+// Grow the window while it contains k or fewer distinct chars, shrink it otherwise. 
+// O(n) time and O(1) space.
 
 #include <string>
 #include <iostream>

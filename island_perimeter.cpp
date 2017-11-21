@@ -24,7 +24,8 @@ public:
         using Neighbors = std::vector<std::pair<int, int>>;
         Neighbors neighbors({{row-1,col}, {row+1,col}, {row,col+1}, {row,col-1}});
         for (auto& n : neighbors) {
-            if ((n.first >= 0 && n.first < grid.size()) && (n.second >= 0 && n.second < grid[0].size())) {
+            if ((n.first >= 0 && n.first < grid.size()) && 
+                (n.second >= 0 && n.second < grid[0].size())) {
                 // Valid neighbor
                 if (grid[n.first][n.second] == 1) {
                     // Neighbor is land, so that side can't contribute to perimeter
