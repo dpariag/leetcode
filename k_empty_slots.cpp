@@ -9,46 +9,61 @@
 #include <vector>
 #include <unordered_map>
 #include <iostream>
+#include <limits>
 #include <assert.h>
 
 using FlowerToDays = std::unordered_map<int, int>;
 
+// Accepted. 285ms Beats 5.01% of submissions, ties 0.09% of submissions.
 class Solution {
 public:
     int kEmptySlots(const std::vector<int>& flowers, int k) {
-        FlowerToDays days(flowers.size()*2);
+        if (flowers.size() < k+2) { return -1; }
 
+        FlowerToDays days(flowers.size()*2);
         for (int i = 0; i < flowers.size(); ++i) {
             days[flowers[i]] = i+1;
         }
-         
-        int left_day = 0;
-        int target_flower, target_day = std::numeric_limits<int>::max();
-        for (int flower = 1; flower <= flowers.size(); ++flower) {
-            int bloom_day = days[flower];
-            std::cout << "target_day = " << target_day << std::endl;
-            std::cout << "flower = " << flower << " blooms on day " << bloom_day << std::endl;
-            if (bloom_day < target_day) {
-                target_flower = flower + k + 1;
-                target_day = days[target_flower];
-                left_day = bloom_day;
-                std::cout << "new target flower = " << target_flower << " target_day = " << target_day << std::endl;
-            } else if (bloom_day == target_day) {
-                std::cout << "Found the gap on day " << bloom_day << std::endl;
-                return std::max(bloom_day , left_day);
+
+        bool found = false;
+        int best_day1 = std::numeric_limits<int>::max(), best_day2 = std::numeric_limits<int>::max();
+        int left_flower = 1, left_day = days[left_flower];
+        int right_flower = left_flower + k + 1, right_day = days[right_flower];
+        for (int flower = 2; flower <= flowers.size(); ++flower) {
+            //std::cout << "left_flower = " << left_flower << " right flower = " << right_flower << std::endl;
+            //std::cout << "left_day = " << left_day << " right day = " << right_day << std::endl;
+            int day = days[flower];
+            //std::cout << "flower = " << flower << " blooming on " << day << std::endl;
+
+            if (flower == right_flower) {
+                //std::cout << "*left_day = " << left_day << " *right day = " << right_day << std::endl;
+                if (std::max(left_day, right_day) < std::max(best_day1, best_day2)) {
+                    best_day1 = left_day;
+                    best_day2 = right_day;
+                    found = true;
+                    //std::cout << "best_days are " << best_day1 << "," << best_day2 << std::endl;
+                }
+                left_flower = flower;
+                left_day = day;
+                right_flower = left_flower + k + 1;
+                right_day = days[right_flower];
+            } else if (day < left_day || day < right_day) {
+                left_flower = flower;
+                left_day = day;
+                right_flower = left_flower + k + 1;
+                if (right_flower > flowers.size()) { break; }
+                right_day = days[right_flower];
             }
-            std::cout << std::endl;
+            //std::cout << std::endl;
         }
-        std::cout << "NO GAP!" << std::endl;
-        return -1;
+        return found ? std::max(best_day1, best_day2) : -1;
     }
 };
 
 void test_k_empty_slots() {
     Solution soln;
-
-    assert(soln.kEmptySlots({3,9,2,8,1,6,10,5,4,7}, 1) == 6);
     assert(soln.kEmptySlots({1,2,3}, 1) == -1);
+    assert(soln.kEmptySlots({3,9,2,8,1,6,10,5,4,7}, 1) == 6);
     assert(soln.kEmptySlots({1,3,2}, 1) == 2);
     assert(soln.kEmptySlots({6,5,8,9,7,1,10,2,3,4}, 2) == 8);
 
