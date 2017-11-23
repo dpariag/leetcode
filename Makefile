@@ -167,6 +167,7 @@ CPP_PROGS := \
 	longest_substring_k_distinct \
 	moving_average \
 	letter_combos_phone \
+	k_empty_slots \
 	diagonal_traverse
 
 CFLAGS := -std=c99
