@@ -169,7 +169,8 @@ CPP_PROGS := \
 	letter_combos_phone \
 	k_empty_slots \
 	diagonal_traverse \
-	flip_game
+	flip_game \
+	flip_game2
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
