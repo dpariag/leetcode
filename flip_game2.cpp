@@ -10,8 +10,6 @@
 
 using Cache = std::unordered_map<std::string, bool>;
 
-// Start 1:45pm
-// End: 1:53pm
 // Accepted. 219ms. Beats 12.90% of submissions, ties < 1% of submissions.
 class Solution {
 public:
@@ -43,7 +41,21 @@ public:
     }
 };
 
+bool test_can_win(std::string s, bool expected) {
+    Solution soln;
+    return soln.canWin(s) == expected;
+}
+
+void test_can_win() {
+    assert(test_can_win("++++", true));
+    assert(test_can_win("++-+--", true));
+    assert(test_can_win("-++-++", false));
+    assert(test_can_win("+++++", false));
+    assert(test_can_win("-++-++--++", true));
+}
+
 int main(int argc, char** argv) {
+    test_can_win();
     std::cout << argv[0] + 2 << "...OK!" << std::endl;
     return 0;
 }
