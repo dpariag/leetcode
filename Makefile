@@ -166,7 +166,8 @@ CPP_PROGS := \
 	island_perimeter \
 	longest_substring_k_distinct \
 	moving_average \
-	letter_combos_phone
+	letter_combos_phone \
+	diagonal_traverse
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
