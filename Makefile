@@ -170,7 +170,8 @@ CPP_PROGS := \
 	k_empty_slots \
 	diagonal_traverse \
 	flip_game \
-	flip_game2
+	flip_game2 \
+	meeting_rooms
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
