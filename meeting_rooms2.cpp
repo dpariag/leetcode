@@ -19,29 +19,24 @@ struct Interval {
 
 using Intervals = std::vector<Interval>;
 
+// Accepted. 1365ms. Beats 0.09% of submissions, ties < 1% of submissions.
 class Solution {
 public:
     int minMeetingRooms(Intervals& intervals) {
-        if (intervals.empty()) { return 0; }
-        // Sort by increasing end time
-        std::sort(intervals.begin(), intervals.end(),
-                [](const Interval& i1, const Interval& i2) {
-                    return (i1.end < i2.end) || (i1.end == i2.end && i1.start < i2.start); });
-
-        int left = 0, right = 0, rooms = 0, max_rooms = 0;
-        while (right < intervals.size()) {
-            while (intervals[left].end <= intervals[right].start) { 
-                ++left; 
-                rooms = std::max(0, rooms-1);
-                std::cout << "*rooms = " << rooms << std::endl;
-            }
-            //max_rooms = std::max(max_rooms, right - left + 1);
-            if (rooms == 0 || (right > 0 && intervals[right].start < intervals[right-1].end)) { ++rooms; }
-            std::cout << "rooms = " << rooms << std::endl;
-            max_rooms = std::max(rooms, max_rooms);
-            ++right;
+        int left = std::numeric_limits<int>::max(), right = std::numeric_limits<int>::min();
+        for (int i = 0; i < int(intervals.size()); ++i) {
+            left = std::min(left, intervals[i].start);
+            right = std::max(right, intervals[i].end);
         }
-        std::cout << "max rooms = " << max_rooms << std::endl;
+
+        std::vector<int> layout(right-left+1, 0);
+        int max_rooms = 0;
+        for (int i = 0; i < int(intervals.size()); ++i) {
+            for (int start = intervals[i].start; start < intervals[i].end; ++start) {
+                layout[start-left] += 1;
+                max_rooms = std::max(max_rooms, layout[start-left]);
+            }
+        }
         return max_rooms;
     }
 };
