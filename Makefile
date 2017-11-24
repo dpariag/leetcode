@@ -171,7 +171,8 @@ CPP_PROGS := \
 	diagonal_traverse \
 	flip_game \
 	flip_game2 \
-	meeting_rooms
+	meeting_rooms \
+	meeting_rooms2
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
