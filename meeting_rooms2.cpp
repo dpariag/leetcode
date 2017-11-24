@@ -2,8 +2,9 @@
 // Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] 
 // (si < ei), find the minimum number of conference rooms required.
 
-// Brute Force:
-// Better:
+// Brute Force: Use an array to represent all time slots. Iterate intervals incrementing any time with a room in use.
+// Better: Split intervals into start and end times, and sort each. Starting a new meeting (advancing start) adds a room.
+// Advancing end (if current end <= current start) frees up a room. Track max.
 
 #include <vector>
 #include <algorithm>
@@ -19,23 +20,26 @@ struct Interval {
 
 using Intervals = std::vector<Interval>;
 
-// Accepted. 1365ms. Beats 0.09% of submissions, ties < 1% of submissions.
+// Accepted. 12ms. Beats 68.35% of submissions, ties 13.08% of submissions.
 class Solution {
 public:
     int minMeetingRooms(Intervals& intervals) {
-        int left = std::numeric_limits<int>::max(), right = std::numeric_limits<int>::min();
+        std::vector<int> start_times(intervals.size(), 0);
+        std::vector<int> end_times(intervals.size(), 0);
+
         for (int i = 0; i < int(intervals.size()); ++i) {
-            left = std::min(left, intervals[i].start);
-            right = std::max(right, intervals[i].end);
+            start_times[i] = intervals[i].start;
+            end_times[i] = intervals[i].end;
         }
 
-        std::vector<int> layout(right-left+1, 0);
+        std::sort(start_times.begin(), start_times.end());
+        std::sort(end_times.begin(), end_times.end());
         int max_rooms = 0;
-        for (int i = 0; i < int(intervals.size()); ++i) {
-            for (int start = intervals[i].start; start < intervals[i].end; ++start) {
-                layout[start-left] += 1;
-                max_rooms = std::max(max_rooms, layout[start-left]);
-            }
+
+        int ended = 0;
+        for (int started = 0; started < int(start_times.size()); ++started) {
+            while (end_times[ended] <= start_times[started]) { ++ended; }
+            max_rooms = std::max(max_rooms, (started-ended+1));
         }
         return max_rooms;
     }
