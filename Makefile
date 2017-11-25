@@ -172,7 +172,8 @@ CPP_PROGS := \
 	flip_game \
 	flip_game2 \
 	meeting_rooms \
-	meeting_rooms2
+	meeting_rooms2 \
+	one_edit_distance
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
