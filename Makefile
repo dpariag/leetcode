@@ -173,7 +173,8 @@ CPP_PROGS := \
 	flip_game2 \
 	meeting_rooms \
 	meeting_rooms2 \
-	one_edit_distance
+	one_edit_distance \
+	task_scheduler
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
