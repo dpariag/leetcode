@@ -16,13 +16,6 @@ struct TaskCount {
 };
 using TaskCounts = std::vector<TaskCount>;
 
-void print(const TaskCounts& task_counts) {
-    for (auto tc: task_counts) {
-        std::cout << tc.task << ":" << tc.count << " ";
-    }
-    std::cout << std::endl;
-}
-
 // Accepted. 93ms. Beats 15.07% of submissions, ties < 1% of submissions.
 class Solution {
 public:
@@ -37,6 +30,7 @@ public:
     int leastInterval(const std::vector<char>& tasks, int n) {
         int counts[cNumTasks] = {0};
         int last_index[cNumTasks] = {0};
+
         for (auto t : tasks ) { counts[t-'A']++; }
 
         TaskCounts task_counts;
@@ -51,17 +45,11 @@ public:
 
         int cpu_interval = 0;
         while (!task_counts.empty()) {
-            //std::cout << "cpu interval " << cpu_interval << std::endl;
-            //print(task_counts);
             int i = 0;
             while (i < task_counts.size()) {
                 auto task = task_counts[i].task;
-                //std::cout << "Trying " << task << std::endl;
-                //std::cout << "Last index = " << last_index[task-'A'] << std::endl;
                 if (last_index[task-'A'] == -1 || (cpu_interval - last_index[task-'A'] - 1) >= n) {
-                    //std::cout << "Placing " << task << " at " << cpu_interval << " ";
                     --task_counts[i].count;
-                    //std::cout << task_counts[i].count << " remaining." << std::endl << " ";
                     last_index[task-'A'] = cpu_interval;
                     resort(task_counts, i); 
                     break;
