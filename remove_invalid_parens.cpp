@@ -1,4 +1,4 @@
-// Leetcode: 
+// Leetcode: https://leetcode.com/problems/remove-invalid-parentheses/description/
 // Given a string of parens and some letters, remove the minimum number of parens to make the 
 // input string balanced (ignoring letters). Return all possible balanced strings.
 
@@ -6,52 +6,74 @@
 // Better:
 
 #include <vector>
-#include <stack>
+#include <queue>
 #include <algorithm>
 #include <unordered_set>
 #include <iostream>
 #include <assert.h>
 
-using Strings = std::vector<std::string>;
+struct Block {
+    std::string str;
+    int offset;
+    Block(const std::string& s, int o): str(s), offset(o) {}
+};
 
+using Queue = std::deque<Block>;
+using Strings = std::vector<std::string>;
+using StringSet = std::unordered_set<std::string>;
+
+// Accepted. 3ms. Beats 59.72% of submissions, ties 29.15% of submissions.
 class Solution {
 public:
-    Strings removeInvalidParentheses(std::string& s) {
-        Strings result;
-        remove_invalid(s, 0, 0, result);
-        return result;
-    }
+    void bfs(const std::string& s, StringSet& set, char open, char close) {
+        Queue q;
 
-    void remove_invalid(std::string& s, int start, int last_replace, Strings& result) {
-        int num_left = 0, num_right = 0;
-        std::cout << std::endl;
-        std::cout << "s = " << s << std::endl;
-        std::cout << "start = " << start << " last_replace = " << last_replace << std::endl;
+        q.emplace_back("", 0);
+        while (!q.empty()) {
+            auto block = q.front();
+            q.pop_front();
+            int i = block.offset, num_open = 0;
+            for (; i < s.size(); ++i) {
+                block.str.append(1, s[i]);
+                if (s[i] == open) { ++num_open; }
+                if (s[i] == close) { --num_open; }
 
-        for (int i = start; i < s.size(); ++i) {
-            if (s[i] == '(') { ++num_left; }
-            else if (s[i] == ')') { ++num_right; }
-
-            std::cout << "i = " << i << " and s = " << s << std::endl;
-            if (num_right > num_left) {
-                std::cout << "left = " << num_left << " right = " << num_right << std::endl;
-                std::cout << "last replace = " << last_replace << std::endl;
-                for (int j = last_replace; j < i; ++j) {
-                    if (s[j] == ')' && (j == 0 || (j > 0 && s[j-1] != ')'))) {
-                        std::cout << "j = " << j << std::endl;
-                        auto temp = s;
-                        temp.erase(j, 1);
-                        remove_invalid(temp, i, j, result);
-                        last_replace = j+1;
+                if (num_open < 0) {
+                    // Mismatch: Too many closed parens
+                    int j = block.str.size() - 1;
+                    bool remove = true;
+                    while (j >= 0) {
+                        if (remove && block.str[j] == close) {
+                            q.emplace_back(block.str.erase(j, 1), i+1);
+                            block.str.insert(j, 1, close);
+                            remove = false;
+                        } else if (!remove && block.str[j] != close) {
+                            remove = true;
+                        }
+                        --j;
                     }
+                    break;
                 }
+            } // for
+
+            std::string reverse = block.str;
+            std::reverse(reverse.begin(), reverse.end());
+            if (num_open == 0) {
+                open == '(' ? set.emplace(block.str) : set.emplace(reverse);
+            } else if (num_open > 0) {
+                bfs(reverse, set, close, open);
             }
         }
-        if (num_left == num_right) {
-            result.emplace_back(s);
-            std::cout << "**" << s << std::endl;
+    }
+
+    Strings removeInvalidParentheses(std::string& s) {
+        StringSet set; 
+        Strings result;
+        bfs(s, set, '(', ')');
+        for (auto& str: set) {
+            result.emplace_back(str);
         }
-        std::cout << std::endl;
+        return result;
     }
 };
 
@@ -65,21 +87,22 @@ bool test_remove_invalid(std::string s, Strings expected) {
 }
 
 void test_remove_invalid() {
-    assert(test_remove_invalid("()())()", {"(())()", "()()()"}));
-    assert(test_remove_invalid("()))", {"()"}));
+    assert(test_remove_invalid("", {""}));
     assert(test_remove_invalid(")", {""}));
-    //assert(test_remove_invalid(")d))", {"d"}));
-    return;
-    assert(test_remove_invalid("()((", {"()"}));
-    assert(test_remove_invalid("()(((((((()", {"()()"}));
-    assert(test_remove_invalid("((()()", {"()()", "(())"}));
-    assert(test_remove_invalid("()())()", {"(())()", "()()()"}));
-    assert(test_remove_invalid("(((", {""}));
-    assert(test_remove_invalid("()()(()", {"()()()"}));
-    assert(test_remove_invalid(")(f", {"f"}));
-    assert(test_remove_invalid("()((()(())", {"()()(())", "()((()))"}));
-    //assert(test_remove_invalid("(()(()", {"()()"}));
-    //assert(test_remove_invalid("", {"", ""}));
+    assert(test_remove_invalid("(", {""}));
+    assert(test_remove_invalid("()", {"()"}));
+    assert(test_remove_invalid("(()y", {"()y"}));
+    assert(test_remove_invalid("p(r)", {"p(r)"}));
+    assert(test_remove_invalid("()(())", {"()(())"}));
+    assert(test_remove_invalid("(a(()", {"a()", "(a)"}));
+    assert(test_remove_invalid("()((()(())", {"()()(())", "()((()))", "()(()())"}));
+    assert(test_remove_invalid("((()", {"()"}));
+    assert(test_remove_invalid("()())", {"(())", "()()"}));
+    assert(test_remove_invalid("(()))", {"(())"}));
+    assert(test_remove_invalid("((a)))", {"((a))"}));
+    assert(test_remove_invalid("(a()))", {"(a())"}));
+    assert(test_remove_invalid("(()a))", {"(()a)", "((a))"}));
+    assert(test_remove_invalid("()()())", {"(()())", "()(())", "()()()"}));
 }
 
 int main(int argc, char** argv) {
