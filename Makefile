@@ -174,7 +174,8 @@ CPP_PROGS := \
 	meeting_rooms \
 	meeting_rooms2 \
 	one_edit_distance \
-	task_scheduler
+	task_scheduler \
+	max_subarray_sum_k
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
