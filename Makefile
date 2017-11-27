@@ -175,7 +175,8 @@ CPP_PROGS := \
 	meeting_rooms2 \
 	one_edit_distance \
 	task_scheduler \
-	max_subarray_sum_k
+	max_subarray_sum_k \
+	license_key_formatting
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
