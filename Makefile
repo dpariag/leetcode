@@ -176,7 +176,8 @@ CPP_PROGS := \
 	one_edit_distance \
 	task_scheduler \
 	max_subarray_sum_k \
-	license_key_formatting
+	license_key_formatting \
+	wiggle_sort
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
