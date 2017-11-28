@@ -178,7 +178,8 @@ CPP_PROGS := \
 	max_subarray_sum_k \
 	license_key_formatting \
 	wiggle_sort \
-	repeated_string_match
+	repeated_string_match \
+	paint_fence
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
