@@ -179,7 +179,8 @@ CPP_PROGS := \
 	license_key_formatting \
 	wiggle_sort \
 	repeated_string_match \
-	paint_fence
+	paint_fence \
+	binary_tree_vertical_traversal
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
