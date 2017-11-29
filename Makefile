@@ -180,7 +180,8 @@ CPP_PROGS := \
 	wiggle_sort \
 	repeated_string_match \
 	paint_fence \
-	binary_tree_vertical_traversal
+	binary_tree_vertical_traversal \
+	range_sum_2d_mutable
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
