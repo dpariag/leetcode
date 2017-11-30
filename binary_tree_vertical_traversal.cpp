@@ -14,9 +14,8 @@
 
 struct NodeEntry {
     TreeNode* node;
-    int row;
     int col;
-    NodeEntry(TreeNode* n, int r, int c) : node(n), row(r), col(c) {}
+    NodeEntry(TreeNode* n, int c) : node(n), col(c) {}
 };
 using Queue = std::queue<NodeEntry>;
 using Traversal = std::vector<std::vector<int>>;
@@ -29,7 +28,7 @@ public:
         Traversal t;
         Queue q;
 
-        if (root != nullptr) { q.emplace(NodeEntry(root, 0, 0)); }
+        if (root != nullptr) { q.emplace(NodeEntry(root, 0)); }
 
         while (!q.empty()) {
             auto& entry = q.front();
@@ -42,8 +41,8 @@ public:
             max_col = std::max(max_col, entry.col);
             t[entry.col - min_col].push_back(entry.node->val);
             
-            if (entry.node->left != nullptr) { q.emplace(NodeEntry(entry.node->left, entry.row+1, entry.col-1));}
-            if (entry.node->right != nullptr) { q.emplace(NodeEntry(entry.node->right, entry.row+1, entry.col+1));}
+            if (entry.node->left != nullptr) { q.emplace(NodeEntry(entry.node->left, entry.col-1));}
+            if (entry.node->right != nullptr) { q.emplace(NodeEntry(entry.node->right, entry.col+1));}
             q.pop();
         }
         return t;
