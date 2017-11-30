@@ -181,7 +181,8 @@ CPP_PROGS := \
 	repeated_string_match \
 	paint_fence \
 	binary_tree_vertical_traversal \
-	range_sum_2d_mutable
+	range_sum_2d_mutable \
+	longest_substring_2_distinct
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
