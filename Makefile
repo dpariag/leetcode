@@ -183,7 +183,8 @@ CPP_PROGS := \
 	binary_tree_vertical_traversal \
 	range_sum_2d_mutable \
 	longest_substring_2_distinct \
-	word_squares
+	word_squares \
+	linked_list_random_node
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
