@@ -185,7 +185,8 @@ CPP_PROGS := \
 	longest_substring_2_distinct \
 	word_squares \
 	linked_list_random_node \
-	in_order_succ_bst
+	in_order_succ_bst \
+	lca_binary_tree
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
