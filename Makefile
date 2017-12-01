@@ -186,7 +186,8 @@ CPP_PROGS := \
 	word_squares \
 	linked_list_random_node \
 	in_order_succ_bst \
-	lca_binary_tree
+	lca_binary_tree \
+	simplify_path
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
