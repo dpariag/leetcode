@@ -40,6 +40,19 @@ void bst_insert(TreeNode*& root, const std::vector<int>& values) {
     }
 }
 
+TreeNode* bst_find(TreeNode* root, int value) {
+  TreeNode* cur = root;
+
+  while (cur != nullptr && cur->val != value) {
+    if (value < cur->val) {
+      cur = cur->left;
+    } else {
+      cur = cur->right;
+    }
+  }
+  return cur;
+}
+
 void in_order_insert(TreeNode*& node, const std::vector<int>& values, int start, int end) {
     if (start > end) { return; }
 
