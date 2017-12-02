@@ -187,7 +187,8 @@ CPP_PROGS := \
 	linked_list_random_node \
 	in_order_succ_bst \
 	lca_binary_tree \
-	simplify_path
+	simplify_path \
+	evaluate_division
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
