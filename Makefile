@@ -188,7 +188,8 @@ CPP_PROGS := \
 	in_order_succ_bst \
 	lca_binary_tree \
 	simplify_path \
-	evaluate_division
+	evaluate_division \
+	valid_word_square
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
