@@ -16,22 +16,17 @@ using AccountSet = std::unordered_set<std::string>;
 struct AccountGroup {
     std::string name;
     AccountSet accounts;
-    AccountGroup(std::string& n, AccountSet& set): name(n), accounts(set) {}
+    AccountGroup(std::string& n, AccountSet&& set): name(n), accounts(set) {}
 };
 using AccountGroups = std::vector<AccountGroup>;
 using AccountMap = std::unordered_map<std::string, int>; // email -> group index
-
-void print(AccountSet& set) {
-    for (auto& item : set) { std::cout << item << " "; }
-    std::cout << std::endl;
-}
 
 // Accepted. 109ms. Beats 75.00% of submissions, ties 2.70% of submissions.
 class Solution {
 public:
     Accounts accountsMerge(Accounts& accounts) {
         AccountMap map;
-        AccountGroupups groups;
+        AccountGroups groups;
 
         for (auto& a : accounts) {
             AccountSet new_set;
@@ -50,7 +45,7 @@ public:
                         auto to_clear = found->second;
                         groups[set_index].accounts.insert(groups[to_clear].accounts.begin(), 
                                                           groups[to_clear].accounts.end());
-                        for(auto& item : groups[found->second].accounts) {
+                        for(auto& item : groups[to_clear].accounts) {
                             map[item] = set_index;
                         }
                         groups[to_clear].accounts.clear();
@@ -59,11 +54,9 @@ public:
             }
             for (auto& item : new_set) { map[item] = set_index; }
             if (set_index == groups.size()) {
-                groups.emplace_back(name, new_set);
+                groups.emplace_back(name, std::move(new_set));
             } else {
-                for (auto& item : new_set) {
-                    groups[set_index].accounts.emplace(item);
-                }
+                groups[set_index].accounts.insert(new_set.begin(), new_set.end());
             }
         }
 

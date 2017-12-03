@@ -190,7 +190,8 @@ CPP_PROGS := \
 	simplify_path \
 	evaluate_division \
 	valid_word_square \
-	consecutive_subseq
+	consecutive_subseq \
+	accounts_merge
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
