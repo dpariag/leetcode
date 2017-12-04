@@ -191,10 +191,11 @@ CPP_PROGS := \
 	evaluate_division \
 	valid_word_square \
 	consecutive_subseq \
-	accounts_merge
+	accounts_merge \
+	walls_and_gates
 
 CFLAGS := -std=c99
-CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic
+CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
 
 .PHONY: all
 
