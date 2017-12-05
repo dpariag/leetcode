@@ -194,7 +194,8 @@ CPP_PROGS := \
 	accounts_merge \
 	walls_and_gates \
 	missing_ranges \
-	shortest_distance_buildings
+	shortest_distance_buildings \
+	sort_transformed_array
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
