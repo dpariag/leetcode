@@ -192,7 +192,9 @@ CPP_PROGS := \
 	valid_word_square \
 	consecutive_subseq \
 	accounts_merge \
-	walls_and_gates
+	walls_and_gates \
+	missing_ranges \
+	shortest_distance_buildings
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
