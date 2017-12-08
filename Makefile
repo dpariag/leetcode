@@ -199,7 +199,9 @@ CPP_PROGS := \
 	sparse_matrix \
 	basic_calculator2 \
 	odd_even_list \
-	add_two_numbers
+	add_two_numbers \
+	nim_game \
+	median_two_sorted_arrays
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare

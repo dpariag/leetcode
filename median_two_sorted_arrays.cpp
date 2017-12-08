@@ -12,6 +12,7 @@
 
 using Numbers = std::vector<int>;
 
+// Accepted. 49ms. Beats 77.49% of submissions, ties 5.94 of submissions.
 class Solution {
 public:
     // nums is a sorted array. Return:
@@ -53,31 +54,25 @@ public:
         int median_index = total_size / 2;
         median_index -= (total_size % 2) == 0 ? 1 : 0;
         int left = 0, right = nums1.size() - 1;
-        std::cout << std::endl;
-        std::cout << "median_index = " << median_index << std::endl;
 
         while (left <= right) {
             int mid = left + (right-left) / 2;
             int nums2_index = median_index - mid;
-            std::cout << "Trying : nums1[" << mid << "] = " << nums1[mid] <<  std::endl;
-            std::cout << "nums2_index = " << nums2_index << std::endl;
 
             int check = check_position(nums2, nums2_index, nums1[mid]);
-            if (check == 0) {
+
+            if (mid > median_index || check == 1) {
+                right = mid - 1;                
+            } else if (check == -1) {
+                left = mid + 1;
+            } else if (check == 0) {
                 if (total_size % 2) {
                     result = nums1[mid];
                 } else {
-                    //result = double(nums1[mid] + std::min(get_next(nums1, mid), nums2[nums2_index])) / 2;
                     int next_in_nums2 = nums2_index < nums2.size() ? nums2[nums2_index] : std::numeric_limits<int>::max();
                     result = double(nums1[mid] + std::min(get_next(nums1, mid), next_in_nums2)) / 2;
                 }             
                 return true;
-            } else if (check == -1) {
-                std::cout << "Go right" << std::endl;
-                left = mid + 1;
-            } else {
-                std::cout << "Go left" << std::endl;
-                right = mid - 1;                
             }
         }        
         return false;
@@ -102,7 +97,6 @@ bool test_find_median(Numbers nums1, Numbers nums2) {
     std::sort(merged.begin(), merged.end());
     auto mid = merged.size() / 2;
     auto expected_median = (merged.size() % 2) ? double(merged[mid]) : double((merged[mid-1] + merged[mid])) / 2.0;
-    std::cout << "median: " << median << " expected: " << expected_median << std::endl;
     return expected_median == median;
 }
 
