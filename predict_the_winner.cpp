@@ -46,14 +46,14 @@ public:
         // Iterate diagonals of decreasing length
         for (int diag = 0; diag < nums.size(); ++diag) {
             int diag_length = nums.size() - diag;
-            for (int start = 0; start < diag_length; ++start) {
-                int end = start + diag; 
-                if (start == end) {
-                    table[start][end] = nums[start];
+            for (int row = 0; row < diag_length; ++row) {
+                int col = row + diag; 
+                if (row == col) {
+                    table[row][col] = nums[row];
                 } else {
-                    auto play_left = nums[start] - table[start+1][end];
-                    auto play_right = nums[end] - table[start][end-1];
-                    table[start][end] = std::max(play_left, play_right);
+                    auto play_left = nums[row] - table[row+1][col];
+                    auto play_right = nums[col] - table[row][col-1];
+                    table[row][col] = std::max(play_left, play_right);
                 } 
             }
         }

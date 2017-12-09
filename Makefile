@@ -201,7 +201,8 @@ CPP_PROGS := \
 	odd_even_list \
 	add_two_numbers \
 	nim_game \
-	median_two_sorted_arrays
+	median_two_sorted_arrays \
+	buy_sell_fee
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
