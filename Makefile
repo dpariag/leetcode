@@ -202,7 +202,9 @@ CPP_PROGS := \
 	add_two_numbers \
 	nim_game \
 	median_two_sorted_arrays \
-	buy_sell_fee
+	buy_sell_fee \
+	sum_of_left_leaves \
+	regex_matching
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
