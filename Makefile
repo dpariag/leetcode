@@ -204,7 +204,8 @@ CPP_PROGS := \
 	median_two_sorted_arrays \
 	buy_sell_fee \
 	sum_of_left_leaves \
-	regex_matching
+	regex_matching \
+	single_elem_sorted
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
