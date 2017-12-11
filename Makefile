@@ -205,7 +205,8 @@ CPP_PROGS := \
 	buy_sell_fee \
 	sum_of_left_leaves \
 	regex_matching \
-	single_elem_sorted
+	single_elem_sorted \
+	contains_duplicate_3
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
