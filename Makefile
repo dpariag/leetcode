@@ -206,7 +206,8 @@ CPP_PROGS := \
 	sum_of_left_leaves \
 	regex_matching \
 	single_elem_sorted \
-	contains_duplicate_3
+	contains_duplicate_3 \
+	invert_binary_tree
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
