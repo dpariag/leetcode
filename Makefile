@@ -208,7 +208,8 @@ CPP_PROGS := \
 	single_elem_sorted \
 	contains_duplicate_3 \
 	invert_binary_tree \
-	copy_list_random_ptr
+	copy_list_random_ptr \
+	circular_array_loop
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
