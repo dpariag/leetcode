@@ -210,6 +210,9 @@ CPP_PROGS := \
 	invert_binary_tree \
 	copy_list_random_ptr \
 	circular_array_loop
+	add_digits \
+	reverse_polish_notation \
+	triangle
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
