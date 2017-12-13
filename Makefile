@@ -209,10 +209,11 @@ CPP_PROGS := \
 	contains_duplicate_3 \
 	invert_binary_tree \
 	copy_list_random_ptr \
-	circular_array_loop
+	circular_array_loop \
 	add_digits \
 	reverse_polish_notation \
-	triangle
+	triangle \
+	sorted_array_to_bst
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
