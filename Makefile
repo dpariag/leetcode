@@ -214,7 +214,9 @@ CPP_PROGS := \
 	reverse_polish_notation \
 	triangle \
 	sorted_array_to_bst \
-	largest_rectangle_histogram
+	largest_rectangle_histogram \
+	integer_break \
+	combinations
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
