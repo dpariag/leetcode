@@ -2,8 +2,8 @@
 // Given a sorted integer array (may contain duplicates), determine if the array can be split into
 // two or more subsequences of at least 3 consecutive integers.
 
-// Brute Force: Iterate the array, building sequences. Store sequences in a hash map, keyed by last item
-// in the sequence. When adding a new item, add it to the shortest sequence available. O(n^2) time.
+// Brute Force: Iterate the array, building sequences. Store sequences in a hash map, keyed by last 
+// item in the sequence. When adding a new item, add it to shortest sequence available. O(n^2) time.
 // Better: Don't store actual sequences. Store the number of sequences of length 1, 2 3+ ending in
 // a particular value. O(n) time and space.
 

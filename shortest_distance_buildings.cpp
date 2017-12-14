@@ -36,10 +36,11 @@ public:
         while (!q.empty()) {
             auto cood = q.front();
             auto distance = cood.distance;
-
-            std::pair<int,int> neighbors[4] = {{cood.row+1, cood.col}, {cood.row-1, cood.col}, {cood.row, cood.col+1}, {cood.row, cood.col-1}};
+            std::pair<int,int> neighbors[4] = {{cood.row+1, cood.col}, {cood.row-1, cood.col}, 
+                                               {cood.row, cood.col+1}, {cood.row, cood.col-1}};
             for (auto& n : neighbors) {
-                if (n.first >= 0 && n.first < grid.size() && n.second >= 0 && n.second < grid[0].size()) {
+                if (n.first >= 0 && n.first < grid.size() && 
+                    n.second >= 0 && n.second < grid[0].size()) {
                     auto& cur = grid[n.first][n.second];
                     if (cur != BUILDING && cur != OBSTACLE && visited[n.first][n.second] == 0) {
                         grid[n.first][n.second] += (distance + 1);
@@ -76,7 +77,9 @@ public:
         for (int row = 0; row < grid.size(); ++row) {
             for (int col = 0; col < grid[0].size(); ++col) {
                 if (reachable[row][col] == num_buildings) {
-                    if (min_distance < 0 || grid[row][col] < min_distance) { min_distance = grid[row][col]; }
+                    if (min_distance < 0 || grid[row][col] < min_distance) { 
+                        min_distance = grid[row][col]; 
+                    }
                 }
             }
         }
