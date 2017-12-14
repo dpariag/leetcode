@@ -213,7 +213,8 @@ CPP_PROGS := \
 	add_digits \
 	reverse_polish_notation \
 	triangle \
-	sorted_array_to_bst
+	sorted_array_to_bst \
+	largest_rectangle_histogram
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
