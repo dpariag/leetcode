@@ -3,7 +3,8 @@
 // flower will bloom (and stay in bloom thereafter). Given an integer k, determine if there is a
 // day where two flowers are in bloom with k empty spots between them.
 
-// Brute Force: Iterate the flowers array (for days 1,2,...N), switching flowers into bloom and checking k flowers away. O(n*k)
+// Brute Force: Iterate the flowers array (for days 1,2,...N), switching flowers into bloom and 
+// checking k flowers away. O(n*k)
 // Better: Build the reverse mapping from flowers -> bloom day, then iterate flowers 1...N
 // maintaining an interval (left_flower, right_flower) and bloom days (left_day, right_day).
 // If the i'th flower blooms before left_day or right_day, then the interval is reset. O(n) time and space.
