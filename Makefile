@@ -218,7 +218,8 @@ CPP_PROGS := \
 	integer_break \
 	combinations \
 	longest_abs_file_path \
-	ransom_note
+	ransom_note \
+	rotate_image
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
