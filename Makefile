@@ -216,7 +216,9 @@ CPP_PROGS := \
 	sorted_array_to_bst \
 	largest_rectangle_histogram \
 	integer_break \
-	combinations
+	combinations \
+	longest_abs_file_path \
+	ransom_note
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
