@@ -220,7 +220,8 @@ CPP_PROGS := \
 	longest_abs_file_path \
 	ransom_note \
 	rotate_image \
-	single_number
+	single_number \
+	word_pattern
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
