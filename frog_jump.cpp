@@ -7,35 +7,35 @@
 // Better:
 
 #include <vector>
-#include <unordered_set>
+#include <unordered_map>
 #include <queue>
 #include <iostream>
 #include <assert.h>
 
-struct Stone {
-    int position;
-    int last_jump;
-    Stone(int p, int l) : position(p), last_jump(l) {}
-};
+using Table = std::vector<std::vector<bool>>;
+using Indices = std::unordered_map<int,int>;
+using Stones = std::vector<int>;
 
+// Accepted. 716ms. Beats 9.60% of submissions, ties < 1% of submissions.
 class Solution {
 public:
     bool canCross(const std::vector<int>& stones) {
         if (stones.size() <= 1) { return true; }
-        std::unordered_set<int> stones_set(stones.begin(), stones.end());
-        std::queue<Stone> q;
-        q.emplace(Stone(stones[0], 0));
+        Indices indices;
+        for (int i = 0; i < stones.size(); ++i) { indices.emplace(stones[i], i); }
+        Table reachable(stones.size(), std::vector<bool>(stones.size() + 1, false));
 
-        while (!q.empty()) {
-            auto stone = q.front();
-            q.pop();
-
-            for (int jump : {stone.last_jump - 1, stone.last_jump, stone.last_jump+1}) {
-                if (jump <= 0) { continue; }
-                int next_position = stone.position + jump;
-                if (next_position == stones.back()) { return true; }
-                if (stones_set.count(next_position)) {
-                    q.emplace(Stone(next_position, jump));
+        reachable[0][0] = true;
+        for (int index = 1; index < stones.size(); ++index) {
+            for (int jump = 1; jump < stones.size(); ++jump) {
+                auto found = indices.find(stones[index] - jump);
+                if (found != indices.end()) {
+                    reachable[index][jump] = reachable[found->second][jump-1] ||
+                                             reachable[found->second][jump] ||
+                                             reachable[found->second][jump+1];
+                }
+                if (index == int(stones.size()) - 1 && reachable[index][jump]) {
+                    return true;
                 }
             }
         }
@@ -48,6 +48,8 @@ void test_can_cross() {
     assert(soln.canCross({1}) == true);
     assert(soln.canCross({0,1,3,5,6,8,12,17}) == true);
     assert(soln.canCross({0,1,2,3,4,8,9,11}) == false);
+    assert(soln.canCross({0,1,3,6,10,13,15,16,19,21,25}) == false);
+    assert(soln.canCross({0,1,3,6,10,13,15,18}) == true);
 }
 
 int main(int argc, char** argv) {
