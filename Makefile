@@ -221,7 +221,8 @@ CPP_PROGS := \
 	ransom_note \
 	rotate_image \
 	single_number \
-	word_pattern
+	word_pattern \
+	frog_jump
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
