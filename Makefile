@@ -221,7 +221,10 @@ CPP_PROGS := \
 	ransom_note \
 	rotate_image \
 	single_number \
-	word_pattern
+	word_pattern \
+	insert_delete_random \
+	combinations_3 \
+	flatten_nested_list
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
