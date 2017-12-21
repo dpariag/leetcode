@@ -224,7 +224,8 @@ CPP_PROGS := \
 	word_pattern \
 	insert_delete_random \
 	combinations_3 \
-	flatten_nested_list
+	flatten_nested_list \
+	frog_jump
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
