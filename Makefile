@@ -222,7 +222,9 @@ CPP_PROGS := \
 	rotate_image \
 	single_number \
 	word_pattern \
-	frog_jump
+	frog_jump \
+	single_number_3 \
+	best_meeting_point
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
