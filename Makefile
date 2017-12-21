@@ -167,7 +167,6 @@ CPP_PROGS := \
 	longest_substring_k_distinct \
 	moving_average \
 	letter_combos_phone \
-	k_empty_slots \
 	diagonal_traverse \
 	flip_game \
 	flip_game2 \
@@ -197,6 +196,7 @@ CPP_PROGS := \
 	shortest_distance_buildings \
 	sort_transformed_array \
 	sparse_matrix \
+	k_empty_slots \
 	basic_calculator2 \
 	odd_even_list \
 	add_two_numbers \
@@ -224,7 +224,7 @@ CPP_PROGS := \
 	word_pattern \
 	frog_jump \
 	single_number_3 \
-	best_meeting_point
+	best_meeting_point \
 	insert_delete_random \
 	combinations_3 \
 	flatten_nested_list \

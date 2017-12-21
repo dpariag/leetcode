@@ -10,8 +10,10 @@
 // If the i'th flower blooms before left_day or right_day, then the interval is reset. O(n) time and space.
 
 #include <vector>
+#include <algorithm>
 #include <iostream>
 #include <limits>
+#include <ctime>
 #include <assert.h>
 
 // Accepted. 199ms. Beats 79.86% of submissions, ties 4.66% of submissions.

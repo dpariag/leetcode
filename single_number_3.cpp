@@ -5,6 +5,7 @@
 // Approach: Use three passes of the array using XOR properties
 
 #include <vector>
+#include <algorithm>
 #include <iostream>
 #include <assert.h>
 

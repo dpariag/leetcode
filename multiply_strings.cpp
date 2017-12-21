@@ -4,6 +4,7 @@
 // Approach: Grade school multiplication with a carry. O(m*n) time
 
 #include <vector>
+#include <algorithm>
 #include <iostream>
 #include <assert.h>
 
