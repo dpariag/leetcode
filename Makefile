@@ -225,6 +225,9 @@ CPP_PROGS := \
 	frog_jump \
 	single_number_3 \
 	best_meeting_point
+	insert_delete_random \
+	combinations_3 \
+	flatten_nested_list \
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
