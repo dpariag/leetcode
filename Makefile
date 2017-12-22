@@ -228,6 +228,8 @@ CPP_PROGS := \
 	insert_delete_random \
 	combinations_3 \
 	flatten_nested_list \
+	binary_tree_sequence \
+	add_bold_tag
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
