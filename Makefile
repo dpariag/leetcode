@@ -224,7 +224,7 @@ CPP_PROGS := \
 	word_pattern \
 	frog_jump \
 	single_number_3 \
-	best_meeting_point
+	best_meeting_point \
 	insert_delete_random \
 	combinations_3 \
 	flatten_nested_list \
