@@ -229,7 +229,8 @@ CPP_PROGS := \
 	combinations_3 \
 	flatten_nested_list \
 	binary_tree_sequence \
-	add_bold_tag
+	add_bold_tag \
+	min_stack
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
