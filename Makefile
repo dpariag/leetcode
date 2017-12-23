@@ -230,7 +230,8 @@ CPP_PROGS := \
 	flatten_nested_list \
 	binary_tree_sequence \
 	add_bold_tag \
-	min_stack
+	min_stack \
+	sentence_screen_fitting
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
