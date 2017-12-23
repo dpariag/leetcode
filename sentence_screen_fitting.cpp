@@ -11,32 +11,40 @@
 #include <iostream>
 #include <assert.h>
 
-// Accepted. 22ms. Beats 47.82% of submissions, ties 1.21% of submissions.
+// Accepted. 6ms. Beats 79.13% of submissions, ties 18.45% of submissions.
 class Solution {
 public:
     int wordsTyping(const std::vector<std::string>& sentence, int num_rows, int num_cols) {
         std::vector<int> table(sentence.size(), 0);
-        int length = sentence.size();
+        int sentence_length = sentence.size();
+        
+        // Find out how much room it takes to place an entire sentence
+        int sentence_room = 0;
+        for (auto& word : sentence) {
+        	sentence_room += (word.size() + 1);
+        }
 
-        for (int i = 0; i < sentence.size(); ++i) {
-            // If a row starts with sentence[i], what word does the next row start with?
-            int room = num_cols, j = i;
+		// If a row starts with sentence[i], how many words fit on that row, 
+		// and what does the next row start with?
+        for (int i = 0; i < sentence.size(); ++i) {    
+            int room = (num_cols % sentence_room), j = i;
             while (room > 0) {
-                if (int(sentence[j % length].size()) <= room) {
-                    room -= (sentence[j % length].size() + 1);
+                if (int(sentence[j % sentence_length].size()) <= room) {
+                    room -= (sentence[j % sentence_length].size() + 1);
                 } else { break; } // word does not fit
                 ++j;
             }
-            table[i] = j;
+            table[i] = j + ((num_cols / sentence_room) * sentence_length);
         }
         
+        // Iterate rows, counting how many words fit on each row
         int num_words = 0, next_word = 0;
         for (int row = 0; row < num_rows; ++row) {
-        	int index = next_word % length;
+        	int index = next_word % sentence_length;
             num_words += table[index] - index;
             next_word =  table[index];
         }
-        return num_words / length;
+        return num_words / sentence_length;
     }
 };
 
