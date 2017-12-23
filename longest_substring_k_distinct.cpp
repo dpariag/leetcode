@@ -9,7 +9,6 @@
 #include <iostream>
 #include <assert.h>
 
-// Start: 2:43pm. Coded: 2:51pm
 // Accepted. 6ms. Beats 69.69% of submissions, ties 30.31% of submissions.
 class Solution {
 public:
@@ -19,8 +18,8 @@ public:
 
         while (right < int(s.size())) {
             while (right < s.size() && num_distinct <= k) {
-                ++counts[s[right]];
-                if (counts[s[right]] == 1) { ++num_distinct; } // new char
+                ++counts[int(s[right])];
+                if (counts[int(s[right])] == 1) { ++num_distinct; } // new char
                 if (left <= right && num_distinct <= k) {
                     max_len = std::max(max_len, (right - left + 1));
                 }
@@ -28,8 +27,8 @@ public:
             }
 
             while (left <= right && num_distinct > k) {
-                --counts[s[left]];
-                if (counts[s[left]] == 0) { --num_distinct; } // no more of s[left] in the window
+                --counts[int(s[left])];
+                if (counts[int(s[left])] == 0) { --num_distinct; } // no more of s[left] in the window
                 ++left;
             }
         }

@@ -11,6 +11,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <assert.h>
+#include <ctime>
 #include "list.h"
 
 // Accepted. 36ms. Beats 89.41% of submissions, ties 8.33% of submissions.
@@ -19,7 +20,6 @@ public:
     Solution(ListNode* head): m_list(head) {
         std::srand(std::time(0));
     }
-
 
     int getRandom() {
         int val = m_list->val, count = 1;

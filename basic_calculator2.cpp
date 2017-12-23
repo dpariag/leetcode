@@ -27,7 +27,7 @@ public:
         return result;
     }
 
-    int calculate(std::string& s) {
+    int calculate(const std::string& s) {
         std::vector<int> stack;
         int result = 0, left = 0, right = 0, i = 0;
         char last_op = '\0';
