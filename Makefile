@@ -231,7 +231,8 @@ CPP_PROGS := \
 	binary_tree_sequence \
 	add_bold_tag \
 	min_stack \
-	sentence_screen_fitting
+	sentence_screen_fitting \
+	zig_zag_iterator
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
