@@ -232,7 +232,8 @@ CPP_PROGS := \
 	add_bold_tag \
 	min_stack \
 	sentence_screen_fitting \
-	zig_zag_iterator
+	zig_zag_iterator \
+	bomb_enemy
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
