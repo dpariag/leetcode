@@ -3,8 +3,10 @@
 // return the maximum enemies you can kill by placing one bomb on an empty cell.
 // The bomb kills all the enemies in the same row and column untless it hits a wall.
 
-// Brute Force:
-// Better:
+// Brute Force: For each '0' cell, scan it's row and column for enemies. O(n^3) time.
+// Better: Create a grid with four counters denoting the number of enemies above, below,
+// to the left and right of the current square. Sweep the array twice, first from bottom-right 
+// to top-left, then from top-left to bottom-right dragging enemy counts across the grid.
 
 #include <vector>
 #include <iostream>
@@ -68,8 +70,8 @@ public:
 
 void test_max_enemies() {
     Solution soln;
-    assert(soln.maxKilledEnemies({{'W','E','E','E','E','0','E','E','E','E','E','W'}}) == 9);
     assert(soln.maxKilledEnemies({{'E'}}) == 0);
+    assert(soln.maxKilledEnemies({{'W','E','E','E','E','0','E','E','E','E','E','W'}}) == 9);
     assert(soln.maxKilledEnemies({{'0','E','0','0'}, {'E','0','W','E'}, {'0','E','0','0'}}) == 3);
 }
 
