@@ -236,7 +236,8 @@ CPP_PROGS := \
 	bomb_enemy \
 	encode_decode_strings \
 	longest_univalue_path \
-	unique_word_abbrev
+	unique_word_abbrev \
+	3sum_smaller
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
