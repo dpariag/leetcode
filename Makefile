@@ -235,7 +235,8 @@ CPP_PROGS := \
 	zig_zag_iterator \
 	bomb_enemy \
 	encode_decode_strings \
-	longest_univalue_path
+	longest_univalue_path \
+	unique_word_abbrev
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
