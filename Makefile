@@ -234,7 +234,8 @@ CPP_PROGS := \
 	sentence_screen_fitting \
 	zig_zag_iterator \
 	bomb_enemy \
-	encode_decode_strings
+	encode_decode_strings \
+	longest_univalue_path
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
