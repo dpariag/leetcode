@@ -237,7 +237,9 @@ CPP_PROGS := \
 	encode_decode_strings \
 	longest_univalue_path \
 	unique_word_abbrev \
-	3sum_smaller
+	3sum_smaller \
+	union_find \
+	number_islands_2
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
