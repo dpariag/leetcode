@@ -1,8 +1,9 @@
 // Leetcode: https://leetcode.com/problems/longest-increasing-path-in-a-m/description/
 // Given an integer m, find the length of the longest increasing path.
 
-// Brute Force:
-// Better:
+// Brute Force: Peform depth-first-search from each matrix[i][j]. O(n^4) time.
+// Better: Store paths[i][j] = {The longest path starting at matrix[i][j]} and use this to memoize the DFS.
+// Improves runtime to O(n^2) since each square is visited at most once. 
 
 #include <vector>
 #include <iostream>
@@ -16,17 +17,7 @@ struct Cood {
 using Matrix = std::vector<std::vector<int>>;
 static const int NOT_VISITED = -1;
 
-void print(const Matrix& m) {
-    for (int row = 0; row < m.size(); ++row) {
-        for (int col = 0; col < m[0].size(); ++col) {
-            std::cout << m[row][col] << " ";
-        }
-        std::cout << std::endl;
-    }
-    std::cout << std::endl;
-}
-
-// Accepted. Beats 48.50% of submissions, ties 1.28% of submissions.
+// Accepted. 36ms. Beats 57.49% of submissions, ties 14.12% of submissions.
 class Solution {
 public:
     inline bool is_valid(const Cood& c, int num_rows, int num_cols) {
@@ -40,8 +31,7 @@ public:
         using Coods = std::vector<Cood>;
         Coods neighbors{{row-1,col},{row+1,col},{row,col-1},{row,col+1}};
         for (auto n : neighbors) {
-            if (is_valid(n, m.size(), m[0].size()) && 
-                m[row][col] < m[n.row][n.col]) {
+            if (is_valid(n, m.size(), m[0].size()) && m[row][col] < m[n.row][n.col]) {
                 // Valid neighbor with a larger value
                 dfs(m, paths, n.row, n.col);
                 longest = std::max(longest, 1+paths[n.row][n.col]);
