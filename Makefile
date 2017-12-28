@@ -239,7 +239,8 @@ CPP_PROGS := \
 	unique_word_abbrev \
 	3sum_smaller \
 	union_find \
-	number_islands_2
+	number_islands_2 \
+	longest_increasing_path
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
