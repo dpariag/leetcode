@@ -240,7 +240,8 @@ CPP_PROGS := \
 	3sum_smaller \
 	union_find \
 	number_islands_2 \
-	longest_increasing_path
+	longest_increasing_path \
+	strobogrammatic
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
