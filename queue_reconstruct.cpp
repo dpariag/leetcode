@@ -5,7 +5,7 @@
 
 // Brute Force: Compute all permutations of queue, check which ones satisfy the height constraint.
 // Better: Sort the queue by descending height, breaking ties using smaller h values.
-// Then iterate the sorted queue, inserting people by their h-value. This allows us to insert
+// Then iterate the sorted queue, inserting people by their k-value. This allows us to insert
 // the next tallest person who has the fewest people ahead of them
 
 #include <vector>
@@ -13,7 +13,7 @@
 #include <iostream>
 #include <assert.h>
 
-using Person = std::pair<int,int>;
+using Person = std::pair<int,int>; // height, # of taller ahead (k)
 using Queue = std::vector<Person>;
 
 // Accepted. 29ms. Beats 98.11% of submissions, ties 1.66% of submissions.
