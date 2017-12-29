@@ -241,7 +241,8 @@ CPP_PROGS := \
 	union_find \
 	number_islands_2 \
 	longest_increasing_path \
-	strobogrammatic
+	strobogrammatic \
+	peeking_iterator
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
