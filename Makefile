@@ -242,7 +242,8 @@ CPP_PROGS := \
 	number_islands_2 \
 	longest_increasing_path \
 	strobogrammatic \
-	peeking_iterator
+	peeking_iterator \
+	strobogrammatic_2 \
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
