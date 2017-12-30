@@ -244,7 +244,8 @@ CPP_PROGS := \
 	strobogrammatic \
 	peeking_iterator \
 	strobogrammatic_2 \
-	serialize_deserialize_tree
+	serialize_deserialize_tree \
+	palindrome_permutation
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
