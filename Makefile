@@ -246,7 +246,8 @@ CPP_PROGS := \
 	strobogrammatic_2 \
 	serialize_deserialize_tree \
 	palindrome_permutation \
-	min_window_subseq
+	min_window_subseq \
+	next_closest_time
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
