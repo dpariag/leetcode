@@ -248,7 +248,8 @@ CPP_PROGS := \
 	palindrome_permutation \
 	min_window_subseq \
 	next_closest_time \
-	group_shifted_strings
+	group_shifted_strings \
+	design_hit_counter
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
