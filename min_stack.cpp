@@ -5,6 +5,7 @@
 // Better: Store the current min with each item in the stack. O(1) time and O(n) space.
 
 #include <vector>
+#include <limits>
 #include <iostream>
 #include <assert.h>
 

@@ -6,6 +6,7 @@
 // O(n) time and space.
 
 #include <vector>
+#include <algorithm>
 #include <iostream>
 #include <assert.h>
 
