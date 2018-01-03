@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <unordered_map>
+#include <algorithm>
 #include <string>
 #include <iostream>
 #include <assert.h>
