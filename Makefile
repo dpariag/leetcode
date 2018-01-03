@@ -253,7 +253,10 @@ CPP_PROGS := \
 	merge_sorted_array \
 	implement_trie \
 	subsets_2 \
-	judge_route_circle
+	judge_route_circle \
+	first_uniq_char \
+	fraction_to_decimal \
+	spiral_matrix
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
