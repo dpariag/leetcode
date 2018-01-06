@@ -261,7 +261,10 @@ CPP_PROGS := \
 	hamming_distance \
 	encode_decode_tinyurl \
 	first_bad_version \
-	count_and_say
+	count_and_say \
+	roman_to_integer  \
+	game_of_life \
+	sentence_similarity_2
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
