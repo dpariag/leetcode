@@ -264,7 +264,8 @@ CPP_PROGS := \
 	count_and_say \
 	roman_to_integer  \
 	game_of_life \
-	sentence_similarity_2
+	sentence_similarity_2 \
+	encode_shortest_length
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
