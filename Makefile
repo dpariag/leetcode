@@ -269,7 +269,8 @@ CPP_PROGS := \
 	binary_watch \
 	find_permutation \
 	find_the_difference \
-	the_maze_2 
+	the_maze_2 \
+	alien_dictionary
 
 
 CFLAGS := -std=c99
