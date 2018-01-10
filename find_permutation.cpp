@@ -10,7 +10,7 @@
 #include <assert.h>
 
 // Accepted. 100ms. Beats 6.86% of submissions, ties < 1% of submissions.
-class Solution {
+class SolutionWithSet {
 public:
     std::vector<int> findPermutation(const std::string& s) {
         std::set<int> values;
@@ -45,6 +45,38 @@ public:
         return perm;
     }
 };
+
+// Accepted. 63ms. Beats 96.57% of submissions, ties 3.43% of submissions
+class Solution {
+public:
+    std::vector<int> findPermutation(const std::string& s) {
+        std::vector<int> decreases(s.size()+1, 0);
+        std::string s1 = "I" + s;
+        int count = 0;
+        for (int i = s1.size()-1; i >= 0; --i) {
+            decreases[i] = count;
+            if (s1[i] == 'I') { 
+                count = 0; 
+            } else {
+                ++count;
+            }
+        }
+
+        std::vector<int> perm(s.size()+1, 0);
+        perm[0] = 1 + decreases[0];
+        int max = perm[0];
+        for (int i = 0; i < s.size(); ++i) {
+            if (s[i] == 'D') {
+                perm[i+1] = perm[i] - 1;
+            } else {
+                perm[i+1] = max + decreases[i+1] + 1;
+            }
+            max = std::max(max, perm[i+1]);
+        }
+        return perm;
+    }
+};
+
 
 void test_find_permutation() {
     Solution soln;
