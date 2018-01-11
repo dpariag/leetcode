@@ -270,7 +270,8 @@ CPP_PROGS := \
 	find_permutation \
 	find_the_difference \
 	the_maze_2 \
-	alien_dictionary
+	alien_dictionary \
+	closest_bst_value
 
 
 CFLAGS := -std=c99
