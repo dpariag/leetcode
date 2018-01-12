@@ -269,9 +269,13 @@ CPP_PROGS := \
 	binary_watch \
 	find_permutation \
 	find_the_difference \
+	the_maze \
 	the_maze_2 \
 	alien_dictionary \
-	closest_bst_value
+	closest_bst_value \
+	optimal_account_balance \
+	output_contest_matches \
+	min_unique_abbrev
 
 
 CFLAGS := -std=c99
