@@ -275,7 +275,8 @@ CPP_PROGS := \
 	closest_bst_value \
 	optimal_account_balance \
 	output_contest_matches \
-	min_unique_abbrev
+	min_unique_abbrev \
+	add_search_word
 
 
 CFLAGS := -std=c99
