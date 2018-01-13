@@ -276,7 +276,8 @@ CPP_PROGS := \
 	optimal_account_balance \
 	output_contest_matches \
 	min_unique_abbrev \
-	add_search_word
+	add_search_word \
+	longest_incr_subarray
 
 
 CFLAGS := -std=c99
