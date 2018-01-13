@@ -278,7 +278,8 @@ CPP_PROGS := \
 	min_unique_abbrev \
 	add_search_word \
 	longest_incr_subarray \
-	readn_given_read4
+	readn_given_read4 \
+	exclusive_time_functions
 
 
 CFLAGS := -std=c99
