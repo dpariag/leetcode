@@ -279,7 +279,8 @@ CPP_PROGS := \
 	add_search_word \
 	longest_incr_subarray \
 	readn_given_read4 \
-	exclusive_time_functions
+	exclusive_time_functions \
+	combination_sum4
 
 
 CFLAGS := -std=c99
