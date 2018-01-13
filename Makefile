@@ -280,7 +280,8 @@ CPP_PROGS := \
 	longest_incr_subarray \
 	readn_given_read4 \
 	exclusive_time_functions \
-	combination_sum4
+	combination_sum4 \
+	generalized_abbrev
 
 
 CFLAGS := -std=c99
