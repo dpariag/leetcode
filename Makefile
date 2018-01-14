@@ -281,7 +281,8 @@ CPP_PROGS := \
 	readn_given_read4 \
 	exclusive_time_functions \
 	combination_sum4 \
-	generalized_abbrev
+	generalized_abbrev \
+	decode_ways2
 
 
 CFLAGS := -std=c99
