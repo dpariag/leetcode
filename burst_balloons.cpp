@@ -3,8 +3,10 @@
 // nums[i-1] * nums[i] * nums[i+i] coins. After the burst, nums[i] and nums[i+1] are adjacent.
 // Find the maximum coins you can collect by bursting the balloons wisely.
 
-// Brute Force:
-// Better:
+// Brute Force: Iterate the array, burst i'th balloon and recurse on remaining balloons. O(n!) time.
+// Better: Define table[i][j] = {max coins possible with balloons[i..j]. Iterate the diagonals,
+// filling in ranges of len = {1,2,..,n}. Treat each coin in the range as if it were the last coin
+// to be popped, which allows decomposing into independent subproblems.
 
 #include <vector>
 #include <iostream>
