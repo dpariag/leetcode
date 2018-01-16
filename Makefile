@@ -283,7 +283,9 @@ CPP_PROGS := \
 	combination_sum4 \
 	generalized_abbrev \
 	decode_ways2 \
-	utf8_validation
+	utf8_validation \
+	cracking_the_safe \
+	sentence_similarity
 
 
 CFLAGS := -std=c99
