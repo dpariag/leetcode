@@ -285,7 +285,8 @@ CPP_PROGS := \
 	decode_ways2 \
 	utf8_validation \
 	cracking_the_safe \
-	sentence_similarity
+	sentence_similarity \
+	rearrange_string_k_apart
 
 
 CFLAGS := -std=c99
