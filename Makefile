@@ -286,8 +286,11 @@ CPP_PROGS := \
 	utf8_validation \
 	cracking_the_safe \
 	sentence_similarity \
-	rearrange_string_k_apart
-
+	rearrange_string_k_apart \
+	plus_one_linked_list \
+	student_attendance_1 \
+	student_attendance_2 \
+	flatten_2d_vector
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
