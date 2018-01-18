@@ -291,7 +291,8 @@ CPP_PROGS := \
 	student_attendance_1 \
 	student_attendance_2 \
 	flatten_2d_vector \
-	next_greater_2
+	next_greater_2 \
+	my_calendar_1
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
