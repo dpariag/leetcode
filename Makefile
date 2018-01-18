@@ -290,7 +290,8 @@ CPP_PROGS := \
 	plus_one_linked_list \
 	student_attendance_1 \
 	student_attendance_2 \
-	flatten_2d_vector
+	flatten_2d_vector \
+	next_greater_2
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
