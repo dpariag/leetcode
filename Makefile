@@ -293,7 +293,8 @@ CPP_PROGS := \
 	flatten_2d_vector \
 	next_greater_2 \
 	my_calendar_1 \
-	word_search_2
+	word_search_2 \
+	count_range_sum
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
