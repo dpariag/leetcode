@@ -294,7 +294,8 @@ CPP_PROGS := \
 	next_greater_2 \
 	my_calendar_1 \
 	word_search_2 \
-	count_range_sum
+	count_range_sum \
+	kth_smallest_in_sorted_matrix
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
