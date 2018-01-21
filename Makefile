@@ -298,7 +298,8 @@ CPP_PROGS := \
 	kth_smallest_in_sorted_matrix \
 	magical_string \
 	valid_abbreviation \
-	line_reflection
+	line_reflection \
+	median_data_stream
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
