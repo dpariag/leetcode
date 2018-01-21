@@ -296,7 +296,8 @@ CPP_PROGS := \
 	word_search_2 \
 	count_range_sum \
 	kth_smallest_in_sorted_matrix \
-	magical_string
+	magical_string \
+	valid_abbreviation
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
