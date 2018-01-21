@@ -299,7 +299,8 @@ CPP_PROGS := \
 	magical_string \
 	valid_abbreviation \
 	line_reflection \
-	median_data_stream
+	median_data_stream \
+	reverse_pairs
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
