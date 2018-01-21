@@ -297,7 +297,8 @@ CPP_PROGS := \
 	count_range_sum \
 	kth_smallest_in_sorted_matrix \
 	magical_string \
-	valid_abbreviation
+	valid_abbreviation \
+	line_reflection
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
