@@ -2,8 +2,10 @@
 // Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] 
 // (si < ei), find the minimum number of conference rooms required.
 
-// Brute Force: Use an array to represent all time slots. Iterate intervals incrementing any time with a room in use.
-// Better: Split intervals into start and end times, and sort each. Starting a new meeting (advancing start) adds a room.
+// Brute Force: Use an array to represent all time slots. Iterate intervals incrementing any time 
+// with a room in use.
+// Better: Split intervals into start and end times, and sort each. Starting a new meeting 
+// (advancing start) adds a room.
 // Advancing end (if current end <= current start) frees up a room. Track max.
 
 #include <vector>
