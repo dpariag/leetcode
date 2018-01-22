@@ -300,7 +300,9 @@ CPP_PROGS := \
 	valid_abbreviation \
 	line_reflection \
 	median_data_stream \
-	reverse_pairs
+	reverse_pairs \
+	graph_valid_tree
+
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
