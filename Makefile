@@ -301,7 +301,8 @@ CPP_PROGS := \
 	line_reflection \
 	median_data_stream \
 	reverse_pairs \
-	graph_valid_tree
+	graph_valid_tree \
+	mode_in_bst
 
 
 CFLAGS := -std=c99
