@@ -1,22 +1,19 @@
 // Leetcode: https://leetcode.com/problems/magical-string/description/
 
-// Brute Force:
-// Better:
+// Approach: Generate the magical string up to length N by discovering the
+// pattern required to generate it. Count '1's in the first N chars. O(n) time/space.
 
 #include <vector>
 #include <string>
 #include <iostream>
 #include <assert.h>
 
-// 1 22 11 2 1 22 1 22 11 2 11 22
-// 1 22 11 2 1 22 1 22 11 2 11 22
-
-// Accepted. 6ms. Beats 55.06% of submissions, ties < 1% of submissions.
+// Accepted. 8ms. Beats 55.06% of submissions, ties < 1% of submissions.
 class Solution {
 public:
     int magicalString(int n) {
         std::string magical("122");
-        magical.reserve(100000);
+        magical.reserve(n);
 
         int i = 2;
         while (magical.size() < n) {
