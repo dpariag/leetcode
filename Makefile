@@ -302,7 +302,8 @@ CPP_PROGS := \
 	median_data_stream \
 	reverse_pairs \
 	graph_valid_tree \
-	mode_in_bst
+	mode_in_bst \
+	magic_dictionary
 
 
 CFLAGS := -std=c99
