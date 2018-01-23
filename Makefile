@@ -303,7 +303,8 @@ CPP_PROGS := \
 	reverse_pairs \
 	graph_valid_tree \
 	mode_in_bst \
-	magic_dictionary
+	magic_dictionary \
+	palindromic_substrings
 
 
 CFLAGS := -std=c99
