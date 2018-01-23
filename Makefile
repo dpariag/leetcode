@@ -304,7 +304,8 @@ CPP_PROGS := \
 	graph_valid_tree \
 	mode_in_bst \
 	magic_dictionary \
-	palindromic_substrings
+	palindromic_substrings \
+	wildcard_matching
 
 
 CFLAGS := -std=c99
