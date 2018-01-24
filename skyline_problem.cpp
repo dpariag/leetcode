@@ -36,7 +36,7 @@ struct Endpoint {
     }
 };
 
-// Accepted. 28ms. Beats 40.87% of submissions, ties < 1% of submissions.
+// Accepted. 27ms. Beats 41.30% of submissions, ties < 1% of submissions.
 class Solution {
 public:
     Skyline getSkyline(Buildings& buildings) {
@@ -61,9 +61,6 @@ public:
             auto& ep = endpoints[i];
             auto& building = buildings[ep.index];
 
-            // Remove any ended buildings
-            while(!tallest.empty() && tallest.top()[right_side] < ep.x) { tallest.pop(); }
-
             if (ep.is_start) {
                 // New building starting
                 if (tallest.empty() || building[height] > tallest.top()[height]) {                    
@@ -75,6 +72,7 @@ public:
                 if (!tallest.empty() && tallest.top() == buildings[ep.index]) {
                     // The ended building is the tallest one
                     tallest.pop();
+                    // Remove any shorted buildings that have also ended
                     while(!tallest.empty() && tallest.top()[right_side] <= ep.x) { tallest.pop(); }
 
                     result.emplace_back(std::make_pair(ep.x, (tallest.empty() ? 0 : tallest.top()[height])));
@@ -89,25 +87,15 @@ public:
 bool test_skyline_problem(Buildings buildings, Skyline expected) {
     Solution soln;
     auto skyline = soln.getSkyline(buildings);
-    std::cout << "Printing the skyline..." << std::endl;
-    for (auto s : skyline) {
-        std::cout << s.first << "," << s.second << std::endl;
-    }
-    std::cout << std::endl << std::endl;
     return skyline == expected;
 }
 
 void test_skyline_problem() {
     assert(test_skyline_problem({{1,2,1},{1,2,2},{1,2,3}}, {{1,3},{2,0}}));
-
     assert(test_skyline_problem({{2,9,10},{3,7,15},{5,12,12},{15,20,10},{19,24,8}},
                                 {{2,10}, {3,15}, {7,12},{12,0},{15,10}, {20,8}, {24,0}}));
-    
-
     assert(test_skyline_problem({{2,13,10},{10,17,25},{12,20,14}},
                 {{2,10},{10,25},{17,14},{20,0}}));
-
-
 }
 
 int main(int argc, char** argv) {
