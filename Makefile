@@ -307,7 +307,8 @@ CPP_PROGS := \
 	palindromic_substrings \
 	wildcard_matching \
 	populate_next_right \
-	populate_next_right_2
+	populate_next_right_2 \
+	skyline_problem
 
 
 CFLAGS := -std=c99
