@@ -305,7 +305,8 @@ CPP_PROGS := \
 	mode_in_bst \
 	magic_dictionary \
 	palindromic_substrings \
-	wildcard_matching
+	wildcard_matching \
+	populate_next_right
 
 
 CFLAGS := -std=c99
