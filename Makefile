@@ -308,7 +308,8 @@ CPP_PROGS := \
 	wildcard_matching \
 	populate_next_right \
 	populate_next_right_2 \
-	skyline_problem
+	skyline_problem \
+	4_keys_keyboard
 
 
 CFLAGS := -std=c99
