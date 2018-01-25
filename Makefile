@@ -309,7 +309,8 @@ CPP_PROGS := \
 	populate_next_right \
 	populate_next_right_2 \
 	skyline_problem \
-	4_keys_keyboard
+	4_keys_keyboard \
+	max_chunks_to_sorted
 
 
 CFLAGS := -std=c99
