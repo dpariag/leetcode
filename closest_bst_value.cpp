@@ -2,8 +2,8 @@
 // Given a non-empty binary search tree and a floating point target value, 
 // find the value in the BST that is closest to the target.
 
-// Brute Force:
-// Better:
+// Brute Force: Traverse the entire tree comparing distance to the target. O(n) time.
+// Better: Binary search for target, comparing distance to target along the way. O(h) time.
 
 #include <limits>
 #include <iostream>
