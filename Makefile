@@ -310,7 +310,8 @@ CPP_PROGS := \
 	populate_next_right_2 \
 	skyline_problem \
 	4_keys_keyboard \
-	max_chunks_to_sorted
+	max_chunks_to_sorted \
+	split_array_largest_sum
 
 
 CFLAGS := -std=c99
