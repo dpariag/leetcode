@@ -311,7 +311,8 @@ CPP_PROGS := \
 	skyline_problem \
 	4_keys_keyboard \
 	max_chunks_to_sorted \
-	split_array_largest_sum
+	split_array_largest_sum \
+	num_connected_components
 
 
 CFLAGS := -std=c99
