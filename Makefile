@@ -312,7 +312,8 @@ CPP_PROGS := \
 	4_keys_keyboard \
 	max_chunks_to_sorted \
 	split_array_largest_sum \
-	num_connected_components
+	num_connected_components \
+	min_diff_bst \
 
 
 CFLAGS := -std=c99
