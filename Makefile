@@ -314,6 +314,7 @@ CPP_PROGS := \
 	split_array_largest_sum \
 	num_connected_components \
 	min_diff_bst \
+	phone_directory
 
 
 CFLAGS := -std=c99
