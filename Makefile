@@ -315,7 +315,8 @@ CPP_PROGS := \
 	num_connected_components \
 	min_diff_bst \
 	phone_directory \
-	closest_bst_value_2
+	closest_bst_value_2 \
+	maximal_rectangle
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
