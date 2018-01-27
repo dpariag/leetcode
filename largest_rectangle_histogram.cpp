@@ -2,7 +2,7 @@
 // Given a histogram specified as array of unit-width bars, find the area of the largest rectangle 
 // in the histogram.
 
-// Brute Force: For each A[i], scan forward to find largest rectangle that includes A[i]. O(n^2) time.
+// Brute Force: For each A[i], scan forward to find largest rectangle starting at A[i]. O(n^2) time.
 // Better: Use a stack to store the buildings in ascending order of height. If a shorter building
 // is discovered, pop all taller buildings from the stack calculating the largest rectangle that uses
 // the popped building as it's tallest building.
@@ -26,7 +26,7 @@ public:
                 stack.push(i);
             } else {
                 // Current bar is shorter than stack top
-                // Pop taller bars, calculating rectangle area with the popped bar as the tallest bar.
+                // Pop taller bars, calculating rectangle area with popped bar as the tallest bar.
                 while (!stack.empty() && bars[stack.top()] > bars[i]) {
                     int popped = stack.top();
                     stack.pop();
@@ -67,4 +67,3 @@ int main(int argc, char** argv) {
     std::cout << argv[0] + 2 << "...OK!" << std::endl;
     return 0;
 }
-    
