@@ -317,7 +317,8 @@ CPP_PROGS := \
 	phone_directory \
 	closest_bst_value_2 \
 	maximal_rectangle \
-	count_unique_digits
+	count_unique_digits \
+	random_pick_index
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
