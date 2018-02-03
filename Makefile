@@ -320,7 +320,8 @@ CPP_PROGS := \
 	count_unique_digits \
 	random_pick_index \
 	1bit_2bit_chars \
-	max_product_3nums
+	max_product_3nums \
+	average_levels
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
