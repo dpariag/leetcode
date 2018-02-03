@@ -322,7 +322,8 @@ CPP_PROGS := \
 	1bit_2bit_chars \
 	max_product_3nums \
 	average_levels \
-	binary_tree_preorder
+	binary_tree_preorder \
+	binary_tree_postorder
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
