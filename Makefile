@@ -324,7 +324,8 @@ CPP_PROGS := \
 	average_levels \
 	binary_tree_preorder \
 	binary_tree_postorder \
-	count_binary_substrings
+	count_binary_substrings \
+	restore_ip_addresses
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
