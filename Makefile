@@ -329,7 +329,8 @@ CPP_PROGS := \
 	verify_preorder_serial \
 	count_univalue_subtrees \
 	kill_process \
-	merge_two_sorted
+	merge_two_sorted \
+	symmetric_tree
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
