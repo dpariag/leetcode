@@ -328,7 +328,8 @@ CPP_PROGS := \
 	restore_ip_addresses \
 	verify_preorder_serial \
 	count_univalue_subtrees \
-	kill_process
+	kill_process \
+	merge_two_sorted
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
