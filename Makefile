@@ -330,7 +330,8 @@ CPP_PROGS := \
 	count_univalue_subtrees \
 	kill_process \
 	merge_two_sorted \
-	symmetric_tree
+	symmetric_tree \
+	string_compression
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
