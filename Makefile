@@ -331,7 +331,8 @@ CPP_PROGS := \
 	kill_process \
 	merge_two_sorted \
 	symmetric_tree \
-	string_compression
+	string_compression \
+	top_k_frequent
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
