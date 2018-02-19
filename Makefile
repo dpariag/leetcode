@@ -328,7 +328,13 @@ CPP_PROGS := \
 	restore_ip_addresses \
 	verify_preorder_serial \
 	subarray_sum_equals_k \
-	validate_bst
+	validate_bst \
+	count_univalue_subtrees \
+	kill_process \
+	merge_two_sorted \
+	symmetric_tree \
+	string_compression \
+	top_k_frequent
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
