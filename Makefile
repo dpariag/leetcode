@@ -337,7 +337,8 @@ CPP_PROGS := \
 	top_k_frequent \
 	license_key_formatting \
 	moving_average \
-	wildcard_matching
+	wildcard_matching \
+	delete_and_earn
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
