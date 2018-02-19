@@ -339,7 +339,8 @@ CPP_PROGS := \
 	moving_average \
 	wildcard_matching \
 	delete_and_earn \
-	house_robber
+	house_robber \
+	shuffle_an_array
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
