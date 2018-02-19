@@ -19,7 +19,8 @@ public:
     bool is_match_dp(const std::string& s, const std::string& p) {
         if (p.empty()) { return s.empty(); }
 
-        Table table(1+p.size(), std::vector<bool>(1+s.size(), false)); // Leave space for empty string and empty pattern
+        // Leave space for empty string and empty pattern
+        Table table(1+p.size(), std::vector<bool>(1+s.size(), false)); 
         table[0][0] = true;
 
         // Fill in first column
