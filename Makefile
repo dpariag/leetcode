@@ -335,7 +335,8 @@ CPP_PROGS := \
 	symmetric_tree \
 	string_compression \
 	top_k_frequent \
-	license_key_formatting
+	license_key_formatting \
+	moving_average
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
