@@ -338,7 +338,8 @@ CPP_PROGS := \
 	license_key_formatting \
 	moving_average \
 	wildcard_matching \
-	delete_and_earn
+	delete_and_earn \
+	house_robber
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
