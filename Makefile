@@ -332,7 +332,8 @@ CPP_PROGS := \
 	merge_two_sorted \
 	symmetric_tree \
 	string_compression \
-	top_k_frequent
+	top_k_frequent \
+	knight_probability
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
