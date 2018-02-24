@@ -1,12 +1,14 @@
 // Leetcode: https://leetcode.com/problems/add-and-search-word-data-structure-design/description/
 
 // Options: 
-// 1) Insert all (2^m) regexes of each word in a hash map. Insert is O(2^m), Lookup is O(1). O(2^m*n) space.
-// 2) Insert each word in a hash map. During lookup, for each '.' substitute each letter in a-z, lookup and backtrack. 
-//    Insert is O(1), Lookup is (26^m), O(n*m) space
-// 3) Build a trie. Lookup requires special handling for '.' with backtracking. Lookup is O(26^m) in the worst case, but better average case.
-// 4) Keep words in a vector. Insert is O(1). Lookup scans words and checks if regex can produce the word. 
-//    Lookup is O(n*m) which is bad if n >> m. O(n*m) space.
+// 1) Insert all (2^m) regexes of each word in a hash map. 
+//    Insert is O(2^m), Lookup is O(1). O(2^m*n) space.
+// 2) Insert each word in a hash map. During lookup, for each '.' substitute each letter in a-z, 
+//    lookup and backtrack. Insert is O(1), Lookup is (26^m), O(n*m) space
+// 3) Keep words in a vector. Insert is O(1). Lookup scans words and checks if regex can produce 
+//    the word. Lookup is O(n*m) which is bad if n >> m. O(n*m) space.
+// 4) Build a trie. Lookup requires special handling for '.' with backtracking. 
+//    Lookup is O(26^m) in the worst case, but better average case.
 
 #include <string>
 #include <iostream>
@@ -43,14 +45,13 @@ private:
 
     bool backtrack_search(const std::string& word, int index, const TrieNode* node) {
         if (node == nullptr) { return false; }
-        if (index == word.size()) {
-            return node->is_word;
-        }
+        if (index == word.size()) { return node->is_word; }
 
         char ch = word[index];
         if (ch == '.') {
             for (int i = 0; i < 26; ++i) {
-                if (node->children[i] != nullptr && backtrack_search(word, index+1, node->children[i])) {
+                if (node->children[i] != nullptr && 
+                    backtrack_search(word, index+1, node->children[i])) {
                     return true;
                 }
             }

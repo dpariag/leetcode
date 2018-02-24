@@ -327,12 +327,20 @@ CPP_PROGS := \
 	count_binary_substrings \
 	restore_ip_addresses \
 	verify_preorder_serial \
+	subarray_sum_equals_k \
+	validate_bst \
 	count_univalue_subtrees \
 	kill_process \
 	merge_two_sorted \
 	symmetric_tree \
 	string_compression \
 	top_k_frequent \
+	license_key_formatting \
+	moving_average \
+	wildcard_matching \
+	delete_and_earn \
+	house_robber \
+	shuffle_an_array \
 	knight_probability
 
 CFLAGS := -std=c99

@@ -1,7 +1,9 @@
-// Leetcode: 
+// Leetcode: https://leetcode.com/problems/first-bad-version/description/
+// Given versions 1..n of software, and a function isBadVersion(), determine
+// which release of the software is the first bad one (one is guaranteed bad)
 
-// Brute Force:
-// Better:
+// Brute Force: Scan the array calling isBadVersion(). O(n) time.
+// Better: Binary search over the array, remembering the last bad version seen.
 
 #include <vector>
 #include <iostream>

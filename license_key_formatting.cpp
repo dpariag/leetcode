@@ -3,7 +3,7 @@
 // * Split S into blocks of size k, separated by dashes. The first block may contain < k chars.
 // * Convert lower case chars to upper case
 
-// Approach: Scan S from right to left, appending characters to the result. Append dashes every k characters.
+// Approach: Scan S from right to left, appending characters to result. Append dashes every k chars.
 // O(n) time and space (not done in place)
 
 #include <string>

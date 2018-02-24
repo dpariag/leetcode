@@ -1,10 +1,10 @@
 // Leetcode: https://leetcode.com/problems/minimum-window-subsequence/description/
-// Given strings S and T, find the minimum (contiguous) substring of S, so that has T as a subsequence.
+// Given strings S and T, find the minimum (contiguous) substring of S, that has T as a subsequence.
 
 // Brute Force: Generate all substrings of S, check if T is contained. O(n^2*m) time.
 // Better: Scan from each index in S to see if T can be contained. O(n^2) time.
-// Even Better: DP approach. Let T[i][j] = {rightmost starting index in S which contains T[0..j] }
-// Then T[i][j] = (S[i-1] == T[j-1]) ? T[i-i][j-1] : T[i][j-1]
+// Better: DP approach. Let table[i][j] = {rightmost starting index in S which contains T[0..j] }
+// Then table[i][j] = (S[i-1] == T[j-1]) ? table[i-i][j-1] : table[i][j-1]
 
 #include <vector>
 #include <iostream>

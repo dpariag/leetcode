@@ -1,8 +1,8 @@
 // Leetcode: https://leetcode.com/problems/moving-average-from-data-stream/description/
-//
+// Given a stream of integers and a window size, calculate the moving avg of all integers in the 
+// sliding window.
 
-// Brute Force:
-// Better:
+// Approach: Maintain a circular buffer of values in the window. Discard old, add new.
 
 #include <vector>
 #include <iostream>
@@ -23,7 +23,6 @@ public:
         total += val;
         total -= discard;
         if (size < m_values.size()) { ++size; }
-        std::cout << double(total) / double(size) << std::endl;
         return double(total) / double(size);
     }
 
