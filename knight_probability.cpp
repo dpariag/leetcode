@@ -2,8 +2,8 @@
 // Given an NxN chessboard and the starting position for a knight, determine the probability
 // that the knight is still on the board after K moves.
 
-// Brute Force:
-// Better:
+// Brute Force: Use DFS to count valid moves for the next K moves, then calculate probability.
+// Better: Use DFS, but memoize the number of valid moves using table[row][col][k].
 
 #include <cmath>
 #include <vector>
