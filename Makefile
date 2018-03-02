@@ -343,7 +343,8 @@ CPP_PROGS := \
 	shuffle_an_array \
 	knight_probability \
 	array_nesting \
-	max_length_repeated_subarray
+	max_length_repeated_subarray \
+	serialize_deserialize_bst
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
