@@ -344,7 +344,8 @@ CPP_PROGS := \
 	knight_probability \
 	array_nesting \
 	max_length_repeated_subarray \
-	serialize_deserialize_bst
+	serialize_deserialize_bst \
+	max_points_on_line
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
