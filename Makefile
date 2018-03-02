@@ -341,7 +341,8 @@ CPP_PROGS := \
 	delete_and_earn \
 	house_robber \
 	shuffle_an_array \
-	knight_probability
+	knight_probability \
+	array_nesting
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
