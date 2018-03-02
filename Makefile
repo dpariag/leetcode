@@ -342,7 +342,8 @@ CPP_PROGS := \
 	house_robber \
 	shuffle_an_array \
 	knight_probability \
-	array_nesting
+	array_nesting \
+	max_length_repeated_subarray
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
