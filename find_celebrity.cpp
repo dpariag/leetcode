@@ -1,7 +1,8 @@
 // Leetcode: https://leetcode.com/problems/find-the-celebrity/description/
 
-// Brute Force:
-// Better:
+// Brute Force: Fill out the entire "knows" matrix, then scan for a "cross" in the matrix.
+// Better: Prune the search as early as possible. If someone knows someone else, they
+// can't be the celebrity. O(n^2) worse case.
 
 #include <vector>
 #include <iostream>
