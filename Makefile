@@ -347,7 +347,8 @@ CPP_PROGS := \
 	serialize_deserialize_bst \
 	max_points_on_line \
 	zig_zag_conversion \
-	battleships
+	battleships \
+	min_genetic_mutation
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
