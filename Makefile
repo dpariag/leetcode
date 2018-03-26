@@ -349,7 +349,8 @@ CPP_PROGS := \
 	zig_zag_conversion \
 	battleships \
 	min_genetic_mutation \
-	max_stack
+	max_stack \
+	search_2D_matrix
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
