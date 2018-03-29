@@ -351,7 +351,8 @@ CPP_PROGS := \
 	min_genetic_mutation \
 	max_stack \
 	search_2D_matrix \
-	arithmetic_slices
+	arithmetic_slices \
+	add_two_numbers_2
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
