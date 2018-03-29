@@ -352,7 +352,8 @@ CPP_PROGS := \
 	max_stack \
 	search_2D_matrix \
 	arithmetic_slices \
-	add_two_numbers_2
+	add_two_numbers_2 \
+	insertion_sort_list
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
