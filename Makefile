@@ -354,7 +354,8 @@ CPP_PROGS := \
 	arithmetic_slices \
 	add_two_numbers_2 \
 	insertion_sort_list \
-	partition_to_k_subsets
+	partition_to_k_subsets \
+	daily_temperatures
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
