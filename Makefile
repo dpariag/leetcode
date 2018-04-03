@@ -353,7 +353,8 @@ CPP_PROGS := \
 	search_2D_matrix \
 	arithmetic_slices \
 	add_two_numbers_2 \
-	insertion_sort_list
+	insertion_sort_list \
+	partition_to_k_subsets
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
