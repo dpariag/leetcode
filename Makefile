@@ -357,7 +357,8 @@ CPP_PROGS := \
 	partition_to_k_subsets \
 	daily_temperatures \
 	wiggle_subsequence \
-	climbing_stairs
+	climbing_stairs \
+	partition_labels
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
