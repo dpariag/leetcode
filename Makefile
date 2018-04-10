@@ -358,7 +358,8 @@ CPP_PROGS := \
 	daily_temperatures \
 	wiggle_subsequence \
 	climbing_stairs \
-	partition_labels
+	partition_labels \
+	boundary_binary_tree
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
