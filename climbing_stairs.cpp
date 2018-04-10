@@ -1,8 +1,9 @@
 // Leetcode: https://leetcode.com/problems/climbing-stairs/description/
 // Calculate how many ways you can climb up n steps if you can take 1 or 2 steps at a time.
 
-// Brute Force:
-// Better:
+// Brute Force: Recursively evaluate number of ways to climb (n-1) + (n-2) steps. O(2^n) time.
+// Better: Build solution bottom up using: num_steps(n) = nums_steps(n-1) + nums_steps(n-2). 
+// O(n) time and O(1) space
 
 #include <vector>
 #include <iostream>
@@ -21,20 +22,17 @@ public:
             one_back = num_steps;
             ++cur_step;
         }
-        //std::cout << "N = " << n << " Steps = " << num_steps << std::endl;
         return num_steps;
     }
 };
 
 void test_climb_stairs() {
     Solution soln;
-
     assert(soln.climbStairs(1) == 1);
     assert(soln.climbStairs(2) == 2);
     assert(soln.climbStairs(3) == 3);
     assert(soln.climbStairs(4) == 5);    
     assert(soln.climbStairs(5) == 8);
-
 }
 
 int main(int argc, char** argv) {
