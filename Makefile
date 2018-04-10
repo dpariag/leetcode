@@ -359,7 +359,8 @@ CPP_PROGS := \
 	wiggle_subsequence \
 	climbing_stairs \
 	partition_labels \
-	boundary_binary_tree
+	boundary_binary_tree \
+	integer_to_roman
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
