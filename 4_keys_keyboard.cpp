@@ -10,6 +10,7 @@
 #include <iostream>
 #include <assert.h>
 
+// Accepted. 3ms. Beats 97.74% of submissions.
 class Solution {
 public:
     int maxA(int n) {
