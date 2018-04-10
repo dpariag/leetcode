@@ -1,3 +1,12 @@
+// Leetcode: https://leetcode.com/problems/boundary-of-binary-tree/description/
+// Return the boundary of a binary tree (moving anti-clockwise) with no duplicates.
+
+// Brute force: 3 passes of the binary tree. O(n) time and O(h) space.
+// Better: Add the root to the boundary, then:
+// - do a pre-order traversal of the root's left subtree using a boolean to track if nodes are exterior.
+// - do a post-order traversal of the root's right subtree using a boolean to track if nodes are exterior.
+// O(n) time and O(h) space.
+
 #include <vector>
 #include <iostream>
 #include <assert.h>
