@@ -362,7 +362,8 @@ CPP_PROGS := \
 	boundary_binary_tree \
 	integer_to_roman \
 	2_keys_keyboard \
-	valid_sudoku
+	valid_sudoku \
+	top_k_frequent
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
