@@ -363,7 +363,8 @@ CPP_PROGS := \
 	integer_to_roman \
 	2_keys_keyboard \
 	valid_sudoku \
-	top_k_frequent
+	top_k_frequent \
+	reverse_string
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
