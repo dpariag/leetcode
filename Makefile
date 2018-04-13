@@ -364,7 +364,8 @@ CPP_PROGS := \
 	2_keys_keyboard \
 	valid_sudoku \
 	top_k_frequent \
-	reverse_string
+	reverse_string \
+	range_sum_immutable
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
