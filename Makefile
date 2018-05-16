@@ -366,7 +366,8 @@ CPP_PROGS := \
 	top_k_frequent \
 	reverse_string \
 	range_sum_immutable \
-	132_pattern
+	132_pattern \
+	reorganize_string
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
