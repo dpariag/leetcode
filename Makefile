@@ -365,7 +365,8 @@ CPP_PROGS := \
 	valid_sudoku \
 	top_k_frequent \
 	reverse_string \
-	range_sum_immutable
+	range_sum_immutable \
+	132_pattern
 
 CFLAGS := -std=c99
 CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
