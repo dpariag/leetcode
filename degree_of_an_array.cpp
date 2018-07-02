@@ -17,7 +17,7 @@ typedef struct Span {
 using SpanMap = std::unordered_map<int, Span>;
 using Counts = std::unordered_map<int,int>;
 
-// Accepted: 40ms. Beats 73.84% of submissions.
+// Accepted: 39ms. Beats 75.72% of submissions.
 class Solution {
 public:
     int findShortestSubArray(std::vector<int>& nums) {
