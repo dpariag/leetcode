@@ -369,7 +369,8 @@ CPP_PROGS := \
 	132_pattern \
 	reorganize_string \
 	coin_change \
-	construct_tree_inorder_postorder
+	construct_tree_inorder_postorder \
+	degree_of_an_array
 
 
 CFLAGS := -std=c99
