@@ -370,7 +370,8 @@ CPP_PROGS := \
 	reorganize_string \
 	coin_change \
 	construct_tree_inorder_postorder \
-	degree_of_an_array
+	degree_of_an_array \
+    max_binary_tree
 
 
 CFLAGS := -std=c99
