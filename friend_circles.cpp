@@ -1,7 +1,9 @@
 // Leetcode: https://leetcode.com/problems/friend-circles/description/
+// Given a matrix M, where M[i][j] denotes that the i'th and j'th students are friends
+// determine how many friend circles exist.
 
-// Brute Force:
-// Better:
+// Approach: Use DFS to scan the matrix. If i and j are friends, then continue DFS from j. O(n^2) time.
+// This is an instance of finding connnected components in a graph, or the union-find algorithm.
 
 #include "debug.h"
 #include <vector>
@@ -9,33 +11,28 @@
 #include <assert.h>
 
 using Matrix = std::vector<std::vector<int>>;
+using Visited = std::vector<bool>;
 
-// Accepted. 28ms. Beats 5.96% of cpp submissions.
+// Accepted. 12ms. Beats 98.31% of cpp submissions.
 class Solution {
 public:
-    void dfs(Matrix& M, int i, int j) {
-        M[i][j] = 0, M[j][i] = 0, M[i][i] = 0, M[j][j] = 0;
-        for (j = 0; j < M[i].size(); ++j) {
-            if (i != j && M[i][j] == 1) {
-                dfs(M, j, i);
+    void dfs(Matrix& M, int i, Visited& visited) {
+        visited[i] = true;
+        for (int j = 0; j < M[i].size(); ++j) {
+            if (!visited[j] && i != j && M[i][j] == 1) {
+                dfs(M, j, visited);
             }
         }
     }
 
     int findCircleNum(Matrix& M) {
         int num_circles = 0;
+        Visited visited(M.size(), false);
         for (int i = 0; i < M.size(); ++i) {
-            bool circle = false;
-            for (int j = 0; j < M[0].size(); ++j) {
-                if (i != j && M[i][j] == 1) {
-                    circle = true;
-                    dfs(M, j, i);
-                }
+            if (!visited[i]) {
+                dfs(M, i, visited);
+                ++num_circles;
             }
-            if (circle) ++num_circles;
-        }
-        for (int i = 0; i < M.size(); ++i) {
-            if (M[i][i] == 1) ++num_circles;
         }
         return num_circles;
     }
