@@ -371,7 +371,8 @@ CPP_PROGS := \
 	coin_change \
 	construct_tree_inorder_postorder \
 	degree_of_an_array \
-    max_binary_tree
+    max_binary_tree \
+    path_sum_3
 
 
 CFLAGS := -std=c99
