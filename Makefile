@@ -373,7 +373,8 @@ CPP_PROGS := \
 	degree_of_an_array \
     max_binary_tree \
     path_sum_3 \
-    word_pattern_2
+    word_pattern_2 \
+    max_depth_binary_tree
 
 
 CFLAGS := -std=c99
