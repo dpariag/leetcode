@@ -372,7 +372,8 @@ CPP_PROGS := \
 	construct_tree_inorder_postorder \
 	degree_of_an_array \
     max_binary_tree \
-    path_sum_3
+    path_sum_3 \
+    word_pattern_2
 
 
 CFLAGS := -std=c99
