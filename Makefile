@@ -375,7 +375,8 @@ CPP_PROGS := \
     path_sum_3 \
     word_pattern_2 \
     max_depth_binary_tree \
-    bottom_left_leaf
+    bottom_left_leaf \
+    is_graph_bipartite
 
 
 CFLAGS := -std=c99
