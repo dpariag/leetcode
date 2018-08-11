@@ -374,7 +374,8 @@ CPP_PROGS := \
     max_binary_tree \
     path_sum_3 \
     word_pattern_2 \
-    max_depth_binary_tree
+    max_depth_binary_tree \
+    bottom_left_leaf
 
 
 CFLAGS := -std=c99
