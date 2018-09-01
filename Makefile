@@ -377,7 +377,8 @@ CPP_PROGS := \
     max_depth_binary_tree \
     bottom_left_leaf \
     is_graph_bipartite \
-    friend_circles
+    friend_circles \
+    house_robber_2
 
 
 CFLAGS := -std=c99
