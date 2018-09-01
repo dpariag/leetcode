@@ -378,7 +378,8 @@ CPP_PROGS := \
     bottom_left_leaf \
     is_graph_bipartite \
     friend_circles \
-    house_robber_2
+    house_robber_2 \
+	number_matching_subseqs
 
 
 CFLAGS := -std=c99
