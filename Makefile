@@ -371,16 +371,17 @@ CPP_PROGS := \
 	coin_change \
 	construct_tree_inorder_postorder \
 	degree_of_an_array \
-    max_binary_tree \
-    path_sum_3 \
-    word_pattern_2 \
-    max_depth_binary_tree \
-    bottom_left_leaf \
-    is_graph_bipartite \
-    friend_circles \
-    house_robber_2 \
-    number_matching_subseqs \
-    longest_palindromic_subseq
+	max_binary_tree \
+	path_sum_3 \
+	word_pattern_2 \
+	max_depth_binary_tree \
+	bottom_left_leaf \
+	is_graph_bipartite \
+	friend_circles \
+	house_robber_2 \
+	number_matching_subseqs \
+	longest_palindromic_subseq \
+	construct_tree_preorder_inorder
 
 
 CFLAGS := -std=c99
