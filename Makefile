@@ -379,7 +379,8 @@ CPP_PROGS := \
     is_graph_bipartite \
     friend_circles \
     house_robber_2 \
-	number_matching_subseqs
+    number_matching_subseqs \
+    longest_palindromic_subseq
 
 
 CFLAGS := -std=c99
