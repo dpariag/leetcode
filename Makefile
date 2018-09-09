@@ -381,7 +381,8 @@ CPP_PROGS := \
 	house_robber_2 \
 	number_matching_subseqs \
 	longest_palindromic_subseq \
-	construct_tree_preorder_inorder
+	construct_tree_preorder_inorder \
+	permutation_in_string
 
 
 CFLAGS := -std=c99
