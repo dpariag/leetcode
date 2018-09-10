@@ -382,7 +382,8 @@ CPP_PROGS := \
 	number_matching_subseqs \
 	longest_palindromic_subseq \
 	construct_tree_preorder_inorder \
-	permutation_in_string
+	permutation_in_string \
+	paint_house_2
 
 
 CFLAGS := -std=c99
