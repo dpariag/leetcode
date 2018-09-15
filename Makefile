@@ -383,7 +383,8 @@ CPP_PROGS := \
 	longest_palindromic_subseq \
 	construct_tree_preorder_inorder \
 	permutation_in_string \
-	paint_house_2
+	paint_house_2 \
+	stickers_to_spell
 
 
 CFLAGS := -std=c99
