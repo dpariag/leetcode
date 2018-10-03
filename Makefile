@@ -384,7 +384,8 @@ CPP_PROGS := \
 	construct_tree_preorder_inorder \
 	permutation_in_string \
 	paint_house_2 \
-	stickers_to_spell
+	stickers_to_spell \
+	card_flipping_game
 
 
 CFLAGS := -std=c99
