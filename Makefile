@@ -385,7 +385,8 @@ CPP_PROGS := \
 	permutation_in_string \
 	paint_house_2 \
 	stickers_to_spell \
-	card_flipping_game
+	card_flipping_game \
+	prefix_suffix_search
 
 
 CFLAGS := -std=c99
