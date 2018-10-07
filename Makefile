@@ -386,7 +386,8 @@ CPP_PROGS := \
 	paint_house_2 \
 	stickers_to_spell \
 	card_flipping_game \
-	prefix_suffix_search
+	prefix_suffix_search \
+	closest_leaf
 
 
 CFLAGS := -std=c99
