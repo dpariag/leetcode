@@ -387,7 +387,8 @@ CPP_PROGS := \
 	stickers_to_spell \
 	card_flipping_game \
 	prefix_suffix_search \
-	closest_leaf
+	closest_leaf \
+	find_largest_values
 
 
 CFLAGS := -std=c99
