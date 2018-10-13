@@ -388,7 +388,8 @@ CPP_PROGS := \
 	card_flipping_game \
 	prefix_suffix_search \
 	closest_leaf \
-	find_largest_values
+	find_largest_values \
+	longest_mountain
 
 
 CFLAGS := -std=c99
