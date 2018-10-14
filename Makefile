@@ -389,7 +389,8 @@ CPP_PROGS := \
 	prefix_suffix_search \
 	closest_leaf \
 	find_largest_values \
-	longest_mountain
+	longest_mountain \
+	random_pick_weight
 
 
 CFLAGS := -std=c99
