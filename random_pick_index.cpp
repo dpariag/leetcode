@@ -1,6 +1,6 @@
 // Leetcode: https://leetcode.com/problems/random-pick-index/description/
-// Given an array of integers with possible duplicates, randomly output the index of a given target number.
-// You can assume that the given target number must exist in the array.
+// Given an array of integers with possible duplicates, randomly output the index of a given 
+// target number. You can assume that the given target number must exist in the array.
 
 // Brute Force: Store indices of each number in a hash map of vectors. 
 // Then, given a target, return a random index. O(n) time/space
