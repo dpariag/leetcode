@@ -390,7 +390,8 @@ CPP_PROGS := \
 	closest_leaf \
 	find_largest_values \
 	longest_mountain \
-	random_pick_weight
+	random_pick_weight \
+	max_area_of_island
 
 
 CFLAGS := -std=c99
