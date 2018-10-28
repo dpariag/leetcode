@@ -17,7 +17,10 @@ struct Range {
 
   Range(int s, int e, int last_seat) : start(s), end(e) {
     size = end - start; 
-    if (end == last_seat) {
+    if (start == 0) {
+      seat = 0;
+      distance = end;
+    } else if (end == last_seat) {
       seat = last_seat;
       distance = end - start;
     } else {
@@ -29,15 +32,7 @@ struct Range {
   bool operator==(const Range& other) const {
     return start == other.start && end == other.end;
   }
-
-  friend std::ostream& operator<<(std::ostream& os, const Range& r);  
 };
-
-std::ostream& operator<<(std::ostream& os, const Range& r) {
-  os << " [" << r.start << "," << r.end << "] ";
-  os << " distance = " << r.distance;
-  return os;
-}
 
 // Descending order
 struct CompareBySize {
@@ -53,7 +48,7 @@ struct CompareByStart {
   }
 };
 
-// Accepted. 24ms. Beats 61.08% of submissions
+// Accepted. 16ms. Beats 99.83% of submissions
 class ExamRoom {
 public:
   ExamRoom(int N): last_seat(N-1) {
@@ -61,26 +56,19 @@ public:
   }
 
   int seat() {
-    int seat = 0;
     auto begin_iter = ranges_by_size.begin();
     auto biggest = *begin_iter;
     ranges_by_size.erase(begin_iter);
     ranges_by_start.erase(biggest);
+    int seat = biggest.seat;
 
     if (biggest.start == 0) {
-      seat = 0;
       insert(1, biggest.end);
     } else if (biggest.end == last_seat) {
-      seat = last_seat;
       insert(biggest.start, last_seat - 1);
     } else {
-      seat = biggest.start + (biggest.size / 2);
-      if (biggest.start < seat) {
-        insert(biggest.start, seat-1);
-      }
-      if (seat < biggest.end) {
-        insert(seat+1, biggest.end);
-      }
+      insert(biggest.start, seat-1);
+      insert(seat+1, biggest.end);
     }
     return seat;
   }

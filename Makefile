@@ -391,7 +391,8 @@ CPP_PROGS := \
 	find_largest_values \
 	longest_mountain \
 	random_pick_weight \
-	max_area_of_island
+	max_area_of_island \
+	exam_room
 
 
 CFLAGS := -std=c99
