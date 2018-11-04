@@ -392,7 +392,8 @@ CPP_PROGS := \
 	longest_mountain \
 	random_pick_weight \
 	max_area_of_island \
-	exam_room
+	exam_room \
+	intersection_2_arrays
 
 
 CFLAGS := -std=c99
