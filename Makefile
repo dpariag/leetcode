@@ -393,7 +393,8 @@ CPP_PROGS := \
 	random_pick_weight \
 	max_area_of_island \
 	exam_room \
-	intersection_2_arrays
+	intersection_2_arrays \
+	random_point_circle
 
 
 CFLAGS := -std=c99
