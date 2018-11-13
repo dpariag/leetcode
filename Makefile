@@ -394,7 +394,9 @@ CPP_PROGS := \
 	max_area_of_island \
 	exam_room \
 	intersection_2_arrays \
-	random_point_circle
+	random_point_circle \
+	minimum_time_difference \
+	cheapest_flights
 
 
 CFLAGS := -std=c99
