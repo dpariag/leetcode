@@ -397,7 +397,8 @@ CPP_PROGS := \
 	random_point_circle \
 	minimum_time_difference \
 	cheapest_flights \
-	employee_free_time
+	employee_free_time \
+	remove_linked_list_elems
 
 
 CFLAGS := -std=c99
