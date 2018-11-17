@@ -396,7 +396,8 @@ CPP_PROGS := \
 	intersection_2_arrays \
 	random_point_circle \
 	minimum_time_difference \
-	cheapest_flights
+	cheapest_flights \
+	employee_free_time
 
 
 CFLAGS := -std=c99
