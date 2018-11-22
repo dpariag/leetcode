@@ -398,7 +398,8 @@ CPP_PROGS := \
 	minimum_time_difference \
 	cheapest_flights \
 	employee_free_time \
-	remove_linked_list_elems
+	remove_linked_list_elems \
+	kth_largest_in_stream
 
 
 CFLAGS := -std=c99
