@@ -1,8 +1,8 @@
 // Leetcode: https://leetcode.com/problems/kth-largest-element-in-a-stream/
 // Design a class to find the k'th largest number in a stream
 
-// Brute Force:
-// Better:
+// Brute Force: Maintain a sorted array. O(n) add operation.
+// Better: Use a min-heap. O(logK) add operation
 
 #include <vector>
 #include <queue>
