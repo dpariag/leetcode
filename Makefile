@@ -399,7 +399,8 @@ CPP_PROGS := \
 	cheapest_flights \
 	employee_free_time \
 	remove_linked_list_elems \
-	kth_largest_in_stream
+	kth_largest_in_stream \
+	max_consecutive_ones_2
 
 
 CFLAGS := -std=c99
