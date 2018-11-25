@@ -400,7 +400,8 @@ CPP_PROGS := \
 	employee_free_time \
 	remove_linked_list_elems \
 	kth_largest_in_stream \
-	max_consecutive_ones_2
+	max_consecutive_ones_2 \
+	merge_two_binary_trees
 
 
 CFLAGS := -std=c99
