@@ -401,7 +401,9 @@ CPP_PROGS := \
 	remove_linked_list_elems \
 	kth_largest_in_stream \
 	max_consecutive_ones_2 \
-	merge_two_binary_trees
+	merge_two_binary_trees \
+  partition_array_disjoint \
+  fruit_into_baskets
 
 
 CFLAGS := -std=c99
