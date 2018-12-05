@@ -403,7 +403,8 @@ CPP_PROGS := \
 	max_consecutive_ones_2 \
 	merge_two_binary_trees \
   partition_array_disjoint \
-  fruit_into_baskets
+  fruit_into_baskets \
+  word_subsets
 
 
 CFLAGS := -std=c99
