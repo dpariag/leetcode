@@ -406,7 +406,8 @@ CPP_PROGS := \
   fruit_into_baskets \
   word_subsets \
   possible_bipartition \
-  making_large_island
+  making_large_island \
+  max_average_subarray_1
 
 
 CFLAGS := -std=c99
