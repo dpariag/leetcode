@@ -404,7 +404,8 @@ CPP_PROGS := \
 	merge_two_binary_trees \
   partition_array_disjoint \
   fruit_into_baskets \
-  word_subsets
+  word_subsets \
+  possible_bipartition
 
 
 CFLAGS := -std=c99
