@@ -405,7 +405,8 @@ CPP_PROGS := \
   partition_array_disjoint \
   fruit_into_baskets \
   word_subsets \
-  possible_bipartition
+  possible_bipartition \
+  making_large_island
 
 
 CFLAGS := -std=c99
