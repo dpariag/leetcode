@@ -1,14 +1,13 @@
 // Leetcode: https://leetcode.com/problems/maximum-average-subarray-i/
 
-// Brute Force:
-// Better:
-// Acceptance: 
+// Approach: Use a sliding window of size K to sweep the array. Track the max average.
+// Acceptance: 38.3
 
 #include <iostream>
 #include <vector>
 #include <assert.h>
 
-// Accepted. 116ms. Faster than 25.07% of cpp submissions.
+// Accepted. 112ms. Faster than 93.25% of cpp submissions.
 class Solution {
 public:
   double findMaxAverage(std::vector<int>& nums, int k) {
