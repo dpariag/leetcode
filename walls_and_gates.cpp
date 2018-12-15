@@ -11,8 +11,6 @@
 #include <iostream>
 #include <assert.h>
 
-static const int INF = 2147483647;
-static const int WALL = -1;
 static const int ROOM = 0;
 using Grid = std::vector<std::vector<int>>;
 
