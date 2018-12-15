@@ -407,7 +407,8 @@ CPP_PROGS := \
   word_subsets \
   possible_bipartition \
   making_large_island \
-  max_average_subarray_1
+  max_average_subarray_1 \
+  asteroid_collision
 
 
 CFLAGS := -std=c99
