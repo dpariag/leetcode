@@ -408,7 +408,8 @@ CPP_PROGS := \
   possible_bipartition \
   making_large_island \
   max_average_subarray_1 \
-  asteroid_collision
+  asteroid_collision \
+  kth_symbol_grammar
 
 
 CFLAGS := -std=c99
