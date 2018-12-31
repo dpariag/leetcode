@@ -409,7 +409,9 @@ CPP_PROGS := \
   making_large_island \
   max_average_subarray_1 \
   asteroid_collision \
-  kth_symbol_grammar
+  kth_symbol_grammar \
+  set_intersection_at_least_two \
+  valid_mountain_array
 
 
 CFLAGS := -std=c99
