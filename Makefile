@@ -411,7 +411,8 @@ CPP_PROGS := \
   asteroid_collision \
   kth_symbol_grammar \
   set_intersection_at_least_two \
-  valid_mountain_array
+  valid_mountain_array \
+  equal_tree_partition
 
 
 CFLAGS := -std=c99
