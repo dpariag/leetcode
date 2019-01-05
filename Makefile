@@ -412,7 +412,8 @@ CPP_PROGS := \
   kth_symbol_grammar \
   set_intersection_at_least_two \
   valid_mountain_array \
-  equal_tree_partition
+  equal_tree_partition \
+  shifting_letter
 
 
 CFLAGS := -std=c99
