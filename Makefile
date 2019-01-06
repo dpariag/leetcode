@@ -413,7 +413,8 @@ CPP_PROGS := \
   set_intersection_at_least_two \
   valid_mountain_array \
   equal_tree_partition \
-  shifting_letter
+  shifting_letter \
+  advantage_shuffle
 
 
 CFLAGS := -std=c99
