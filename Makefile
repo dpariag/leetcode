@@ -414,7 +414,8 @@ CPP_PROGS := \
   valid_mountain_array \
   equal_tree_partition \
   shifting_letter \
-  advantage_shuffle
+  advantage_shuffle \
+  valid_triangle_number
 
 
 CFLAGS := -std=c99
