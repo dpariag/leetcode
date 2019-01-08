@@ -415,7 +415,8 @@ CPP_PROGS := \
   equal_tree_partition \
   shifting_letter \
   advantage_shuffle \
-  valid_triangle_number
+  valid_triangle_number \
+  largest_sum_averages
 
 
 CFLAGS := -std=c99
