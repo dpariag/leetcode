@@ -416,7 +416,8 @@ CPP_PROGS := \
   shifting_letter \
   advantage_shuffle \
   valid_triangle_number \
-  largest_sum_averages
+  largest_sum_averages \
+  pivot_index
 
 
 CFLAGS := -std=c99
