@@ -419,7 +419,8 @@ CPP_PROGS := \
   largest_sum_averages \
   pivot_index \
   orderly_queue \
-  check_completeness
+  check_completeness \
+  most_common_word
 
 
 CFLAGS := -std=c99
