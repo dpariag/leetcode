@@ -1,7 +1,6 @@
 // Leetcode: https://leetcode.com/problems/most-common-word/
 
-// Brute Force:
-// Better:
+// Approach: Scan a word, count it and track the highest cardinality word.
 // Acceptance: 41.1
 
 #include <iostream>
@@ -21,36 +20,28 @@ public:
     WordCounts word_counts;
     Dictionary blacklist(banned.begin(), banned.end());
 
-    int max = -1;
+    int i = 0, max = -1;
     std::string word, most_common;
-    for (const auto& ch : paragraph) {
-      if (std::isalpha(ch)) {
-        word.push_back(std::tolower(ch));
-      } else {
-        if (!word.empty()) {
-          std::cout << word << std::endl;
-          if (blacklist.count(word) == 0) {
-            auto count = ++word_counts[word];
-            if (count > max) {
-              max = count;
-              most_common = word;
-            }
-          }
-          word.clear();
-        } // non-empty word
-      } // else
-    } // for
-    if (!word.empty()) {
-      std::cout << word << std::endl;
-      if (blacklist.count(word) == 0) {
-        auto count = ++word_counts[word];
-        if (count > max) {
-          max = count;
-          most_common = word;
-        }
+    while (i < paragraph.size()) {
+      // Skip non alphanumeric
+      while(i < paragraph.size() && !std::isalpha(paragraph[i])) { ++i; }
+      // Build a word
+      while(i < paragraph.size() && std::isalpha(paragraph[i])) {
+        word.push_back(std::tolower(paragraph[i]));
+        ++i;
       }
-      word.clear();
-    } // non-empty word
+      // Check word against the blacklist
+      if (!word.empty()) {
+        if (blacklist.count(word) == 0) {
+          auto count = ++word_counts[word];
+          if (count > max) {
+            max = count;
+            most_common = word;
+          }
+        }
+        word.clear();
+      }
+    } // while
     return most_common;
   }
 };
