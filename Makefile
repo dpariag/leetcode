@@ -421,7 +421,8 @@ CPP_PROGS := \
   orderly_queue \
   check_completeness \
   most_common_word \
-  subarray_sum_divisible_k
+  subarray_sum_divisible_k \
+  search_insert_position
 
 
 CFLAGS := -std=c99
