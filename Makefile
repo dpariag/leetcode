@@ -420,7 +420,8 @@ CPP_PROGS := \
   pivot_index \
   orderly_queue \
   check_completeness \
-  most_common_word
+  most_common_word \
+  subarray_sum_divisible_k
 
 
 CFLAGS := -std=c99
