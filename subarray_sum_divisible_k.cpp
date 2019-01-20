@@ -2,34 +2,33 @@
 // Given an integer array A, return the number of (contiguous, non-empty) subarrays that have a sum divisible by K.
 
 // Brute Force: Generate all subarrays, compute each sum and check divisibility by K. O(n^3)
-// Better:
-// Acceptance: 
+// Better: Store prefix remainders (i.e., running_sum % K) in a hash map. For each running sum,
+// determine if there is a prefix subarray that can be subtracted to give a suffix that is divisible by K
+// A prefix subarray can be subtracted if it has either a positive or negative sum.
+// Acceptance: 37.4
 
 #include <iostream>
 #include <vector>
 #include <unordered_map>
 #include <assert.h>
 
-using SumMap = std::unordered_map<int64_t, int64_t>;  // sum to number of occurences
-
-// Accepted. 76ms. Faster than 36.75% of submissions
+// Accepted. 56ms. Faster than 94.61% of submissions
 class Solution {
 public:
   int subarraysDivByK(std::vector<int>& A, int K) {
-    SumMap prefix_sums(A.size()* 2);
-    prefix_sums[0] = 1;  // empty array
+    // Use a lookup table instead of a hash map. Negative keys are stored first, then positive ones
+    // Just a trick to enable faster lookups (compared to a hash map)
+    int remainders[20000] = {0};   // Store index i at (i + K) for -K < i < K
+    remainders[K] = 1;  // empty array (i.e., remainder = 0)
     int64_t sum = 0, num_subarrays = 0; 
     for (int i = 0; i < A.size(); ++i) {
       sum += A[i];
       auto remainder = sum % K;
       auto smaller = remainder;
       auto bigger = (remainder < 0) ? remainder + K : remainder - K;
-       
-      auto found = prefix_sums.find(smaller);
-      if (found != prefix_sums.end()) num_subarrays += found->second;
-      found = prefix_sums.find(bigger);
-      if (found != prefix_sums.end()) num_subarrays += found->second;
-      prefix_sums[remainder]++;
+      num_subarrays += remainders[smaller + K];  
+      num_subarrays += remainders[bigger + K]; 
+      remainders[remainder + K]++;
     }
     return num_subarrays;
   }
