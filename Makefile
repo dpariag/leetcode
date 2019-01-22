@@ -422,7 +422,8 @@ CPP_PROGS := \
   check_completeness \
   most_common_word \
   subarray_sum_divisible_k \
-  search_insert_position
+  search_insert_position \
+  largest_number_at_least_twice
 
 
 CFLAGS := -std=c99
