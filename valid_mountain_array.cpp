@@ -6,7 +6,7 @@
 
 // Brute Force:
 // Better:
-// Acceptance: 35.0
+// Acceptance: 34.8
 
 #include <iostream>
 #include <vector>
