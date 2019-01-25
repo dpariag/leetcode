@@ -423,7 +423,8 @@ CPP_PROGS := \
   most_common_word \
   subarray_sum_divisible_k \
   search_insert_position \
-  largest_number_at_least_twice
+  largest_number_at_least_twice \
+  max_width_ramp
 
 
 CFLAGS := -std=c99
