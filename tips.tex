@@ -1,0 +1,1230 @@
+\documentclass[12pt]{article}
+\usepackage{xspace}
+\usepackage{epsf}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{soul}
+\usepackage{listings}
+\usepackage{enumitem}
+\setlist{nolistsep, itemsep=4pt}
+\usepackage{geometry} 
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\geometry{a4paper,portrait, margin=0.75in}
+\addtolength{\topmargin}{0.5in}
+
+\usepackage[utf8]{inputenc}
+
+\newcommand{\OONE}{O($1$) }
+\newcommand{\ON}{O($n$) }
+\newcommand{\ONSQ}{O($n^2$) }
+\newcommand{\ONCB}{O($n^3$) }
+\newcommand{\OTWON}{O($2^n$) }
+\newcommand{\ONLOGN}{O($nlogn$) }
+\newcommand{\smaller}{\footnotesize}
+
+
+% Spacing for code segments
+\lstset {
+    language=C++,
+    basicstyle=\footnotesize,% basic font setting
+}
+
+\begin{document}
+
+\section{Techniques and Problems to Remember}
+\pagestyle{plain}
+\pagenumbering{arabic}
+
+\noindent
+\textbf{Covering Subarray:}
+Given an array of strings, and a set of strings, find the smallest subarray containing the set.
+The algorithm below is \ON time.
+\begin{enumerate}
+\item Maintain a hash map of covered strings to ref counts (initially empty). 
+\item Iterate the array with indices \emph{i} and \emph{j} which define the covering subarray \texttt{A[i..j]}.
+\item Increment j (incrementing the ref count of A[j]) until all strings are covered.
+Then increment i, (decrementing the ref count of A[i]) until at least one string is not
+covered. Repeat, tracking the smallest size. 
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Majority Element (Boyer-Moore Majority vote)}
+In an unsorted array, find the element that appears more than $\floor*{n/2}$ times.
+\begin{enumerate}
+\item Choose a candidate, increment \texttt{count} if A[i] == candidate, decrementing otherwise. Reset candidate if \texttt{count == 0}. Second pass to determine if final
+candidate is a majority element.
+\item Can be generalized to finding elements that appear more than $\floor*{n/k}$ times.
+\end{enumerate}
+
+\vspace{5mm}
+\noindent
+\textbf{Generate random point within a circle}
+\begin{enumerate}
+\item Generate a random angle over [0,2$\pi$] radians
+\item Generate a length according to the CDF $\sqrt{x}$ since larger circles have more points
+\item Use trigonometry to find the x,y co-ordinates of the point
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Increasing Triplet}
+In an unsorted array, find an increasing subsequence of 3 elements (\ON time, \OONE space)
+\begin{enumerate}
+\item \texttt{min = INT\_MAX; middle = INT\_MAX}. Scan the array:
+\item \texttt{if (A[i] <= min) // update min}
+\item \texttt{else if (A[i] <= middle) // update middle}
+\item \texttt{else // found increasing triplet}
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Consecutive Subsequences:} Can a sorted array be split into two or more subsequences of
+3 or more consecutive integers. Every array elem must be used.
+\begin{enumerate}
+\item Count sequences of lengths 1, 2 and 3 or more ending in a particular value.
+\item \texttt{hash\_map[i]} holds counts of sequences of length 1,2, and 3 or more which end in i.
+\item For each \texttt{A[i]}, find \textbf{shortest} sequence ending in \texttt{A[i]-1} and extend it.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Coins:}
+Count ways to represent N cents using quarters, dimes, nickels, pennies.
+\begin{enumerate}
+\item Solve recursively. Every call turns into 4 calls.
+\item First call uses 25c and lower, second 10c and lower, third 5c and lower, fourth only 1c.\newline
+\texttt{change(N) = change(N-25, quarters\_lower) + change(N-10, dimes\_lower) + change(N-5, nickels\_lower) + change(N-1, only\_pennies);}
+\item Use dynamic prog. to cache solutions. \emph{Key(N, max denom allowed)} $\rightarrow$ \emph{\# ways}
+\item Similar problem: Find the smallest number of perfect squares (1,4,9,...) that sum to n. For example, n = 12, return 3 (4 + 4 + 4). n = 13, return 2 (4 + 9). Can be solved using DFS or BFS. BFS will probably explore more sub-optimal solutions.
+\end{enumerate}
+
+\vspace{5mm}
+\noindent
+\textbf{Towers of Hanoi:}
+\begin{enumerate}
+\item Label rings \emph{orig, target, and spare}
+\item Recursively move \emph{n-1} rings from orig to spare.
+\item Move one ring from orig to target
+\item Recursively move \emph{n-1} rings from spare to target.
+\end{enumerate}
+
+\vspace{5mm}
+\noindent
+\textbf{Duplicate Subtrees}
+Given a binary tree, find all duplicated subtrees.
+\begin{enumerate}
+\item Post order traversal computing a rolling hash of each subtree (analagous to Rabin-Karp)
+\item A subtree's hash is calculated by combining the hashes of it's children with its own key.
+\item Only compare subtrees with equal hashes. \ON expected, \ONSQ worst-case time.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Levenshtein Distance:}
+Find minimum number of edits \emph{(insert, remove, or substitute)} to transform A into B.
+\begin{enumerate}
+\item Build an table. t[i][j] is the levenshtein distance for a[0..1] and b[0..j]
+\item \texttt{t[i][j] = (a[i] == b[j]) ? (t[i-1][j-1]) : 1+min(t[i-1][j],t[i][j-1],t[i-1][j-1])}
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Container with most water:}
+In a histogram, find a pair of lines which trap the most water.
+\begin{enumerate}
+\item Iterate the array using \texttt{left} and \texttt{right} indices. Calculate the trapped volume.
+\item Advance the shorter bar, and re-calculate. \ON time.
+\end{enumerate}
+\vspace{5mm}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Longest repeating char:}
+Find longest substring of one char after up to \texttt{k} char replacements.
+\begin{enumerate}
+\item Use left and right indices to create a sliding window over the string.
+\item Count occurences of each character
+\item \texttt{replacements = window.size - max\_char\_count} \emph{// count of all other chars}
+\item Advance right until the number of replacements is $> k$
+\item Advance left until the number of replacements i $<= k$
+\end{enumerate}
+\vspace{5mm}
+
+
+\noindent
+\textbf{Missing and Duplicate:}
+Given an array of N integers between 0 and N-1 inclusive, one element is duplicated (D),
+another is missing (M). Find M and D in O(N) time and O(1) space.
+\begin{enumerate}
+\item Approach 1: Use sum of elements from 0 to N-1 and sum of squares from 0 to N-1 to form two equations. Solve for \emph{M} and \emph{D}. Squaring is prone to overflow! 
+\item Approach 2: XOR all array elements $A = {a_1, a_2, ..., a_i}$. XOR numbers $N = {0,...,N-1}$. 
+\item XOR these two to get $M \oplus D$, these bits are exclusive to \emph{one of} M or D.
+\item Extract the right most bit of $M \oplus D$, and find all array entries with that bit set.
+\item Also find numbers from N with that bit set. XOR all of these to obtain either M or D. 
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Knapsack Problem:}
+N items, with the i'th item having weight $w_i$ and value $v_i$. Choose the highest value
+subset under a given total weight (knapsack size).
+\begin{enumerate}
+\item For each item, either choose it or do not, which leads to top-down, recursive set generation.
+\item Choose $item_i$ if it can be added to a smaller set over items (0...i-1) without overflowing. 
+\item \texttt{table[i][j] = max(table[i-1][j], table[i-1][j - item\_weight] + item\_value)}
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Equal subsets:}
+Partition an array \texttt{A} of positive integers into two subsets of equal size?
+\begin{enumerate}
+\item A special case of the knapsack problem! Knapsack size is \texttt{sum(A) / 2}
+\item Table may not fit in memory if \texttt{sum(A)} is huge.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{4 subsets with equal sum:}
+Partition array of positive integers into 4 subsets of equal size?
+\begin{enumerate}
+\item Use depth-first enumeration. Try adding each number to each of the 4 subsets in turn.
+\item If the number can be added to a subset, recurse on the next number.
+\item Sort the numbers in descending order to process larger numbers sooner.
+\item See \emph{matchstics\_to\_square.cpp} for details. 
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Missing IP address:}
+File with 1 billion 32-bit IPs. Find a missing IP using 1 MB of RAM.
+\begin{enumerate}
+\item Divide IPs into blocks, for example blocks of 65,536 consecutive IPs.
+\item Scan the file once, counting how many IPs are in each block. 
+\item Use the \texttt{top16} bits of the IP as an index into an array of counts.
+\item Find the first block with a $count < 65,536$. This block is missing an IP!
+\item Scan the file again using a bitset to track each of the IPs whose top bits match block index.
+\item Set the bit corresponding to the \texttt{low16} bits of the IP.
+\item Scan the bitset to find a zero bit. Missing IP is \texttt{top16 | low16}.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{String duplicates:}
+Find duplicates in a list of strings which is too large to fit in memory.
+\begin{enumerate}
+\item Break list into chunks and sort each one (external sort). Discard duplicates while merging. 
+Hash tables are useful for counting duplicates, but all keys have to fit in memory
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{String decompositions:}
+A string can be split at each index 0..n-1. The RHS can then be recursively split at each index.
+(e.g., calculating palindromic decompositions).
+\begin{enumerate}
+\item There are $2^{n-1}$ such decompositions. Think of n-bit vectors, where each vector corresponds to a unique decomposition.  
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Generalized Abbreviation:}
+Given \emph{``word``}, return the list of abbreviations: \texttt{\{word,
+1ord, w1rd, wo1d, wor1, 2rd, w2d, wo2, 1o1d, w1r1, 1or1, 3d, w3, 1o2, 2r1, 4\}}
+\begin{enumerate}
+\item Reailze the abbreviations are like \texttt{\_ord, w\_rd, ..., \_\_rd, w\_\_rd,} etc.
+\item So, every character can be abbreviated or not.
+\item Use top-down recursion to generate $2^{n}$ possible abbreviations.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Sentence Screen Fitting:}
+Given an $m * n$ screen, determine how many times a sentence can fit. Words cannot be split and must be space separated.
+\begin{enumerate}
+\item Compute table[i] = number of words that fit on a row that starts with \emph{sentence[i]}?
+\item table[i] allows us to calculate the word that next row begins with
+\item Sweep rows, using table[i] to calculate the number of words that fit in each row
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Collatz Conjecture:}
+If odd, $x = 3x + 1$. If even, $x  = x / 2$. Does the computation converge to 1 for each integer in 1..n?
+\begin{enumerate}
+\item Computation fails if sequence loops (i.e. arrives at previously calculated value) or overflows.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Kth Multiple:}
+Find the \emph{Kth} number whose only prime factors are 3, 5, and 7. (e.g. 1,3,5,7,9,15,21)
+\begin{enumerate}
+\item Remember: Prime factors mean multiplication. $x = 7^i * 5^j * 3^k$
+\item Each value \emph{x} can be used to generate 3 new values: \emph{3x, 5x, 7x}
+\item Store values in a min heap or 3 queues. Select the smallest value and generate 3 more.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Count of 2s:}
+Count how many \emph{2s} occur in the numbers from 0..N
+\begin{enumerate}
+\item Discover recurrence: \texttt{num\_twos(0..$10^i) = i*10^{i-1}$}
+\item Extract digits of N from \emph{left to right}. These are powers of 10.
+\item Calculate \# of 2s due to each digit. Pay attention: 245 adds 45 extra twos.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Generate 1..n in lexical order:}
+\begin{enumerate}
+\item next = 1; then multiply by 10 while $<=$ n. 
+\item increment next until it is divisible by 10. Divide by 10 until there would be a remainder.
+\item Special case when we hit n. Divide by 10 if n is evenly divisible by 10.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Lexically smallest string with unique characters:}
+Remove duplicate characters from a string, return the lexically smallest result.
+\begin{enumerate}
+\item Count occurences of each char. Iterate over s for i = 0...n-1. Build the result by:
+\item decrement count of s[i] (thus tracking occurrences to the right of s[i])
+\item append s[i] to result, but first popback() any lexically larger chars from result which have non-zero remaining counts in s (i.e., occur after s[i] in s)
+\item append each char (a-z) just once (track using array of bools).
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Letters and Numbers:}
+Find the longest sub-array with equal number of letters and numbers.
+\begin{enumerate}
+\item Preprocess array, counting (letters, numbers, \emph{difference}) up to index i and storing
+the \emph{earliest occurrence} of each \emph{difference} in a hash\_map (difference $\rightarrow$ index)
+\item Re-scan the array. For every \emph{difference} encountered, lookup the earliest matching
+\emph{difference} in the hash\_map, thus defining a desired sub-array. Track max.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Longest Matching Parentheses:}
+Find the longest substring with balanced parens.
+\begin{enumerate}
+\item Use a stack to store indices of unmatched open parens.
+\item Pop the stack on closed parens. The suffix starting after the \textbf{new} stack.top() is balanced.
+\item Handle the case where the stack becomes empty.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Invalid Parens:}
+Return all balanced strings obtained by removing the fewest parens from S.
+\begin{enumerate}
+\item BFS, starting with (string="", offset=0). Queue holds balanced strings.
+\item On dequeue, append chars from S starting at offset, until a mismatched ')' is found.
+\item Remove an earlier closing paren to balance the string, then enqueue.
+\item Final strings may have unbalanced '('. Reverse the final string and process recursively,
+switching the roles of '(' and ')'!
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Max Subarray:}
+Find the subarray (i.e., contiguous elements) with the largest sum.
+\begin{enumerate}
+\item Iterate the array, computing the running sum.
+\item If sum becomes negative, set it to zero. Return the max sum and/or subarray indices
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{BST Sequence:}
+Given a BST, generate all arrays which can produce it by sequential insertion.
+\begin{enumerate}
+\item All such arrays have \texttt{root.key} as first item
+\item Recursively generate arrays for left and right subtrees
+\item \emph{Weave} each pair of arrays, then prepend \texttt{root.key}
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Generate all BSTs on 1..n:}
+\begin{enumerate}
+\item placeholder
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Binary Tree Reconstruction:}
+A binary tree (unique keys) is uniquely specified by an in-order traversal, 
+and either a pre-order or post-order traversal. Given in-order and pre-order:
+\begin{enumerate}
+\item Insert nodes in the order they appear in the pre-order traversal.
+\item Use the in-order traversal to determine if that node has left children and/or right children.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Binary Tree Vertical Traversal:}
+Return the vertical traversal of a binary tree (columns of nodes, ordered top to bottom and left to right)
+\begin{enumerate}
+\item Label root as \texttt{col=0}, perform BFS from root. Left child is \texttt{col-1}, 
+right child is \texttt{col+1} 
+\item Append node values during traversal, using distance from min. col so far
+\item Pre-order, in-order and post-order traversals do not discover nodes top to bottom.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Paths with Sum:}
+Find all paths in a BST which sum to a given value. Paths must go downward, but can start and end at any node.
+\begin{enumerate}
+\item Use depth-first-search (e.g., pre-order) to discover every root to leaf path. Store 
+\texttt{running\_sum} (root to current node) in a hash\_map (sum $\rightarrow$ \# times it occurs in tree)
+\item Traversing: increase sum count when encountered, decrease before returning to parent
+\item \texttt{complement = running\_sum - desired\_sum}. Lookup complement in the map.
+If found, an earlier path can be subtracted from the current path to yield the desired sum.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Buy/Sell stock with cooldown:}
+Given array of stock prices, find the max profit possible if you must sell before buying again,
+and you must have a cooldown day between buy/sell transactions.
+\begin{enumerate}
+\item Use \texttt{buy[i],sell[i]} to track the max profit ending with a buy/sell on day i
+\item \texttt{buy[i] = std::max(buy[i-1], sell[i-2]-prices[i]}
+\item \texttt{sell[i] = std::max(sell[i-1], buy[i-1]+prices[i])}
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Masseuse:}
+Calculate maximum booked minutes given a sequence of back to back appts.
+\begin{enumerate}
+\item Choose appt[i] or don't choose it. Choosing \texttt{appts[i]} means skipping \texttt{appts[i+1]}. Optimal solution then chooses one of \texttt{appts[i+2] or appts[i+3]}.
+\item Recursive with memoization, and DP solutions (right to left, i.e. $\leftarrow$) are possible
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Meeting Rooms:}
+Given intervals \texttt{(start\_i, end\_i)} representing meeting start/end times, determine the max.
+meeting rooms needed.
+\begin{enumerate}
+\item Split the intervals collecting start times and end times in separate arrays.
+\item Sort the \texttt{start\_times} and \texttt{end\_times} arrays in ascending order.
+\item Iterate the arrays, each time a new meeting is added, see how many meetings have ended.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Burst Ballons:}
+Given an array of balloons each with a number, bursting balloon i will yield
+nums[i-1] * nums[i] * nums[i+i] coins. After the burst, nums[i-1] and nums[i+1] are adjacent.
+Find the maximum coins you can collect.
+\begin{enumerate}
+\item \texttt{table[i][j] = } \emph{max coins possible over nums[i..j]}
+\item Consider ranges of len = 1,2,3,...,n starting on the main diagonal
+\item Define \texttt{start} and \texttt{end} to be the start and end of the range (inclusive).
+\item Iterate range, choosing nums[j] as the \textbf{last balloon popped} (subproblems independent!)
+\item \texttt{coins = nums[start-1] * nums[j] * nums[end+1] + table[start][j-1] + table[j+1][end]} 
+\item Track max coins over each choice of last coin and update table[start][end]. \ONCB
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Best Meeting Point:}
+Given a grid of houses and empty spaces, find the house/space that minimizes Manhattan distance from all houses.
+\begin{enumerate}
+\item Define \texttt{table[i][j] = total distance from all houses to (i,j)}
+\item Count houses in each row and column, and calculate distance from each house to (0,0)
+\item Fill in first col of table, based on (0,0)
+\item Then, \texttt{table[i][j] = table[i][j-1] + num\_to\_left - num\_to\_right}
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Swap Numbers:}
+Swap two numbers without using temporary storage. Use XOR.
+\begin{enumerate}
+\item $a = a \oplus b; b = a \oplus b; a = a \oplus b;$ 
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Sum Swap:}
+Given 2 arrays, swap a pair of numbers so that the array sums are equal.
+\begin{enumerate}
+\item Calculate $sum_a$ and $sum_b$. Insert elements of \texttt{a} into a hash\_map.
+\item For each $b_i$ in \texttt{b}, calculate $a_i = (sum_a - sum_b) / 2 + b_i$. Lookup in hash\_map.
+\item Special case: $sum_a - sum_b$ is odd
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Two's Complement:}
+Binary storage technique for integers. Positive is normal binary.
+\begin{enumerate}
+\item Negative: Flip the bits in the positive representation, add one, prepend the sign bit
+\item \texttt{2s\_comp(-K) = (flip\_bits(+K) + 1) | (1<<N-1)}
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Factorial Zeros}
+Calculate the number of trailing zeros in \texttt{n!}
+\begin{enumerate}
+\item Count powers of 5 in \texttt{n}.
+\item Each multiple of 5 (e.g., 5,10,15...) $\implies$ one trailing zero. 
+\item Each multiple of 25 $\implies$ 2 trailing, 125 $\implies$ 3 trailing, etc.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Number Max}
+Find the \texttt{max(a,b)} without using if-else or comparison ops
+\begin{enumerate}
+\item Extract sign bits of \texttt{a,b, and a-b}. Build truth table given 3 sign bits (to handle overflow).
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Pairs with Sum:}
+Find all pairs of numbers in an array that sum to a given \texttt{desired\_value}
+\begin{enumerate}
+\item For each \texttt{value} in array, lookup \texttt{complement = desired\_value - value} in the hash\_map
+\item Store \texttt{value} in the hash\_map
+\item Alternatively, for \OONE space, sort the array and consider (left,right) pairs
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Draw the Skyline:}
+Given an array of buildings, draw the outline of the skyline
+\begin{enumerate}
+\item Split buildings into left and right endpoints, sort and store in an array.
+\item Iterate endpoints, maintaining a max heap of \emph{active} buildings
+\item When a new building starts, compare to \texttt{heap.top()} and add a point to the skyline if new building is taller. Add new building to the heap.
+\item When a building ends, see if it is the top of the heap. If it is, remove it and any shorter buildings that have already ended. Add a point to the skyline that is either the next tallest building in the heap, or zero.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Longest Common Substring:}
+Given two strings, find the longest common substring
+\begin{enumerate}
+\item Recursive option is \OTWON. DP option is \ONSQ.
+\item \texttt{t[i][j]} is length of longest substring \textbf{ending} at \texttt{s1[i], s2[j]}.
+\item \texttt{t[i][j] = (s1[i] == s2[j] ? t[i-1][j-1]+1 : 0}
+\end{enumerate}
+
+\vspace{5mm}
+\noindent
+\textbf{Min Window Subsequence:}
+Given S and T, find the min substring of S that contains T as a subsequence.
+\begin{enumerate}
+\item Let x =  T[i][j], then S[x..i] is the min substring that contains T[0..j] as a subsequence.
+\item Allocate table[0..T.size()+1][0...S.size()+1]. Initialize T[i][j] = -1, then T[0][i] = i;
+\item \texttt{T[i][j] = (S[i-1] == T[j-1] ? T[i-1][j-1] : T[i][j-1]}
+\item Scan last row (table[T.size()][...]) looking for min substring
+\end{enumerate}
+
+\vspace{5mm}
+\noindent
+\textbf{Search rotated array:}
+Given a sorted array that has been rotated, find \texttt{target} 
+\begin{enumerate}
+\item Modified binary search. Each array half is either sorted or not, giving rise to 4 cases.
+\item If a half is sorted, check if \texttt{target > nums[left] \&\& target <= nums[right]}
+\item If half is unsorted, check if \texttt{target > nums[left] || target <= nums[right]}
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Reconstruct a queue:} People in a queue are represented by (height,k) pairs where
+k is the number of taller or same height people ahead of them. Reconstruct the
+queue after it is shuffled.
+\begin{itemize}
+\item Sort people by \emph{decreasing height}, breaking ties by smaller k-value.
+\item Iterate list, inserting people into new queue at position k, shifting existing right if needed.
+\item Idea is to insert the tallest remaining person with the fewest taller people ahead of him.
+\end{itemize}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Longest Palindromic Substring:}
+Find the longest palindromic substring of given string \emph{s}.
+\begin{enumerate}
+\item Brute Force: Generate all substrings, check if each is a palindrome. \ONCB time.
+\item DP solution: Use a table of booleans. Table[i][j] is true iff s[i..j] is a palindrome. 
+\item Build one diagonal at a time, main diag first (len = 1), and move up (len = 2,3,...n)
+\item \texttt{table[i][j] = table[i+1][j-1] \&\& (s[i] == s[j]);} \ONSQ time and space.
+\item \emph{Manacher's Algorithm} gives an \ON solution.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Dijkstra's shortest path algorithm:}
+Graph with non-negative edge weights, find the \emph{lowest weight} path between \emph{u} and \emph{v}
+\begin{enumerate}
+\item A min-heap stores lowest weight path from \emph{u} to each vertex.
+While heap is non-empty:
+\item Remove the lowest weight path
+\item Update the weights on each neighbour.
+\item At completion, the path weight to v is \emph{minimal}. 
+\end{enumerate}
+
+\vspace{5mm}
+\noindent
+\textbf{Cheapest flight with at most \emph{K} stops:}
+Given a directed flight graph with weighted edges (flight costs), find the cheapest flight from \emph{U} to \emph{V} with at most k stops.
+\begin{enumerate}
+\item Modified version of Dijkstra's algorithm
+\item The heap may hold multiple entries per city (vertex)
+\item Specifically, the heap stores any path with fewer than K stops
+\end{enumerate}
+
+\vspace{5mm}
+\noindent
+\textbf{Bipartite Graph:}
+Determine if an undirected graph is bipartite.
+\begin{enumerate}
+\item Bipartite: Vertices can be colored so that no edge connects two vertices of same color.
+\item BFS or DFS: Explore every unvisited node assigning it to the opposite color as its parent.
+\item DFS only: Look for cycles of odd length.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Linked list cycles:}
+Given a linked list with a cycle, return the node at the start of the cycle.
+\begin{enumerate}
+\item Use a \emph{slow} and a \emph{fast} pointer (2x).
+\item \emph{slow} enters loop after \texttt{k} steps. Fast is \texttt{k} steps ahead,
+or \texttt{cycle\_length - k} behind.
+\item They collide after \texttt{cycle\_length - k} iterations, at which point \emph{slow} is 
+\texttt{cycle\_length - k} steps into the cycle, and \texttt{k} from the start of the cycle.
+\item Start one pointer from the start, the other from collision spot. Advance by one until they collide at cycle's start (k steps).
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Subarrays with Sum:}
+Find all sub-arrays that sum to a given \texttt{target}
+\begin{enumerate}
+\item Iterate array, calculating the running sum to index \emph{i} and storing \texttt{sum\_i} in a hash\_map
+\item Calculate \texttt{complement = sum\_i - desired\_value}. Lookup \texttt{complement} in the map to determine if an earlier sequence can be subtracted to yield the desired sum.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{KSum}
+Given an integer array, find \emph{K} values that sum to a \texttt{target}
+\begin{enumerate}
+\item Start by sorting the array.
+\item \textbf{2Sum:} Iterate the array from left and right sides looking for a pair with target sum.
+\item \textbf{3Sum:} For each \texttt{A[i]}, iterate \texttt{A[i+1,...,n-1]} looking for a pair with complement sum.
+\item \textbf{4Sum:} For each \texttt{(A[i],A[j])}, iterate \texttt{A[j+1,...,n-1]} looking for a pair with complement sum.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{K closest elems:}
+Given a sorted integer array, find the K \emph{closest} values to a given value.
+\begin{enumerate}
+\item Use \texttt{left} and \texttt{right} indices to scan from either end.
+\item Repeatedly discard the furthest $(size - k)/2$ items from either the left or right side.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{K empty slots:}
+Given a flower bed with slots 1..N, \texttt{flowers[i] = j} means the j'th flower will bloom (and remain in bloom) on day \emph{i}. Determine if there is a day where two flowers are in bloom with 
+\emph{k} empty spots (no blooms) between them.
+\begin{enumerate}
+\item Build the reverse mapping \texttt{days[j] = i} indicating that the j'th flower blooms on day i
+\item Scan \texttt{days}, examining the interval \texttt{days[i]...days[i+k+1]}
+\item If flower j ($i < j < i + k + 1$) blooms before flower i or flower i+k+1, restart interval at j
+\item \ON time and space
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Median of 2 sorted arrays:}: Find the median of 2 sorted arrays in logarithmic time.
+\begin{enumerate}
+\item Binary search on \texttt{A}. For each \texttt{A[mid]}, compute its position, p, in B \textbf{if it were the median}.
+\item If A[mid] could be inserted at B[p] (maintaining sortedness) then A[mid] is the median.
+\item If A[mid] would lie to the right of B[p], then recurse on left half of A.
+\item If A[mid] would lie to the left of B[p], then recurse on the right half of A.
+\item If no median found in A, then repeat binary search using B.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{BST Node Removal:}
+Locate the node \emph{toRemove} (binary search). There are 3 cases:
+\begin{enumerate}
+\item \emph{toRemove} is a leaf. Just remove it.
+\item \emph{toRemove} has one child (left or right). Replace \emph{toRemove} with its child. 
+\item \emph{toRemove} has two children. Swap \emph{toRemove} with in-order successor, then delete successor.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Online sample:}
+Given a continuous stream of items, return a set of size k. All k-sets should be equally likely.
+\begin{enumerate}
+\item Maintain a set of size k at all times.
+\item The n'th item is added to the set with probability $k/n$. If this happens, choose an existing element at random, and replace it with the n'th item. 
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Optimal Account Balancing:}
+Given a list of money transfers between people, find the min number of transfers to settle all debts.
+\begin{enumerate}
+\item Build a directed graph. Vertices are people, edges are transfers.
+\item Calculate net debts, ignore people with no debt. The list of debts is zero-sum by definition.
+\item \texttt{N-1} transfers will always settle all debts, so we are looking for shorter paths.
+\item For the i'th person, try a transfer to j'th person $(j > i)$ with non-zero, opposite-sign debt, then \textbf{recurse on the i+1st person}. If no such person exists, return 0.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Union Find:}
+Efficiently track and merge disjoint subsets
+\begin{enumerate}
+\item Track set items in an array of \texttt{\{count, parent\}} pairs (represents an inverted tree).
+\item Membership: \texttt{parent} points to another slot. Follow parent ptrs until \texttt{set[i].parent == i}. i is the \emph{root} element.
+\item Merging: Add smaller set to larger. Find the \emph{root} of each set and set the smaller's root
+to the larger's root. Update counts. See union\_find.h for details.
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Prim's Algorithm:}
+Find \emph{minimum spanning tree} in a weighted, undirected graph.
+\begin{enumerate}
+\item Start with an arbitrary vertex, and track \emph{unexplored edges} using a min heap.
+\item Add edges leaving starting vertex. While the min-heap is non-empty:
+\item \texttt{edge = min\_heap.pop()}. Add \texttt{(edge, edge.to)} to the tree iff \texttt{!visited[edge.to]}.
+\item Add edges leaving the newly added vertex to the min-heap 
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Operations}
+Implement \texttt{-,*,/} using only \texttt{+}
+\begin{enumerate}
+\item \textbf{a-b:} $b > 0 \implies$ add -1 b times. $b < 0 \implies$ add +1 b times. 
+\item \textbf{a*b:} $b > 0 \implies$ add $(0 + a + a + ...)$ b times. $b < 0 \implies$ then $(0 -a -a - a...)$
+\item \textbf{a/b:} 4 cases. add or subtract b a times.
+\end{enumerate}
+
+
+\vspace{5mm}
+\begin{itemize}
+\item \textbf{M-way merge} of N items. A 2-way, or 3-way merge can be done in O(N). However, merging from M queues is O(N*M). Using a priority queue makes it O(N*logM).
+\item \textbf{Binary digits}: In the numbers 1..N (written in binary), for any bit the count of 1s is greater than or equal to the count of zeroes. Therefore, if one number is missing from 1..N: Compare the count of 1s and 0s. Same or More 1s means a missing zero. Less 1s means a missing one.
+\end{itemize}
+
+
+\newpage
+\section{Algorithms}
+\noindent
+\textbf{Longest Increasing Sequence:}
+Find the longest sequence of increasing digits. May not be consecutive.
+Example: {1,2,3,4} in {1,0,2,0,3,0,4}
+Algorithm is \ONSQ.
+
+\begin{lstlisting}[frame=single]
+unsigned longest_increasing_sequence(const Numbers& numbers) {
+    // Build longest sequence possible using items 0..i
+    SubSequences subs; //vector of (last item in seq, seq length)
+    subs.push_back(SeqData(numbers[0],1));
+    auto longest = subs[0].size;
+
+    for (auto i = 1; i < numbers.size(); ++i) {
+        subs.push_back(SeqData(numbers[i], 1));
+        // Can the i'th item be added to subs[j]?
+        for (auto j = 0; j < i; ++j) {
+            auto& seq = subs[j];
+            if (numbers[i] > seq.last_item && 
+                seq.size + 1 > subs[i].size) {
+                // item at i can be added to sequence at j
+                subs[i] = SeqData(numbers[i], seq.size + 1);
+                longest = std::max(longest, subs[i].size); 
+            } 
+        }
+    }
+    return longest;
+}
+\end{lstlisting}
+
+\vspace{5mm}
+\noindent
+\textbf{Selection Rank:}
+Find \emph{K} smallest items in an unsorted array.
+Expected \ON, worst case \ONSQ (bad pivot). 
+
+\begin{lstlisting}[frame=single]
+void selection_rank(Numbers& numbers, unsigned k, 
+                    unsigned start, unsigned end) {
+    if (k == end-start + 1) { return; }
+
+    auto result = partition(numbers, start, end);   // like quicksort
+    auto pivot_rank = result.first + 1;  // Tenth element is at index 9 
+    auto pivot_dups = result.second;
+
+    if (pivot_rank == k || (pivot_rank > k && (pivot_rank - pivot_dups) <= k)) {
+        return;
+    } else if (pivot_rank < k) {
+        // Recurse on right side
+        return selection_rank(numbers, k-pivot_rank, start+pivot_rank, end);
+    } else {
+        // pivot_rank > k, recurse on left side
+        return selection_rank(numbers, k, start, pivot_rank + start - 1);
+    }
+}
+\end{lstlisting}
+
+\newpage
+\noindent
+\textbf{First Common Ancestor:}
+Assume both nodes exist in tree.  Based on a pre-order traversal
+
+\begin{lstlisting}[frame=single]
+const Node* fca(const Node* node, 
+                const Node* first, const Node* second) const {
+
+    if (node == nullptr) { return nullptr;}
+    if (node == first || node == second) {
+        return node;
+    }
+
+    auto left  = fca(node->left_child,first,second);
+    auto right = fca(node->right_child,first,second);
+    if (left != nullptr && right != nullptr) {
+        return node;
+    }
+    return left != nullptr ? left : right;
+}
+\end{lstlisting}
+
+\vspace{5mm}
+\noindent
+\textbf{Tree Reconstruction:}
+Reconstruct a binary tree from pre-order and in-order traversals \ON
+
+\begin{lstlisting}[frame=single]
+using Traversal = std::vector<int>;
+using TraversalMap = unordered_map<int,unsigned>; //value --> index in traversal
+
+void reconstruct(TraversalMap& in_order_map, unsigned in_start, unsigned in_end,
+                 const Traversal& pre_order, unsigned& pre_index, Node*& node) {
+    if (pre_index >= pre_order.size()) { return; }
+
+    node = new Node{nullptr, nullptr, pre_order[pre_index]}; // insert value
+
+    auto pos = in_order_map[pre_order[pre_index]]; // keys are unique
+    if (pos > in_start) {
+        // There are left children to insert
+        reconstruct(in_order_map, in_start, pos-1, pre_order, 
+                    ++pre_index, node->left_child);
+    }
+
+    if (pos < in_end) {
+        // There are right children to insert 
+        reconstruct(in_order_map, pos+1, in_end, pre_order, 
+                    ++pre_index, node->right_child);
+    }
+}
+\end{lstlisting}
+
+\vspace{5mm}
+\noindent
+\textbf{Depth First Search:}
+\begin{lstlisting}[frame=single]
+int UndirectedGraph::depth_first_search(unsigned from, unsigned to,
+            unsigned weight, VisitedVertices& visited) const {
+
+    visited[from] = true;
+    if (from == to) { return weight; }
+
+    for (const auto& edge : m_adjacency[from]) {
+        if (!visited[edge.to]) {
+            auto w = depth_first_search(edge.to,to,weight + edge.weight,visited);
+            if (w != -1) { return w; }
+        }
+    }
+    return -1;
+}
+\end{lstlisting}
+
+\vspace{5mm}
+\noindent
+\textbf{Breadth First Search:}
+\begin{lstlisting}[frame=single]
+unsigned UndirectedGraph::breadth_first_search(unsigned from, unsigned to) const {
+    PathQueue q;
+    VisitedVertices visited(m_adjacency.size(), false);
+
+    visited[from] = true;
+    q.push_back(Path{0, from});
+    while (!q.empty()) {
+        auto path = q.front();
+        q.pop_front();
+        if (path.last_vertex == to) { return path.weight; }
+
+        for (const auto& edge : m_adjacency[path.last_vertex]) {
+            visited[edge.to] = true;
+            q.push_back(Path{path.weight + edge.weight, edge.to});
+        }
+    }
+    return 0;
+}
+\end{lstlisting}
+
+\noindent
+\textbf{Bottom Up Heap Construction:}
+\begin{lstlisting}[frame=single]
+void heapify(Numbers& numbers, unsigned index) {
+    if (index >= numbers.size()) { return; }
+
+    // Recurse on children (moves to right of the array)
+    heapify(numbers, index*2 + 1);
+    heapify(numbers, index*2 + 2);
+    bubble_down(numbers, index, numbers.size());
+}
+\end{lstlisting}
+
+\noindent
+\textbf{Rabin Karp:}
+\begin{lstlisting}[frame=single]
+int rabin_karp(const std::string& text, const std::string& pat) {
+    if (pat.empty()) { return 0; }
+    constexpr int coeff = 256, prime = 101, plen = pat.length();
+    int i = 0; int pat_hash = 0; int text_hash = 0;
+    
+    int max_coeff = pow(plen - 1);  // coeff^(pat.length() - 1)
+    int distance = text.length() - plen;
+
+    text_hash = rk_hash(text, 0, plen);
+    pat_hash  = rk_hash(pat, 0, plen);
+    while (i <= distance) {
+        if (pat_hash == text_hash) {
+            auto start = text.begin() + i;
+            if (std::equal(start, start + plen, pat.begin())) { return i; }
+        }
+        // Remove leading character from hash, add new character
+        text_hash = (coeff * (text_hash - text[i]*max_coeff) + text[i+plen]) % prime;
+        if (text_hash < 0) { text_hash += prime; }
+        ++i;
+    } 
+    return -1;
+}
+\end{lstlisting}
+
+\subsection{Sorting}
+\begin{center}
+\begin{tabular} {l l l l p{9cm}}
+Name & Worst & Average & Stable & Notes \\
+\hline
+Quick & \ONSQ & \ONLOGN & No & {\smaller Repeatedly partition around random pivot} \\ \hline
+Merge & \ONLOGN & \ONLOGN & Yes & {\smaller Divide and conquer, merge sorted halves}\\ \hline
+Heap & \ONLOGN & \ONLOGN & No & {\smaller Left half is max heap. Repeatedly extract max into sorted right half} \\ \hline
+Insert & \ONSQ & \ONSQ & Yes & {\smaller Sorted/Unsorted halves. Insert next unsorted item into right spot} \\ \hline
+Radix & $O(d*n)$ & & Yes & {\smaller Sort based on digits, right to left} \\ \hline
+Bucket \\ \hline
+Counting & & & Yes & integers are in range 1..k. Count occurences of each, then prefix sums, then output \\ \hline
+Bubble \\ \hline
+Select \\ \hline
+\end{tabular}
+\end{center}
+\begin{itemize}
+\item \textbf{BubbleSort:} \ONSQ worst and average. Repeatedly iterate list swapping out-of-order elements.
+\item \textbf{InsertionSort:} \ONSQ worst and average. Maintain sorted and unsorted halves. Insert next unsorted item into the \emph{right} spot in the sorted list.
+\item \textbf{SelectionSort:} \ONSQ worst and average. Maintain sorted and unsorted halves. Find max/min unsorted item and move to the end of the sorted list.
+\item \textbf{HeapSort:} O(N*logN). Not stable. Unsorted (left) and sorted (right) regions. Unsorted region is a max\_heap (or min\_heap). Remove the largest from heap and place at the start of the sorted region. 
+\item \textbf{Quicksort:} O(N*logN) average, but \ONSQ worst case. Not stable (pivot can move).
+\end{itemize}
+
+\section{Data Structures}
+\noindent
+\textbf{Binary Trees}
+\begin{enumerate}
+\item \textbf{Complete} $\implies$ every level is full except (possibly) the last
+\item \textbf{Full} $\implies$ that every node has zero or two children
+\item \textbf{Perfect} $\implies$ all levels of the tree are full ($2^n-1)$ nodes in the tree) 
+\item \textbf{Height} of a (sub)-tree is the maximum depth of any node in the (sub)-tree. 
+\end{enumerate}
+
+\vspace{5mm}
+\noindent
+\textbf{Binary Search Tree:}
+A binary tree that obeys the \emph{BST property}. i.e., for every node, any keys stored
+in its left subtree are less than \textbf{or equal} to its key, and any keys stored in its
+right subtree are greater than \textbf{or equal} to its key.
+
+
+\vspace{5mm}
+\noindent
+\textbf{Heap:}
+Complete binary tree where each node obeys the \emph{heap order property}.
+i.e., a parent must be smaller (larger) than both children.
+Implemented with an array (e.g., \texttt{nodes[]}).
+\begin{enumerate}
+\item Children of \texttt{nodes[i]} are at \texttt{nodes[2i + 1]} and \texttt{nodes[2i + 2]}
+\item Removal: Swap \texttt{nodes[0]} with \texttt{nodes[last]} and bubble down until heap property holds.
+\item Insertion: Insert new value at \texttt{nodes[size]} and bubble up until heap property holds.
+\item No guarantee of node ordering among siblings, or nodes in any level of the tree. For example, in a max heap, some nodes on level 4 may be greater than some on level 3.
+\end{enumerate}
+
+\vspace{5mm}
+\noindent
+\textbf{Graph Search:}
+BFS and DFS are the primary algorithms.
+\begin{enumerate}
+\item BFS to find shortest path between two vertices, or explore from a set of vertices.
+\item DFS to find cycles: (3 states: \textbf{unvisited}, \textbf{visiting}, \textbf{visited})
+\end{enumerate}
+
+\vspace{5mm}
+\noindent
+\textbf{\emph{Node} Successor in a BST} is either:
+\begin{enumerate}
+\item the leftmost child of \emph{Node's} right subtree
+\item the first ancestor which contains \emph{Node} in its left subtree
+\end{enumerate}
+
+%\vspace{5mm}
+%\noindent
+%\textbf{Trie}
+%\begin{itemize}
+%\item Useful for matching a single string against multiple patterns 
+%\item Useful for longest prefix matching 
+%\end{itemize}
+
+\vspace{5mm}
+\noindent
+\textbf{Queue with max()}
+\begin{itemize}
+\item Implement using a \texttt{std::queue} and \texttt{std::dequeue}
+\item Enqueue: \texttt{queue.push\_back()}. Pop smaller items from back of dequeue, then \texttt{dequeue.push\_back()}
+\item Dequeue: \texttt{queue.pop\_front}. If same item at front of dequeue, then \texttt{dequeue.pop\_front()}
+\end{itemize}
+
+
+\vspace{5mm}
+\noindent
+\textbf{Gray code on n bits:} Gray code is a permutation of 0,1,...,$2^{n-1}$ in which successive elements differ in only one bit, including wraparound.
+\begin{itemize}
+\item n = 2 : 00,01,11,10
+\item n = 3 : 000,001,011,010,110,111,101,100
+\item Double the sequence by appending the reverse of the sequence. Prepend a '0' to the first half and a '1' to the second half.
+\end{itemize}
+
+
+\section{Math}
+\noindent
+$\sum\limits_{i=1}^n i = \frac{n(n+1)}{2}$
+\newline
+\newline
+\noindent
+$\sum\limits_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}$
+%\newline
+%\newline
+%$\binom{n}{k} = \frac{n!}{(k!)(n-k)!}$
+\newline
+\newline
+$\binom{n}{k} = \binom{n-1}{k} + \binom{n-1}{k-1} = \frac{n!}{(k!)(n-k)!}$
+where $\binom{n}{0} = \binom{n}{n} = 1$
+\newline
+\newline
+XOR rules: (x $\oplus$ y) $\oplus$ x == y and (x $\oplus$ x) == 0
+\newline
+\newline
+\texttt{(x \& \textasciitilde (x-1))} extracts the lowest (rightmost) set bit in x
+\newline
+\texttt{(x \& (x-1)} clears the lowest (rightmost) set bit in x
+\newline
+\newline
+\texttt{gcd(a,b) = gcd(a, a mod b) if a > b} \newline
+\texttt{gcd(a,b) = gcd(a - b, b) if a > b} \newline
+\texttt{gcd(a,b) = gcd(a, b - a) if b > a} \newline
+\texttt{gcd(a,a) = a} \newline
+\texttt{gcd(a,0) = a} \newline
+\newline
+\noindent
+\texttt{floor(log10(x)) + 1 --> most significant digit of x}
+
+
+%\section{Networking}
+%\begin{itemize}
+%\item \textbf{Ethernet:} 14 byte header + (46-1500)B of payload data. Each MAC in the header is 6 bytes (48 bits). 
+%\item \textbf{IPv4:} 20-byte header, includes TTL (in hops), and protocol (TCP/UDP/ICMP).
+%\item \textbf{IPv6:} 40-byte header, includes hop limit, 16-byte addresses, and ptrs to extra headers
+%\item \textbf{UDP:}
+%\item \textbf{TCP:} Minimum 20-byte header. Max 60-byte header (i.e. up to 40B of options). TCP maintains two windows to manage throughput. \emph{Congestion Window} tries to avoid network congestion between two endpoints. Maintained by sender, increased additively and decreased multiplicatively. \emph{Receive Window} is maintained by the receiver, and specifies how much additional data can be sent. Zero window size implies don't send data, and start the \emph{persist timer}.
+%\item \textbf{DNS:}
+%\end{itemize}
+%
+\section{C++}
+\begin{itemize}
+\item \texttt{std::string substr(pos=0, len):} returns a substring of length len, starting at pos
+\item \texttt{std::string find\_first\_of(ch, pos=0):} Return index of first occurence of
+\texttt{ch} after \texttt{pos} (or std::string::npos).
+\item \texttt{std::accumulate():} sum values in an array
+\item \texttt{std::condition\_variable::wait(lock, predicate)} : predicate ensures thread waits until the predicate is true.
+\item Throwing an exception from a destructor is bad! Can lead to resource leaks (e.g., how to cleanup a vector of exception-throwing objects if the first object in the vector throws?).
+\item Throwing an exception from a destructor leads to \emph{undefined behaviour}, it might not be possible to even catch the exception!
+\item C++ can only have one exception active at a time. Throwing an exception while another exception is being thrown - \emph{undefined behaviour}.
+\end{itemize}
+
+
+\section{Question Review}
+\begin{enumerate}
+\setcounter{enumi}{15}
+
+\item \textbf{Section 16}
+\begin{enumerate}[label*=\arabic*.]
+\setcounter{enumii}{4}
+\item \textbf{English Int:} Convert 3 digits at a time to string. Add thousands, millions, etc.
+\setcounter{enumii}{15}
+\item \textbf{Sub Sort:} Divide array into \texttt{[sorted][unsorted][sorted]}. Find min and max of unsorted, then their indices in sorted regions.
+\setcounter{enumii}{19}
+\item \textbf{T9:} Pre-process dictionary. Convert each word to an integer or
+\emph{std::string of digits} (very long words).
+Lookup an integer string in \OONE or \ON where N is number of digits in lookup string.
+\setcounter{enumii}{22}
+\item \textbf{Rand7 Rand5:} Use $rand5()$ to generate \emph{digits} in a base 5 number. Convert to base 10 and modulo 7 as long as values above the last multiple of 7 are discarded.
+\end{enumerate}
+
+\vspace{5mm}
+\item \textbf{Section 17}
+\begin{enumerate}[label*=\arabic*.]
+\item \textbf{Add without plus:} Use bitwise XOR and AND to perform integer addition
+\item \textbf{Card Shuffle:} Divide deck into \texttt{[unshuffled][shuffled]}. Swap last unshuffled card with a random unshuffled card at each step.
+\item \textbf{Random Set:} Essentially $\binom{n}{m}$. \texttt{k = rand() \% (end-i); swap(array[k],array[end]);}
+
+\item \textbf{Baby Names:} Map \emph{name} $\rightarrow$ \emph{set id}. Merge sets if needed. \textbf{Improvement:} Build forest of connected names graphs. BFS over each graph in forest to compute sums.
+\item \textbf{Circus Tower:} Sort by descending weight. Longest decreasing sequence by height.
+\item \textbf{Majority Element:} Selection rank to find the median. Count occurences of median.
+\textbf{OR} Count chosen element. \texttt{count += (current == chosen) ? 1 : -1;}
+\item \textbf{Word Distance:} Map \emph{word} $\rightarrow$ \emph{(list of indices...)}. 
+For two given words, merge indices, noting the min difference.
+\item \textbf{Re-Space:} Use a trie to match longest prefixes. Save unmatched chars.
+\item \textbf{Longest Word:} Iterate words longest to shortest.
+Split word at \texttt{index = 1..M-1}. 
+Lookup \texttt{word[0...index]}, then recurse on \texttt{word[index+1..end]}.
+Could also use a trie to match longest prefixes.
+\item \textbf{Shortest SuperSequence:} For each element in the shorter array, 
+store queue of it's indices in the longer array. Perform an \emph{M-way merge} on these queues. 
+Use min-heap to find the smallest \texttt{front()} across M queues.
+\item \textbf{Missing Two:} Use $\sum\limits_{i=1}^n i$ and $\sum\limits_{i=1}^n i^2$ to find missing elements.
+\item \textbf{Continuous Median:} Max-heap to store values less than current median. Min-heap to store larger values. Heap sizes can differ by at most one. Careful about definition of median.
+\item \textbf{Word Transformer:} Build a list of words that are one edit away.
+\item \textbf{Max Black Square:}: Pre-process matrix from bottom right to compute 
+how many white pixels are (below,right) of current pixel. 
+Start at largest sub-square, check each square in \OONE time. There are \ONCB sub-squares.
+\end{enumerate}
+\end{enumerate}
+
+%\vspace{5mm}
+%\noindent
+%\textbf{Checklist:}
+%\begin{enumerate}
+%\item Think of brute force solution.
+%\item Try sorting the data (esp. for duplicates!)
+%\item Hash map?
+%\item Binary Search?
+%\item Trie?
+%\item Binary Search Tree?
+%\item Min Heap?
+%\item Pre-compute something?
+%\item Recursion?
+%\item Memoize?
+%\item Right to left? Search Backwards?
+%\item Stay calm and think
+%\end{enumerate}
+
+%\vspace{5mm}
+%\noindent
+%\textbf{Checklist:}
+%\begin{enumerate}
+%\item 2 hex digits represents one byte.
+%\item $2^7 = 128$ 
+%\item $2^10 = 1024$ (1 KB)
+%\item $2^16 = 65,536$ (65 KB)
+%\item $2^20 = 1,048,576$ (1 MB)
+%\item $2^30 = 1,073,741,824$ (1 GB)
+%\item $2^32 = 4,294,967,296$ (4 GB)
+%\item $2^40 = 1,099,511,627,776$ (1 TB)
+%\end{enumerate}
+
+
+\end{document}
