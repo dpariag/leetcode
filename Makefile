@@ -451,6 +451,12 @@ all: $(CPP_PROGS)
 count:
 	@ls -tr *.go *.cpp *.h *.c | xargs wc -l | nl
 
+tips:
+	latex tips.tex
+	dvips -t letter -Ppdf -G0 -e 0 tips 
+	ps2pdf tips.ps tips.pdf
+	rm tips.aux tips.dvi tips.log tips.ps
+
 clean:
 	@echo "Cleaning..."
 	@rm -f *.o $(CPP_PROGS) $(C_PROGS) $(GO_PROGS)
