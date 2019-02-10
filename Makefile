@@ -424,7 +424,8 @@ CPP_PROGS := \
   subarray_sum_divisible_k \
   search_insert_position \
   largest_number_at_least_twice \
-  max_width_ramp
+  max_width_ramp \
+  vowel_spell_checker
 
 
 CFLAGS := -std=c99
