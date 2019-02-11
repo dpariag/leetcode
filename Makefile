@@ -425,7 +425,8 @@ CPP_PROGS := \
   search_insert_position \
   largest_number_at_least_twice \
   max_width_ramp \
-  vowel_spell_checker
+  vowel_spell_checker \
+  base7
 
 
 CFLAGS := -std=c99
