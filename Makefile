@@ -426,7 +426,9 @@ CPP_PROGS := \
   largest_number_at_least_twice \
   max_width_ramp \
   vowel_spell_checker \
-  base7
+  base7 \
+  bitwise_or_subarrays \
+  eventual_safe_states
 
 
 CFLAGS := -std=c99
@@ -456,10 +458,11 @@ count:
 tips:
 	latex tips.tex
 	dvips -t letter -Ppdf -G0 -e 0 tips 
-	ps2pdf tips.ps tips.pdf
-	rm tips.aux tips.dvi tips.log tips.ps
+	#ps2pdf tips.ps tips.pdf
+	rm tips.aux tips.dvi tips.log
 
 clean:
 	@echo "Cleaning..."
 	@rm -f *.o $(CPP_PROGS) $(C_PROGS) $(GO_PROGS)
+	@rm -f tips.aux tips.dvi tips.log tips.ps
 	@rm -rf *.dSYM
