@@ -428,7 +428,8 @@ CPP_PROGS := \
   vowel_spell_checker \
   base7 \
   bitwise_or_subarrays \
-  eventual_safe_states
+  eventual_safe_states \
+  knight_dialer
 
 
 CFLAGS := -std=c99
