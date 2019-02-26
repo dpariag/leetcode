@@ -429,7 +429,8 @@ CPP_PROGS := \
   base7 \
   bitwise_or_subarrays \
   eventual_safe_states \
-  knight_dialer
+  knight_dialer \
+  set_mismatch
 
 
 CFLAGS := -std=c99

@@ -4,7 +4,7 @@
 // Brute Force: Recursively enumerate all possible numbers from every starting point. Exponential time.
 // Better: Pre-calculate the moves possible from every starting number. Build a DP table of the number of unique
 // numbers generated with K moves from each starting position. The recurrence follows naturally. O(N) time and space.
-// Acceptance: 37.5%
+// Acceptance: 37.5
 
 #include <iostream>
 #include <vector>
