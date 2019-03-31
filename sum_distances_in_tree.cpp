@@ -3,8 +3,8 @@
 // Return an array A, where A[i] is the sum of the distances from node i to every
 // other node in the tree
 
-// Brute Force:
-// Better:
+// Brute Force: From each node, perform DFS to every other node, summing distance. O(V*E) time.
+// Better: Cache edge weights during DFS. Exploring an edge always adds the same distance. O(V+E) time.
 // Acceptance: 38.2
 
 #include <iostream>
@@ -35,10 +35,10 @@ struct EdgeHash {
 using Graph = std::vector<std::vector<int>>;
 using Cache = std::unordered_map<Edge, EdgeData, EdgeHash>;
 
-// Accepted. 172ms. Faster than 42.09% of submissions.
+// Accepted. 164ms. Faster than 45.95% of submissions.
 class Solution {
 public:
-  EdgeData dfs(Graph& g, int parent, int vertex, Cache& cache) {
+  EdgeData dfs(Graph& g, int parent, int vertex, Cache& cache, std::vector<int>& distances) {
     EdgeData edge_data;
     const auto& neighbors = g[vertex];
     for (const auto& neighbor : neighbors) {
@@ -48,9 +48,9 @@ public:
         if (found != cache.end()) {
           edge_data += found->second;
         } else {
-          auto result = dfs(g, vertex, neighbor, cache);
-          std::cout << "Edge from " << vertex << " to " << neighbor << " has weight " << result.distance << std::endl;
+          auto result = dfs(g, vertex, neighbor, cache, distances);
           cache[e] = result;
+          distances[vertex] += result.distance;
           edge_data += result;
         }
       }
@@ -70,19 +70,11 @@ public:
       g[edge[1]].emplace_back(edge[0]);
     }
 
+    std::vector<int> distances(N, 0);
     for (int v = 0; v < g.size(); ++v) {
-      dfs(g, -1, v, cache);
+      dfs(g, -1, v, cache, distances);
     }
-
-    std::vector<int> result(N, 0);
-    for (int src = 0; src < g.size(); ++src) {
-      for (const auto dest : g[src]) {
-        Edge e{src, dest};
-        // Lookup edge distance, every edge should be in the cache
-        result[src] += cache[e].distance;
-      }
-    }
-    return result;
+    return distances;
   }
 };
 
