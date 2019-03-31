@@ -430,7 +430,8 @@ CPP_PROGS := \
   bitwise_or_subarrays \
   eventual_safe_states \
   knight_dialer \
-  set_mismatch
+  set_mismatch \
+  sum_distances_in_tree
 
 
 CFLAGS := -std=c99
