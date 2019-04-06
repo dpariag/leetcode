@@ -431,7 +431,8 @@ CPP_PROGS := \
   eventual_safe_states \
   knight_dialer \
   set_mismatch \
-  sum_distances_in_tree
+  sum_distances_in_tree \
+  shortest_word_distance_1
 
 
 CFLAGS := -std=c99
