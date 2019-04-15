@@ -432,7 +432,8 @@ CPP_PROGS := \
   knight_dialer \
   set_mismatch \
   sum_distances_in_tree \
-  shortest_word_distance_1
+  shortest_word_distance_1 \
+  min_increment
 
 
 CFLAGS := -std=c99
