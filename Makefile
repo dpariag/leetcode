@@ -433,7 +433,8 @@ CPP_PROGS := \
   set_mismatch \
   sum_distances_in_tree \
   shortest_word_distance_1 \
-  min_increment
+  min_increment \
+  car_fleet
 
 
 CFLAGS := -std=c99
