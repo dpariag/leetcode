@@ -434,7 +434,8 @@ CPP_PROGS := \
   sum_distances_in_tree \
   shortest_word_distance_1 \
   min_increment \
-  car_fleet
+  car_fleet \
+  binary_subarrays_with_sum
 
 
 CFLAGS := -std=c99
