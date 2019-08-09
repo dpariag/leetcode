@@ -436,7 +436,8 @@ CPP_PROGS := \
   min_increment \
   car_fleet \
   binary_subarrays_with_sum \
-  max_distance_arrays
+  max_distance_arrays \
+  last_stone_weight
 
 
 CFLAGS := -std=c99
