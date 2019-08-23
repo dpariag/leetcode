@@ -438,11 +438,12 @@ CPP_PROGS := \
   binary_subarrays_with_sum \
   max_distance_arrays \
   last_stone_weight \
-  maximize_distance_to_closest
+  maximize_distance_to_closest \
+  word_distance
 
 
 CFLAGS := -std=c99
-CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare
+CPPFLAGS := -std=c++1y -g -Werror -Wall -pedantic  -Wno-sign-compare -fsanitize=address -fno-omit-frame-pointer
 
 .PHONY: all
 
