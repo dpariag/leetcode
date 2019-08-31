@@ -440,7 +440,8 @@ CPP_PROGS := \
   last_stone_weight \
   maximize_distance_to_closest \
   word_distance \
-  longest_word_in_dictionary
+  longest_word_in_dictionary \
+  insufficient_nodes
 
 
 CFLAGS := -std=c99
