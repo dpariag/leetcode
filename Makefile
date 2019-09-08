@@ -442,7 +442,8 @@ CPP_PROGS := \
   word_distance \
   longest_word_in_dictionary \
   insufficient_nodes \
-  rand10
+  rand10 \
+  string_without_aaa
 
 
 CFLAGS := -std=c99
