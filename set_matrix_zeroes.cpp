@@ -67,9 +67,7 @@ public:
 
 bool test_matrix_zeroes(Matrix m, const Matrix& expected) {
   Solution soln;
-  print(m); std::cout << std::endl;
   soln.setZeroes(m);
-  print(m);
   return m == expected;
 }
 
