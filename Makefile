@@ -443,7 +443,8 @@ CPP_PROGS := \
   longest_word_in_dictionary \
   insufficient_nodes \
   rand10 \
-  string_without_aaa
+  string_without_aaa \
+  set_matrix_zeroes
 
 
 CFLAGS := -std=c99
