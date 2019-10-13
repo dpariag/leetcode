@@ -444,7 +444,8 @@ CPP_PROGS := \
   insufficient_nodes \
   rand10 \
   string_without_aaa \
-  set_matrix_zeroes
+  set_matrix_zeroes \
+  bag_of_tokens \
 
 
 CFLAGS := -std=c99
