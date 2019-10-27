@@ -446,6 +446,7 @@ CPP_PROGS := \
   string_without_aaa \
   set_matrix_zeroes \
   bag_of_tokens \
+  path_with_max_min_value
 
 
 CFLAGS := -std=c99
