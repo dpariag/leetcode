@@ -448,7 +448,8 @@ CPP_PROGS := \
   bag_of_tokens \
   path_with_max_min_value \
   smallest_string_starting_from_leaf \
-  prev_permutation_with_1swap
+  prev_permutation_with_1swap \
+  smallest_subsequence_distinct_chars
 
 
 CFLAGS := -std=c99
