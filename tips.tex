@@ -97,6 +97,17 @@ In an unsorted array, find an increasing subsequence of 3 elements (\ON time, \O
 
 \vspace{5mm}
 \noindent
+\textbf{Smallest Subsequences of Unique chars:} Return lexicographically smallest subsequence of \texttt{text} that contains each char in \texttt{text} exactly once.
+\begin{enumerate}
+\item Scan \texttt{text} left to right using a stack to build result
+\item Pop stack if \texttt{next\_char < stack.top} and \texttt{remaining\_count[stack.top] > 0}
+\item Push \texttt{next\_char} if it is not already in the stack
+\item Note: Update \texttt{remaining\_count} before doing anything else
+\end{enumerate}
+
+
+\vspace{5mm}
+\noindent
 \textbf{Coins:}
 Count ways to represent N cents using quarters, dimes, nickels, pennies.
 \begin{enumerate}
