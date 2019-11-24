@@ -1,8 +1,9 @@
 // Leetcode: https://leetcode.com/problems/decrease-elements-to-make-array-zigzag/
 
-// Brute Force:
-// Better:
-// Acceptance: 
+// Approach: Scan left to right. 
+// Calculate how much each element would have to be decreased by to be smaller than it's smallest neighbor
+// Consider decreasing either odd elements or even ones, return the min. O(n) time and O(1) space
+// Acceptance: 43.3
 
 #include <iostream>
 #include <vector>
