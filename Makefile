@@ -451,7 +451,8 @@ CPP_PROGS := \
   prev_permutation_with_1swap \
   smallest_subsequence_distinct_chars \
   rectangle_overlap \
-  alphabet_board_path
+  alphabet_board_path \
+  decrease_elements_zigzag
 
 
 CFLAGS := -std=c99
