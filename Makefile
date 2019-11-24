@@ -450,7 +450,8 @@ CPP_PROGS := \
   smallest_string_starting_from_leaf \
   prev_permutation_with_1swap \
   smallest_subsequence_distinct_chars \
-  rectangle_overlap
+  rectangle_overlap \
+  alphabet_board_path
 
 
 CFLAGS := -std=c99
