@@ -452,7 +452,8 @@ CPP_PROGS := \
   smallest_subsequence_distinct_chars \
   rectangle_overlap \
   alphabet_board_path \
-  decrease_elements_zigzag
+  decrease_elements_zigzag \
+  min_cost_climbing_stairs
 
 
 CFLAGS := -std=c99
