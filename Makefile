@@ -453,7 +453,8 @@ CPP_PROGS := \
   rectangle_overlap \
   alphabet_board_path \
   decrease_elements_zigzag \
-  min_cost_climbing_stairs
+  min_cost_climbing_stairs \
+  statistics_from_large_sample
 
 
 CFLAGS := -std=c99
